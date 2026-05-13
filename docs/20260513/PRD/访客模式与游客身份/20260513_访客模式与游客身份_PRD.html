@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>20260513 · FlareFlow 访客模式与游客身份 · PRD（派生展示）</title>
+  <style>
+    :root {
+      --bg: #111111;
+      --card: #1F2937;
+      --fg: #F9FAFB;
+      --muted-fg: #9CA3AF;
+      --border: #374151;
+      --primary: #EAB308;
+      --score-green: #10B981;
+      --score-yellow: #F59E0B;
+      --score-red: #EF4444;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--fg); line-height: 1.6; font-size: 14px; }
+    a { color: var(--primary); }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 24px 16px 80px; }
+    .notice { border-radius: 8px; padding: 14px 16px; margin-bottom: 24px; font-size: 13px; border: 1px solid var(--border); }
+    .notice-info { background: rgba(59, 130, 246, 0.08); border-color: rgba(59, 130, 246, 0.35); }
+    .notice strong { color: var(--fg); }
+    h1 { font-size: 22px; font-weight: 600; margin: 0 0 8px; }
+    .meta { color: var(--muted-fg); font-size: 12px; margin-bottom: 24px; }
+    h2 { font-size: 17px; margin-top: 32px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-size: 15px; margin-top: 22px; color: #E5E7EB; }
+    h4 { font-size: 13px; margin-top: 16px; color: var(--muted-fg); text-transform: uppercase; letter-spacing: 0.04em; }
+    .toc { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; margin: 20px 0; }
+    .toc ul { margin: 8px 0 0; padding-left: 18px; }
+    .toc li { margin: 4px 0; }
+    table.spec { width: 100%; border-collapse: collapse; font-size: 12px; margin: 12px 0; }
+    table.spec th, table.spec td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+    table.spec th { background: rgba(0,0,0,0.25); color: var(--muted-fg); font-weight: 500; }
+    .pill { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; background: rgba(234,179,8,0.15); color: var(--primary); border: 1px solid rgba(234,179,8,0.35); }
+    .muted { color: var(--muted-fg); font-size: 12px; }
+
+    .dialog-mockup { background: var(--card); border: 1px solid var(--border); border-radius: 8px; margin: 16px 0; max-width: 576px; overflow: hidden; }
+    .dialog-mockup.size-sm { max-width: 384px; }
+    .dialog-mockup.size-md { max-width: 448px; }
+    .dialog-mockup.size-lg { max-width: 512px; }
+    .dialog-header { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-weight: 500; font-size: 14px; color: var(--fg); }
+    .dialog-close { color: var(--muted-fg); cursor: pointer; font-size: 16px; line-height: 1; }
+    .dialog-body { padding: 16px; font-size: 13px; }
+    .dialog-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; }
+    .dialog-field { flex: 1; padding: 8px 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; color: var(--muted-fg); font-size: 12px; min-height: 36px; }
+    .dialog-footer { padding: 12px 16px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 8px; flex-wrap: wrap; background: rgba(0,0,0,0.15); }
+    .btn { background: var(--bg); border: 1px solid var(--border); padding: 6px 14px; border-radius: 6px; font-size: 12px; color: var(--fg); display: inline-flex; align-items: center; gap: 4px; cursor: pointer; }
+    .btn-primary { background: var(--primary); color: #111; border-color: var(--primary); font-weight: 600; }
+    .btn-outline { background: transparent; }
+    .phone { max-width: 280px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: var(--bg); margin: 12px 0; }
+    .phone-bar { padding: 10px 12px; font-size: 11px; color: var(--muted-fg); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .phone-body { padding: 12px; min-height: 120px; }
+    .strip { background: rgba(234,179,8,0.12); border: 1px solid rgba(234,179,8,0.35); border-radius: 6px; padding: 10px 12px; font-size: 12px; color: var(--fg); display: flex; align-items: center; gap: 8px; }
+    .mock-grid { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+
+    [data-jump] { cursor: pointer !important; position: relative; transition: outline 0.15s; }
+    [data-jump]:hover { outline: 1px dashed var(--primary); outline-offset: 2px; }
+    [data-jump]:hover::after {
+      content: '→ ' attr(data-jump-label);
+      position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+      background: var(--primary); color: #111; padding: 4px 10px; border-radius: 4px;
+      font-size: 11px; white-space: nowrap; z-index: 1000;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4); pointer-events: none;
+    }
+    .jump-highlight { animation: jump-flash 1.4s ease-out; }
+    @keyframes jump-flash {
+      0% { background: rgba(234, 179, 8, 0.22); box-shadow: 0 0 0 4px rgba(234, 179, 8, 0.35); }
+      100% { background: transparent; box-shadow: 0 0 0 0 transparent; }
+    }
+    .sec-anchor { scroll-margin-top: 16px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="notice notice-info">
+      <strong>怎么打开本 HTML</strong><br />
+      <strong>Windows PowerShell：</strong><code style="color:#E5E7EB;">cd "c:\Users\King\Downloads\pm-workflow-new" ; start docs\20260513\PRD\访客模式与游客身份\20260513_访客模式与游客身份_PRD.html</code><br />
+      <strong>资源管理器：</strong>进入同目录双击本文件。<strong>拖到浏览器：</strong>拖入 Chrome / Edge 窗口。<br />
+      GitHub 网页上点开本文件只会看到源码，请本地打开。事实与条款以同目录 <code>20260513_访客模式与游客身份_PRD.md</code> 为准；修改需求请告诉 AI 同步改 .md 与 .html。
+    </div>
+
+    <h1>FlareFlow · 访客模式与游客身份</h1>
+    <p class="meta">派生展示版 · 批次 20260513 · 设计参考 Figma <code>FF-V1.7.5</code> · 真理源：<code>20260513_访客模式与游客身份_PRD.md</code></p>
+
+    <div class="toc">
+      <strong>本页导航</strong>
+      <ul>
+        <li><a href="#sec-1">1. 概述与目标</a></li>
+        <li><a href="#sec-5-0">5.0 三态能力矩阵与鉴权</a></li>
+        <li><a href="#sec-3-3">3.3 状态转移表</a></li>
+        <li><a href="#sec-ui">实物 UI（mockup）</a></li>
+        <li><a href="#sec-5-2-13">5.2.13 隐私同意入口</a></li>
+        <li><a href="#sec-5-2-6-c1">5.2.6 控件清单</a></li>
+        <li><a href="#sec-5-3-6-c1">5.3 播放门闸</a></li>
+        <li><a href="#sec-5-4-6-c1">5.4 Reels</a></li>
+        <li><a href="#sec-5-5-6-c1">5.5 My List</a></li>
+        <li><a href="#sec-5-6-6-c1">5.6 Profile</a></li>
+        <li><a href="#sec-8-3-0">8.3.0 接口意图</a></li>
+        <li><a href="#sec-8-5">8.5 SDK 矩阵</a></li>
+        <li><a href="#sec-10">§10 已拍板默认策略</a></li>
+      </ul>
+    </div>
+
+    <h2 id="sec-1" class="sec-anchor">1. 产品概述（摘要）</h2>
+    <p><span class="pill">VISITOR</span> 未同意隐私 → <strong>无 UID</strong>，SDK 最小化。<span class="pill">GUEST</span> 已同意未登录 → <strong>guest_uid + Guest-Session-Token</strong>，点赞/列表/进度全开。<span class="pill">LOGGED_IN</span> → 仅此态可完成 <strong>真实货币充值</strong>。免费集均可播；付费集均不可播整片（服务端须校验 <code>episode_pay_type</code>）。</p>
+    <p class="muted">完整背景、非目标、§1.6 研发自检与流程图（Mermaid）见 .md 第 1–3 章。</p>
+
+    <h2 id="sec-5-0" class="sec-anchor">5.0 三态能力矩阵（与 .md 一致）</h2>
+    <table class="spec">
+      <thead><tr><th>能力</th><th>VISITOR</th><th>GUEST</th><th>LOGGED_IN</th></tr></thead>
+      <tbody>
+        <tr><td>浏览 Discover / Reels</td><td>✅</td><td>✅</td><td>✅</td></tr>
+        <tr><td>播放免费集</td><td>✅</td><td>✅</td><td>✅</td></tr>
+        <tr><td>播放付费集正片</td><td>❌</td><td>❌</td><td>依会员/商业化</td></tr>
+        <tr><td>点赞写服务端</td><td>❌（走同意流）</td><td>✅</td><td>✅</td></tr>
+        <tr><td>My List 读写</td><td>❌</td><td>✅</td><td>✅</td></tr>
+        <tr><td>播放进度同步</td><td>❌</td><td>✅</td><td>✅</td></tr>
+        <tr><td>Top-up / IAP</td><td>❌</td><td>❌</td><td>✅</td></tr>
+        <tr><td>归因/广告/行为分析 SDK</td><td>关</td><td>开（已 consent）</td><td>开</td></tr>
+      </tbody>
+    </table>
+    <h3>5.0.2 鉴权载体</h3>
+    <table class="spec">
+      <thead><tr><th>身份</th><th>载体</th><th>禁止</th></tr></thead>
+      <tbody>
+        <tr><td>VISITOR</td><td>无（只读可匿名）</td><td>携带 guest token / 伪造 UID</td></tr>
+        <tr><td>GUEST</td><td><code>Guest-Session-Token</code> opaque</td><td>与 Bearer 同请求混用</td></tr>
+        <tr><td>LOGGED_IN</td><td><code>Authorization: Bearer</code></td><td>写请求仅用 guest token</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="sec-3-3" class="sec-anchor">3.3 状态转移（节选）</h2>
+    <table class="spec">
+      <thead><tr><th>当前</th><th>事件</th><th>下一</th></tr></thead>
+      <tbody>
+        <tr><td>—</td><td>首启拒绝</td><td>VISITOR</td></tr>
+        <tr><td>—</td><td>首启同意成功</td><td>GUEST</td></tr>
+        <tr><td>VISITOR</td><td>同意成功（任意入口）</td><td>GUEST</td></tr>
+        <tr><td>VISITOR</td><td>登录成功</td><td>LOGGED_IN（无 merge）</td></tr>
+        <tr><td>GUEST</td><td>登录成功</td><td>LOGGED_IN（merge §10.1）</td></tr>
+        <tr><td>LOGGED_IN</td><td>登出</td><td>VISITOR</td></tr>
+        <tr><td>GUEST</td><td>撤回同意</td><td>VISITOR + 吊销 token</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="sec-ui" class="sec-anchor">实物 UI mockup（FlareFlow dark + 琥珀主色）</h2>
+    <p class="muted">以下控件均带 <code>data-jump</code>：点击可跳到本页下方对应 PRD 章节说明。</p>
+
+    <h3>首启 / 多入口 · 隐私授权（同套 UI）</h3>
+    <div class="dialog-mockup size-md">
+      <div class="dialog-header">
+        <span>Welcome to FlareFlow</span>
+        <span class="dialog-close">×</span>
+      </div>
+      <div class="dialog-body">
+        <p style="margin:0 0 12px;color:var(--muted-fg);font-size:12px;">Summary text + link to full Privacy Policy &amp; Terms.</p>
+        <div class="dialog-row" style="align-items:center;">
+          <span style="width:18px;height:18px;border:2px solid var(--border);border-radius:4px;flex-shrink:0;"></span>
+          <span style="font-size:13px;">I agree to Privacy Policy &amp; Terms</span>
+        </div>
+      </div>
+      <div class="dialog-footer">
+        <span class="btn btn-outline" data-jump="sec-5-2-6-c1" data-jump-label="见 5.2.6 控件 c2 Not now">Not now</span>
+        <span class="btn btn-primary" data-jump="sec-5-2-6-c1" data-jump-label="见 5.2.6 控件 c1 Agree and continue">Agree and continue</span>
+      </div>
+    </div>
+
+    <h3>Discover · 访客露出条（E4）</h3>
+    <div class="phone">
+      <div class="phone-bar">FlareFlow <span>9:41</span></div>
+      <div class="phone-body">
+        <div class="strip" data-jump="sec-5-2-13" data-jump-label="见 5.2.13 入口 E4">
+          <span>🔓</span><span><strong>Unlock full experience</strong> — Tap</span>
+        </div>
+        <p class="muted" style="margin:12px 0 0;">Hero / Play Now …</p>
+      </div>
+    </div>
+
+    <div class="mock-grid">
+      <div>
+        <h3>Profile · VISITOR</h3>
+        <div class="phone">
+          <div class="phone-bar">Profile <span style="color:var(--primary);font-size:11px;" data-jump="sec-5-6-6-c1" data-jump-label="见 5.6.6 控件 c4 Log in">Log in</span></div>
+          <div class="phone-body">
+            <p style="margin:0;font-size:13px;">Visitor</p>
+            <p class="muted" style="margin:4px 0 12px;font-size:11px;">Browsing without personalization account</p>
+            <span class="btn btn-primary" style="width:100%;justify-content:center;margin-bottom:10px;" data-jump="sec-5-6-6-c1" data-jump-label="见 5.6.6 控件 c1 同意">Agree to Privacy Policy</span>
+            <div class="dialog-field" style="cursor:pointer;min-height:48px;display:flex;align-items:center;" data-jump="sec-5-6-6-c1" data-jump-label="见 5.6.6 控件 c2 VIP/钱包占位">VIP / Wallet area → opens consent</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3>Profile · GUEST</h3>
+        <div class="phone">
+          <div class="phone-bar">Profile</div>
+          <div class="phone-body">
+            <p style="margin:0;font-size:13px;">Guest</p>
+            <p style="margin:6px 0;font-size:11px;color:var(--muted-fg);">Guest ID: FF-GUEST-xxxx <span class="btn btn-outline" style="padding:2px 6px;font-size:10px;">copy</span></p>
+            <span class="btn btn-primary" style="width:100%;justify-content:center;" data-jump="sec-5-6-6-c1" data-jump-label="见 5.6.6 控件 c3 Login to recharge">Login to recharge</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>付费集门闸 Sheet</h3>
+    <div class="dialog-mockup size-sm">
+      <div class="dialog-header"><span>Episode locked</span></div>
+      <div class="dialog-body">This episode is VIP / paid. Choose an action.</div>
+      <div class="dialog-footer" style="flex-direction:column;align-items:stretch;">
+        <span class="btn btn-primary" data-jump="sec-5-3-6-c1" data-jump-label="见 5.3.6 / 5.3.7 主按钮">Agree to Privacy Policy</span>
+        <span class="btn btn-outline" data-jump="sec-5-3-6-c1" data-jump-label="见 5.3.7 第三按钮">Review privacy policy</span>
+        <span class="btn btn-outline" data-jump="sec-5-3-6-c1" data-jump-label="见 5.3.7 次按钮 Close">Close</span>
+      </div>
+    </div>
+
+    <h3>Reels · 访客点 Like 半屏</h3>
+    <div class="dialog-mockup size-sm">
+      <div class="dialog-header"><span>Save likes &amp; lists</span><span class="dialog-close">×</span></div>
+      <div class="dialog-body">Agree to Privacy Policy to create your guest profile and save likes.</div>
+      <div class="dialog-footer">
+        <span class="btn btn-outline" data-jump="sec-5-4-6-c1" data-jump-label="见 5.4.6 Not now">Not now</span>
+        <span class="btn btn-primary" data-jump="sec-5-4-6-c1" data-jump-label="见 5.4.6 Agree and continue">Agree and continue</span>
+      </div>
+    </div>
+
+    <h3>My List · 访客空态</h3>
+    <div class="phone" style="max-width:320px;">
+      <div class="phone-bar">My List <span class="muted">edit</span></div>
+      <div class="phone-body" style="text-align:center;padding:20px 12px;">
+        <p class="muted" style="font-size:12px;">Agree to Privacy Policy to save shows</p>
+        <span class="btn btn-primary" style="margin-top:12px;" data-jump="sec-5-5-6-c1" data-jump-label="见 5.5.6 控件 c1 Agree">Agree</span>
+      </div>
+    </div>
+
+    <h2 id="sec-5-2-13" class="sec-anchor">5.2.13 隐私同意入口（E1–E9）</h2>
+    <table class="spec">
+      <thead><tr><th>#</th><th>入口</th><th>访客点击结果</th></tr></thead>
+      <tbody>
+        <tr><td>E1</td><td>冷启动首屏</td><td>同 5.2</td></tr>
+        <tr><td>E2</td><td>Profile 主按钮</td><td>隐私授权</td></tr>
+        <tr><td>E3</td><td>Profile VIP/钱包区</td><td>隐私授权（非登录）</td></tr>
+        <tr><td>E4</td><td>Discover 条</td><td>隐私授权</td></tr>
+        <tr><td>E5</td><td>My List 空态 Agree</td><td>隐私授权</td></tr>
+        <tr><td>E6</td><td>Reels 点赞/列表</td><td>半屏同意</td></tr>
+        <tr><td>E7</td><td>付费门闸</td><td>隐私授权</td></tr>
+        <tr><td>E8</td><td>Settings Privacy</td><td>隐私授权</td></tr>
+        <tr><td>E9</td><td>Discover 底条（可选）</td><td>频控见 .md</td></tr>
+      </tbody>
+    </table>
+    <p class="muted"><code>ConsentFlowCoordinator</code> + <code>entry_point</code> 枚举见 .md 5.2.13 正文。</p>
+
+    <h3 id="sec-5-2-6-c1" class="sec-anchor">5.2.6 控件清单（隐私主弹窗）</h3>
+    <table class="spec">
+      <thead><tr><th>控件</th><th>默认可点</th><th>结果</th></tr></thead>
+      <tbody>
+        <tr><td>c1 Agree and continue</td><td>依赖勾选</td><td>GUEST + 进首页</td></tr>
+        <tr><td>c2 Not now</td><td>是</td><td>VISITOR，Discover</td></tr>
+        <tr><td>c3 隐私政策链接</td><td>是</td><td>WebView / 外链</td></tr>
+      </tbody>
+    </table>
+
+    <h3 id="sec-5-3-6-c1" class="sec-anchor">5.3.6–5.3.7 播放与付费门闸</h3>
+    <p>免费集 EP：可起播。付费集 EP：门闸 sheet；<strong>VISITOR</strong> 主按钮须含同意路径；<strong>GUEST</strong> 主按钮为 Log in + 次要会员说明（见 .md）。</p>
+
+    <h3 id="sec-5-4-6-c1" class="sec-anchor">5.4.6 Reels 点赞 / 列表</h3>
+    <p>VISITOR：点心形 → 半屏 <strong>Save likes &amp; lists</strong>，不调写接口。GUEST：切换 like + 调后端。</p>
+
+    <h3 id="sec-5-5-6-c1" class="sec-anchor">5.5.6 My List</h3>
+    <p>VISITOR：空态 + Agree；编辑灰置。GUEST：全开同步。</p>
+
+    <h3 id="sec-5-6-6-c1" class="sec-anchor">5.6.6 Profile 控件</h3>
+    <table class="spec">
+      <thead><tr><th>控件</th><th>VISITOR</th><th>GUEST</th><th>登录</th></tr></thead>
+      <tbody>
+        <tr><td>c1 同意隐私</td><td>→ 授权弹窗</td><td>—</td><td>—</td></tr>
+        <tr><td>c2 VIP/钱包</td><td>→ 授权弹窗</td><td>登录拦截</td><td>正常</td></tr>
+        <tr><td>c3 Top-up</td><td>隐藏</td><td>Login to recharge</td><td>Top-up</td></tr>
+        <tr><td>c4 Log in</td><td>次要入口</td><td>是</td><td>账号</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="sec-8-3-0" class="sec-anchor">8.3.0 业务接口意图（节选）</h2>
+    <table class="spec">
+      <thead><tr><th>意图</th><th>鉴权</th><th>响应要点</th></tr></thead>
+      <tbody>
+        <tr><td>同意并签发游客</td><td>无持久 UID</td><td>guest_uid, guest_session_token, expires</td></tr>
+        <tr><td>点赞 / My List / 进度写</td><td>Guest 或 Bearer</td><td>ok, updated_at</td></tr>
+        <tr><td>登录合并</td><td>Bearer + guest_session_token</td><td>merged_counts</td></tr>
+        <tr><td>起播鉴权</td><td>可选</td><td>episode_pay_type, playable</td></tr>
+      </tbody>
+    </table>
+    <p class="muted">完整 8.3.0 表与幂等列见 .md。</p>
+
+    <h2 id="sec-8-5" class="sec-anchor">8.5 SDK 开关（节选）</h2>
+    <table class="spec">
+      <thead><tr><th>SDK</th><th>VISITOR</th><th>GUEST</th><th>LOGGED_IN</th></tr></thead>
+      <tbody>
+        <tr><td>归因</td><td>关</td><td>开*</td><td>开*</td></tr>
+        <tr><td>行为分析</td><td>关</td><td>开*</td><td>开*</td></tr>
+        <tr><td>Crash</td><td>匿名无 ID</td><td>默认匿名</td><td>可绑 account</td></tr>
+        <tr><td>支付/IAP</td><td>关</td><td>关</td><td>开</td></tr>
+      </tbody>
+    </table>
+    <p class="muted">* 须已 consent 且符合隐私政策。</p>
+
+    <h2 id="sec-10" class="sec-anchor">§10 已拍板默认策略（摘要）</h2>
+    <ul>
+      <li><strong>10.1 合并</strong>：登录成功携带 guest_session_token；冲突以 <code>updated_at</code> 较新者胜；完成后吊销 guest token。</li>
+      <li><strong>10.2 撤回</strong>：仅 GUEST 可见入口 → VISITOR + 吊销；默认软删对终端不可见。</li>
+      <li><strong>10.3 崩溃</strong>：VISITOR 可上报无 user id / 无 IDFA 的 stack + app/os 版本。</li>
+      <li><strong>10.4 门闸登录后</strong>：回剧集上下文，不自动 IAP。</li>
+    </ul>
+
+    <p class="muted" style="margin-top:40px;">— 全文规则、Gherkin、Mermaid、§1.6 自检与 §11 法务声明见同目录 Markdown —</p>
+  </div>
+
+  <script>
+(function () {
+  document.querySelectorAll('[data-jump]').forEach(function (el) {
+    el.addEventListener('click', function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+      var targetId = el.dataset.jump;
+      var target = document.getElementById(targetId);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        target.classList.add('jump-highlight');
+        setTimeout(function () { target.classList.remove('jump-highlight'); }, 1400);
+      } else {
+        var toast = document.createElement('div');
+        toast.style.cssText = 'position:fixed;bottom:20px;right:20px;background:#1F2937;border:1px solid #F59E0B;padding:10px 16px;border-radius:6px;font-size:13px;color:#F9FAFB;z-index:9999;box-shadow:0 4px 12px rgba(0,0,0,0.4);';
+        toast.textContent = '\u26A0\uFE0F ' + (el.dataset.jumpLabel || '\u8BE5\u6309\u94AE\u6682\u65E0\u5BF9\u5E94\u7AE0\u8282');
+        document.body.appendChild(toast);
+        setTimeout(function () { toast.style.opacity = '0'; toast.style.transition = 'opacity 0.3s'; setTimeout(function () { toast.remove(); }, 300); }, 2000);
+      }
+    });
+  });
+})();
+  </script>
+</body>
+</html>
