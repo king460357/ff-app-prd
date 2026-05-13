@@ -1,5 +1,7 @@
 # pm-workflow — 产品经理 AI 工作流复用包
 
+> **Remote：** `ff-app-prd`（GitHub）。含 FlareFlow 等产品 PRD 批次（`docs/`）与本 PM 工作流模板（`.claude/`、`scripts/` 等）。
+
 > 这是产品总监维护的"PM AI 工作流共享仓"，给组内其他产品经理用。
 >
 > 拿到本仓库的内容（agents + skills + SOP + 工具脚本）接到你自己的工作仓后，**你的 Claude Code 立刻按同一套规则工作**——同样的决策流程、同样的 PRD 写作风格、同样的研发对齐协议。
