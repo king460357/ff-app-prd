@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>20260513 · FlareFlow · 待解锁页广告解锁改插页 · PRD</title>
+  <style>
+    :root {
+      --bg: #08080a;
+      --card: #16161c;
+      --fg: #F4F4F5;
+      --muted-fg: #A1A1AA;
+      --border: #27272a;
+      --primary: #EAB308;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 24px 18px 64px; }
+    .notice.notice-info {
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 22px;
+      font-size: 13px;
+      border: 1px solid rgba(234, 179, 8, 0.35);
+      background: linear-gradient(135deg, rgba(234, 179, 8, 0.08), rgba(24, 24, 30, 0.95));
+    }
+    h1 { font-size: 22px; margin: 0 0 6px; }
+    .meta { font-size: 12px; color: var(--muted-fg); margin-bottom: 20px; }
+    h2 { font-size: 16px; margin: 28px 0 12px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+    h3 { font-size: 14px; margin: 18px 0 8px; color: #e4e4e7; }
+    .muted { color: var(--muted-fg); font-size: 12px; }
+    table.spec { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; }
+    table.spec th, table.spec td { border: 1px solid var(--border); padding: 8px; text-align: left; }
+    table.spec th { background: rgba(0,0,0,0.35); color: var(--muted-fg); font-weight: 500; }
+    .dialog-mockup {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      max-width: 360px;
+      margin: 16px 0;
+      overflow: hidden;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.45);
+    }
+    .dialog-header {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .dialog-body { padding: 16px; font-size: 13px; color: var(--muted-fg); }
+    .dialog-footer {
+      padding: 12px 16px 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: #27272a;
+      color: var(--fg);
+      font-size: 13px;
+      border: 1px solid var(--border);
+    }
+    .btn-primary {
+      background: rgba(234, 179, 8, 0.18);
+      border-color: rgba(234, 179, 8, 0.45);
+      color: var(--primary);
+      font-weight: 600;
+    }
+    [data-jump] { cursor: pointer; position: relative; transition: outline 0.15s; }
+    [data-jump]:hover { outline: 2px dashed var(--primary); outline-offset: 3px; border-radius: 8px; }
+    [data-jump]:hover::after {
+      content: "→ " attr(data-jump-label);
+      position: absolute;
+      left: 0;
+      bottom: 100%;
+      margin-bottom: 6px;
+      padding: 6px 10px;
+      background: #18181b;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 11px;
+      color: var(--muted-fg);
+      white-space: nowrap;
+      z-index: 5;
+      pointer-events: none;
+    }
+    @keyframes jf {
+      0% { box-shadow: 0 0 0 0 rgba(234, 179, 8, 0.55); }
+      100% { box-shadow: 0 0 0 12px rgba(234, 179, 8, 0); }
+    }
+    .jump-highlight { animation: jf 1.4s ease-out; border-radius: 10px; }
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #18181b;
+      border: 1px solid var(--border);
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      display: none;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="notice notice-info">
+      <strong>怎么打开：</strong>本文件需用 Chrome / Edge 本地打开。修改需求请直接告诉 AI，由 AI <strong>同时</strong>更新 <code>.md</code> 与 <code>.html</code>。事实以 Markdown 真理源为准。
+    </div>
+    <h1>待解锁页「广告解锁」→ 插页广告</h1>
+    <div class="meta">FlareFlow · P1 · 2026-05-13 · HTML 派生（事实对齐 <code>20260513_待解锁页广告解锁改插页_PRD.md</code>）</div>
+
+    <p class="muted">已拍板：① 主人群待解锁「广告解锁」→ Interstitial；② 行2/行3 仍 Rewarded；③ 有效订阅不应出现待解锁；④ 访客待解锁页 → 隐私授权，无广告解锁本集。详见 PRD §2.0 / §2.1。</p>
+
+    <h2 id="sec-mock">5.2 待解锁页 mockup</h2>
+    <div class="dialog-mockup">
+      <div class="dialog-header">
+        <span>Unlock episode（主人群）</span>
+        <span style="color:var(--muted-fg);font-size:18px;">×</span>
+      </div>
+      <div class="dialog-body">
+        主人群：点「看广告解锁」→ SDK <strong>Interstitial</strong>。行2/3 同按钮走 <strong>Rewarded</strong>（见 PRD §2.0）。
+      </div>
+      <div class="dialog-footer">
+        <span class="btn">Subscribe</span>
+        <span class="btn">Coins</span>
+        <span class="btn btn-primary" data-jump="sec-5-2-2-c1" data-jump-label="见 PRD §5.2.2 控件 c1">Watch ad to unlock</span>
+      </div>
+    </div>
+
+    <div class="dialog-mockup" style="margin-top:20px;">
+      <div class="dialog-header">
+        <span>访客 · 待解锁页</span>
+        <span style="color:var(--muted-fg);font-size:18px;">×</span>
+      </div>
+      <div class="dialog-body">无「看广告解锁」本集路径；主 CTA 为同意隐私条款（访客 PRD）。</div>
+      <div class="dialog-footer">
+        <span class="btn btn-primary" data-jump="sec-5-2-2-c4" data-jump-label="见 PRD §5.2.2 c4">Agree to Privacy Policy</span>
+      </div>
+    </div>
+
+    <h2 id="sec-5-2-2-c1">5.2.2 控件 c1 —「看广告解锁」</h2>
+    <table class="spec">
+      <tr><th>项</th><th>说明</th></tr>
+      <tr><td>可见</td><td>非访客；主人群或行2/行3；有待解锁次数</td></tr>
+      <tr><td>点击</td><td>主人群 → <strong>Interstitial</strong>；行2/3 → <strong>Rewarded</strong></td></tr>
+      <tr><td>成功</td><td>对应形态达成成功条件 → 解锁 → 关门闸</td></tr>
+      <tr><td>失败</td><td>toast；不扣配额（与 PRD 一致）</td></tr>
+    </table>
+
+    <h2 id="sec-5-2-2-c4">5.2.2 控件 c4 — 访客隐私授权</h2>
+    <table class="spec">
+      <tr><th>项</th><th>说明</th></tr>
+      <tr><td>可见</td><td>访客模式 + 付费集门闸</td></tr>
+      <tr><td>点击</td><td>走访客 PRD 隐私流</td></tr>
+    </table>
+
+    <h2>影响范围（摘要）</h2>
+    <table class="spec">
+      <tr><th>域</th><th>要点</th></tr>
+      <tr><td>前端</td><td>分群路由：Interstitial / Rewarded / 访客隐私</td></tr>
+      <tr><td>SDK</td><td>双形态 placement + 回调</td></tr>
+      <tr><td>数据</td><td>埋点：分群 + ad_format</td></tr>
+    </table>
+  </div>
+  <div id="toast"></div>
+  <script>
+    (function () {
+      function showToast(msg) {
+        var t = document.getElementById("toast");
+        t.textContent = msg;
+        t.style.display = "block";
+        setTimeout(function () { t.style.display = "none"; }, 2200);
+      }
+      document.querySelectorAll("[data-jump]").forEach(function (el) {
+        el.addEventListener("click", function () {
+          var id = el.getAttribute("data-jump");
+          var target = id ? document.getElementById(id) : null;
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+            target.classList.add("jump-highlight");
+            setTimeout(function () { target.classList.remove("jump-highlight"); }, 1400);
+          } else {
+            showToast("\u26A0\uFE0F " + (el.getAttribute("data-jump-label") || "无对应章节"));
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
