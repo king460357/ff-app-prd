@@ -824,7 +824,9 @@ flowchart TD
     <tr><td>—</td><td>关闭 X（系统默认提供）</td><td>关 PiP；按 §5.6 退出流程</td></tr>
   </tbody>
 </table>
-<blockquote class="plain-talk">PiP 浮窗里就 3 个按钮——上一集 / 暂停 / 下一集，加上右上角系统默认的关闭 X。</blockquote>
+<blockquote class="plain-talk">PiP 浮窗里就 3 个按钮——上一集 / 暂停 / 下一集，加上右上角系统默认的关闭 X。其它任何控件（点赞、收藏、倍速、清晰度、<strong>弹幕开关</strong>等）都不放，用户回 App 全屏再操作。</blockquote>
+
+<p><strong>弹幕渲染策略</strong>：PiP 期间<strong>强制不渲染弹幕</strong>——即使用户在全屏页打开了弹幕开关，PiP 窗内也<strong>不显示</strong>任何弹幕。理由：PiP 窗约 100×178 pt，弹幕字号小不易看清；强制关闭节省 CPU 与电量。用户<strong>点 PiP 回 App 全屏</strong>后，恢复用户原本的弹幕开关设置（PiP 期间不持久化改用户偏好）。</p>
 
 <h3 id="sec-5-3">5.3 切集与连播</h3>
 <table>
@@ -1053,7 +1055,42 @@ flowchart TD
   <span class="kw">When</span> 用户点击 PiP 右上角关闭 X
   <span class="kw">Then</span> 视频应停止播放
   <span class="kw">And</span> 前台服务应退出
-  <span class="kw">And</span> App 不应主动切到前台</pre>
+  <span class="kw">And</span> App 不应主动切到前台
+
+<span class="scenario">Scenario:</span> PiP 期间强制不显示弹幕
+  <span class="kw">Given</span> 用户在沉浸播放页正在播放免费集
+  <span class="kw">And</span> 用户全屏页弹幕开关为 ON
+  <span class="kw">When</span> 用户进入 PiP
+  <span class="kw">Then</span> PiP 窗内不应渲染任何弹幕
+  <span class="kw">When</span> 用户点 PiP 回 App 全屏
+  <span class="kw">Then</span> 全屏播放应恢复显示弹幕
+  <span class="kw">And</span> 用户弹幕开关设置应保持为 ON 未被改写
+
+<span class="scenario">Scenario:</span> 用户双击 PiP 放大缩小不影响业务逻辑
+  <span class="kw">Given</span> 用户的 PiP 正在播放
+  <span class="kw">When</span> 用户双击 PiP 浮窗使其放大或缩小
+  <span class="kw">Then</span> 视频应继续不中断播放
+  <span class="kw">And</span> 连播 / 锁定集策略 / watchdog 等业务逻辑应不受影响
+
+<span class="scenario">Scenario:</span> 用户拖动 PiP 改变位置不影响播放
+  <span class="kw">Given</span> 用户的 PiP 正在播放
+  <span class="kw">When</span> 用户拖动 PiP 浮窗到屏幕另一位置
+  <span class="kw">Then</span> 视频应继续播放
+  <span class="kw">And</span> 切集与连播逻辑应不受影响</pre>
+
+<h3 id="sec-5-10">5.10 OS 标准交互（App 不干预）</h3>
+<p>PiP 浮窗的<strong>尺寸、位置、缩放、显隐</strong>由 iOS / Android 系统自带的 PiP API 管控；App <strong>不接管</strong>任何 OS 原生手势。下表罗列<strong>已知</strong> OS 行为以便研发 / QA 对齐预期，<strong>App 业务逻辑（连播、锁定集策略、watchdog 等）不受这些尺寸/位置变化影响</strong>。</p>
+<table>
+  <thead><tr><th>OS 手势 / 事件</th><th>OS 行为</th><th>App 是否干预</th></tr></thead>
+  <tbody>
+    <tr><td><strong>双击 PiP 浮窗</strong></td><td>OS 切换 PiP 尺寸（放大 ↔ 缩小，档位由系统决定）</td><td><strong>否</strong>——继续正常播放</td></tr>
+    <tr><td><strong>拖动 PiP 浮窗</strong></td><td>OS 改变 PiP 位置（吸附屏幕角落或拖到的位置）</td><td><strong>否</strong></td></tr>
+    <tr><td><strong>单击 PiP 浮窗 · 控件区</strong></td><td>OS 显示 / 隐藏上一集 / 暂停 / 下一集三个控件</td><td><strong>否</strong></td></tr>
+    <tr><td><strong>单击 PiP 浮窗 · 非控件区</strong></td><td>App 处理：关 PiP + 切前台 + 路由（详见 §5.6）</td><td><strong>是</strong></td></tr>
+    <tr><td><strong>swipe PiP 离屏</strong>（Android）</td><td>关 PiP（详见 §5.6）</td><td>App 视为正常退出</td></tr>
+    <tr><td><strong>OS 自动收起 PiP</strong>（来电、低内存、系统强杀等）</td><td>系统强制关 PiP</td><td>App 视同正常退出，下次回 App 按现网恢复进度</td></tr>
+  </tbody>
+</table>
 
 <!-- §6 -->
 <h2 id="sec-6">6. 影响范围</h2>
@@ -1061,7 +1098,7 @@ flowchart TD
   <thead><tr><th>模块</th><th>影响</th></tr></thead>
   <tbody>
     <tr><td>系统支持范围</td><td><strong>Android 8.0 (API 26)+ / iOS 14.0+</strong>；低于此版本设备降级到现网退后台</td></tr>
-    <tr><td>沉浸播放页</td><td>右上角 <code>···</code> 菜单加「画中画」<strong>切换开关项</strong>；切换开关偏好持久化（本地存储）；进/退出 PiP 状态管理；锁定集封面渲染</td></tr>
+    <tr><td>沉浸播放页</td><td>右上角 <code>···</code> 菜单加「画中画」<strong>切换开关项</strong>；切换开关偏好持久化（本地存储）；进/退出 PiP 状态管理；锁定集封面渲染；<strong>PiP 期间弹幕渲染关闭 / 回全屏恢复</strong></td></tr>
     <tr><td>沉浸播放器（核心）</td><td>接入 iOS <code>AVPictureInPictureController</code> + Android <code>PIP Mode API</code>；横竖屏 aspect ratio 动态切换；3 个系统位控件</td></tr>
     <tr><td>前台服务（Android FGS）</td><td>与 PiP 生命周期绑定；PiP 关闭时 FGS 退出；<strong>关闭瞬间是否需要短暂续命由研发深化</strong></td></tr>
     <tr><td>iOS 配置</td><td>Info.plist 声明 PiP 相关 Background Modes + <code>AVAudioSession.Category.playback</code> 配置由研发深化</td></tr>
