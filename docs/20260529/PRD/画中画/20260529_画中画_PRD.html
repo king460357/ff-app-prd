@@ -828,6 +828,13 @@ flowchart TD
 
 <p><strong>弹幕渲染策略</strong>：PiP 期间<strong>强制不渲染弹幕</strong>——即使用户在全屏页打开了弹幕开关，PiP 窗内也<strong>不显示</strong>任何弹幕。理由：PiP 窗约 100×178 pt，弹幕字号小不易看清；强制关闭节省 CPU 与电量。用户<strong>点 PiP 回 App 全屏</strong>后，恢复用户原本的弹幕开关设置（PiP 期间不持久化改用户偏好）。</p>
 
+<p><strong>音频会话策略</strong>：PiP 期间走 OS 标准音频会话（iOS <code>AVAudioSession.Category.playback</code> / Android 媒体音频流）；与其它 App 共存规则：</p>
+<ul>
+  <li><strong>PiP 进入瞬间</strong>：FlareFlow 视频音轨抢占音频焦点（与全屏播放一致），其它正在播放的音乐 App（Spotify / Apple Music 等）按系统标准被暂停或音量被压低</li>
+  <li><strong>其它 App 主动抢音频</strong>（用户在 PiP 期间打开音乐 App 等）：FlareFlow PiP <strong>视频自动暂停 + 音频静音</strong>；用户回到 FlareFlow 后<strong>手动点 PiP 内播放按钮</strong>才恢复播放，<strong>不自动恢复</strong></li>
+  <li><strong>来电 / 系统警告音</strong>：参 §5.10 OS 自动收起 PiP 流程</li>
+</ul>
+
 <h3 id="sec-5-3">5.3 切集与连播</h3>
 <table>
   <thead><tr><th>项</th><th>规则</th></tr></thead>
@@ -836,6 +843,7 @@ flowchart TD
     <tr><td><strong>手动切集</strong></td><td>系统位上一集 / 下一集按钮直接切；<strong>首集</strong>上一集置灰；<strong>末集</strong>下一集置灰</td></tr>
     <tr><td><strong>横竖屏切换</strong></td><td>切下一集后若 aspect ratio 与上一集不同（横↔竖），调用 OS API <code>setAspectRatio()</code> 实时更新；PiP 窗轻微动画切换尺寸</td></tr>
     <tr><td><strong>弱网下一集失败</strong></td><td>超时阈值与现网播放器对齐；3 次重试失败 → "已播完"暂停态（不自动退 PiP）</td></tr>
+    <tr><td><strong>播放归属（任务时长 / 观看进度 / 解锁次数 / 数据上报）</strong></td><td><strong>完全沿用现网</strong>——PiP 期间播放与 App 内沉浸页播放等价（同一播放器，仅渲染容器不同）；看剧任务时长、播放进度同步、广告解锁次数等按现网逻辑累加</td></tr>
   </tbody>
 </table>
 
@@ -884,6 +892,13 @@ flowchart TD
   </tbody>
 </table>
 
+<p><strong>身份动态变化处理</strong>：PiP 期间用户身份可能动态变化（最典型场景：VIP 订阅期间过期）。客户端在<strong>每次切集判定时实时查身份</strong>，按当下身份重新判定该集是否锁定：</p>
+<ul>
+  <li><strong>VIP 期间进 PiP → 期间 VIP 过期</strong> → 切到下一 VIP 专属集时按本节锁定集策略（PiP 暂停在封面 + "Tap to unlock"）</li>
+  <li><strong>普通用户期间通过其它路径升级 VIP</strong>（如另设备完成订阅且服务端同步） → 切集时按 <span class="id-tag loggedin">LOGGED_IN</span> VIP 身份判定，原本可能锁定的集现可正常播</li>
+  <li><strong>实时身份依据</strong>：客户端缓存的最新身份状态（与现网播放页判定同源）；如服务端身份变化但本地未同步，按本地判定，下次刷新后再一致</li>
+</ul>
+
 <h3 id="sec-5-5">5.5 广告交互（全部豁免）</h3>
 <table>
   <thead><tr><th>广告类型</th><th>PiP 期间行为</th><th>备注</th></tr></thead>
@@ -905,6 +920,7 @@ flowchart TD
     <tr><td>用户 swipe PiP 离屏（Android）</td><td>等同关闭 X</td></tr>
     <tr><td>Watchdog 30min 触发</td><td>等同关闭 X</td></tr>
     <tr><td>系统压力 / 强制关闭</td><td>视为正常退出；不弹提示</td></tr>
+    <tr><td><strong>推送 / Deep link 触发 App 切前台</strong></td><td><strong>立即关闭当前 PiP</strong>（视频停止）→ App 切前台 → 按推送 deeplink 进<strong>目标剧/集</strong>（不是恢复原 PiP 沉浸页）；与"用户点 PiP 窗体"路径等价但目标位置由 deeplink 决定</td></tr>
   </tbody>
 </table>
 
@@ -1076,7 +1092,37 @@ flowchart TD
   <span class="kw">Given</span> 用户的 PiP 正在播放
   <span class="kw">When</span> 用户拖动 PiP 浮窗到屏幕另一位置
   <span class="kw">Then</span> 视频应继续播放
-  <span class="kw">And</span> 切集与连播逻辑应不受影响</pre>
+  <span class="kw">And</span> 切集与连播逻辑应不受影响
+
+<span class="scenario">Scenario:</span> PiP 期间 VIP 过期后下一集判定为锁定
+  <span class="kw">Given</span> 用户为 VIP 在 PiP 内观看第 N 集
+  <span class="kw">And</span> VIP 订阅在播放期间过期
+  <span class="kw">When</span> 自动连播触发第 N+1 集判定
+  <span class="kw">And</span> 第 N+1 集为 VIP 专属
+  <span class="kw">Then</span> PiP 应暂停在第 N+1 集封面
+  <span class="kw">And</span> 应显示 Tap to unlock overlay
+
+<span class="scenario">Scenario:</span> 推送 Deep link 触发立即关闭当前 PiP 跳目标
+  <span class="kw">Given</span> 用户的 PiP 正在播放剧 A 第 N 集
+  <span class="kw">When</span> 用户点击 FCM 推送 跳到剧 B 第 M 集 Deep link
+  <span class="kw">Then</span> 当前 PiP 应立即关闭 视频停止
+  <span class="kw">And</span> App 应切到前台
+  <span class="kw">And</span> 应进入剧 B 第 M 集 不是恢复剧 A 沉浸页
+
+<span class="scenario">Scenario:</span> PiP 期间播放计入看剧任务时长
+  <span class="kw">Given</span> 用户在 PiP 内观看免费集
+  <span class="kw">And</span> 现网看剧任务条件为累计观看 30 分钟
+  <span class="kw">When</span> 用户在 PiP 内观看 20 分钟 然后回 App 全屏观看 10 分钟
+  <span class="kw">Then</span> 任务进度应累计为 30 分钟
+  <span class="kw">And</span> 应满足任务完成条件
+
+<span class="scenario">Scenario:</span> 其它 App 抢音频时 PiP 自动暂停且不自动恢复
+  <span class="kw">Given</span> 用户的 PiP 正在播放有声音的视频
+  <span class="kw">When</span> 用户切到另一 App 打开音乐播放
+  <span class="kw">Then</span> PiP 视频应自动暂停且音频静音
+  <span class="kw">When</span> 用户回到 FlareFlow
+  <span class="kw">Then</span> PiP 不应自动恢复播放
+  <span class="kw">And</span> 用户需点 PiP 内播放按钮才恢复</pre>
 
 <h3 id="sec-5-10">5.10 OS 标准交互（App 不干预）</h3>
 <p>PiP 浮窗的<strong>尺寸、位置、缩放、显隐</strong>由 iOS / Android 系统自带的 PiP API 管控；App <strong>不接管</strong>任何 OS 原生手势。下表罗列<strong>已知</strong> OS 行为以便研发 / QA 对齐预期，<strong>App 业务逻辑（连播、锁定集策略、watchdog 等）不受这些尺寸/位置变化影响</strong>。</p>
