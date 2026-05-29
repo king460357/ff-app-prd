@@ -1,1207 +1,855 @@
 <!DOCTYPE html>
+<!-- Generated against design-system/flareflow-visual-baseline.md v1.0 (2026-05-29).
+     如视觉与现网不符，先核查 baseline.md 是否过期，再改 HTML。 -->
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>20260513 · FlareFlow App · 访客模式与游客身份 · PRD 展示</title>
-  <style>
-    :root {
-      --bg: #08080a;
-      --card: #16161c;
-      --fg: #F4F4F5;
-      --muted-fg: #A1A1AA;
-      --border: #27272a;
-      --primary: #EAB308;
-      --primary-hover: #FACC15;
-      --primary-dim: rgba(234, 179, 8, 0.14);
-      --glass: rgba(24, 24, 30, 0.72);
-      --device-w: 390px;
-      --device-h: 844px;
-      --radius-device: 44px;
-      --radius-inner: 40px;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: radial-gradient(1200px 600px at 50% -10%, #1a1520 0%, var(--bg) 55%);
-      color: var(--fg);
-      font-size: 14px;
-      line-height: 1.5;
-      letter-spacing: -0.01em;
-      -webkit-font-smoothing: antialiased;
-    }
-    a { color: var(--primary); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .wrap { max-width: 1200px; margin: 0 auto; padding: 24px 20px 80px; }
-    .notice.notice-info, .notice {
-      border-radius: 12px;
-      padding: 16px 18px;
-      margin-bottom: 24px;
-      font-size: 13px;
-      line-height: 1.65;
-      border: 1px solid rgba(234, 179, 8, 0.35);
-      background: linear-gradient(135deg, rgba(234, 179, 8, 0.08), rgba(24, 24, 30, 0.9));
-    }
-    h1 { font-size: 22px; margin: 0 0 8px; font-weight: 700; letter-spacing: -0.02em; }
-    .meta { font-size: 12px; color: var(--muted-fg); margin-bottom: 22px; }
-    h2 { font-size: 16px; margin: 32px 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border); font-weight: 650; }
-    h3 { font-size: 14px; margin: 20px 0 12px; color: #e4e4e7; font-weight: 600; }
-    .muted { color: var(--muted-fg); font-size: 12px; }
-    .toc {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px 18px;
-      margin: 18px 0;
-      font-size: 13px;
-      line-height: 2;
-    }
-    .toc a { margin-right: 14px; white-space: nowrap; }
-    table.spec { width: 100%; border-collapse: collapse; font-size: 12px; margin: 12px 0; }
-    table.spec th, table.spec td { border: 1px solid var(--border); padding: 10px; text-align: left; }
-    table.spec th { color: var(--muted-fg); background: rgba(0, 0, 0, 0.35); font-weight: 500; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FlareFlow · 访客模式与游客身份 · PRD（v1.0 baseline 校准）</title>
+<style>
+  :root {
+    /* Baseline §2 中性 */
+    --ff-bg: #000000;
+    --ff-surface-1: #1F1F22;
+    --ff-surface-2: #2A2A2E;
+    --ff-divider: #262629;
+    --ff-text-primary: #FFFFFF;
+    --ff-text-secondary: #8A8A8E;
+    --ff-text-placeholder: #5E5E62;
+    --ff-text-disabled: #3A3A3D;
 
-    /* —— 高保真机壳：固定 390×844，禁止横向拉伸变形 —— */
-    .app-row {
-      display: flex;
-      flex-wrap: nowrap;
-      gap: 28px;
-      align-items: flex-start;
-      overflow-x: auto;
-      padding: 12px 4px 28px;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-    }
-    .app-col {
-      flex: 0 0 var(--device-w);
-      width: var(--device-w);
-      scroll-snap-align: start;
-    }
-    .app-device {
-      width: var(--device-w);
-      height: var(--device-h);
-      border-radius: var(--radius-device);
-      padding: 3px;
-      background: linear-gradient(165deg, #4a4a55 0%, #2a2a32 40%, #121218 100%);
-      box-shadow:
-        0 0 0 1px rgba(255, 255, 255, 0.06) inset,
-        0 32px 64px rgba(0, 0, 0, 0.75),
-        0 8px 24px rgba(0, 0, 0, 0.45);
-      flex-shrink: 0;
-    }
-    .app-device-inner {
-      width: 100%;
-      height: 100%;
-      border-radius: var(--radius-inner);
-      overflow: hidden;
-      background: #09090b;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
-    .status-wrap {
-      flex-shrink: 0;
-      padding: 12px 24px 0;
-      background: linear-gradient(180deg, #0c0c0f 0%, #09090b 100%);
-    }
-    .dynamic-island {
-      width: 120px;
-      height: 34px;
-      margin: 0 auto 10px;
-      border-radius: 20px;
-      background: #000;
-      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06);
-    }
-    .status-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 6px 10px;
-      font-size: 15px;
-      font-weight: 600;
-      font-variant-numeric: tabular-nums;
-      letter-spacing: -0.02em;
-    }
-    .status-icons { display: flex; align-items: center; gap: 6px; opacity: 0.95; }
-    .status-icons svg { display: block; }
+    /* Baseline §2.2 金 */
+    --ff-gold: #FFD24A;
+    --ff-gold-bright: #FFCB47;
+    --ff-gold-deep: #E5A82B;
+    --ff-gold-dark: #8E6D2E;
+    --ff-gold-gradient: linear-gradient(135deg, #FFCB47, #E5A82B);
 
-    .app-main {
-      flex: 1;
-      min-height: 0;
-      position: relative;
-      background: #09090b;
-      overflow: hidden;
-    }
-    .app-scroll {
-      position: absolute;
-      inset: 0;
-      overflow-y: auto;
-      overflow-x: hidden;
-      padding-bottom: 88px;
-      -webkit-overflow-scrolling: touch;
-    }
+    /* Baseline §2.3 橙 */
+    --ff-orange: #FF6B3D;
+    --ff-orange-gradient: linear-gradient(135deg, #FF8050, #FF5028);
 
-    .tab-bar {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 20;
-      display: flex;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      background: rgba(9, 9, 11, 0.88);
-      backdrop-filter: blur(20px) saturate(1.2);
-      -webkit-backdrop-filter: blur(20px) saturate(1.2);
-      padding: 6px 6px calc(10px + env(safe-area-inset-bottom, 0px));
-      min-height: 76px;
-    }
-    .tab-item {
-      flex: 1;
-      text-align: center;
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--muted-fg);
-      padding: 6px 2px;
-      cursor: default;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 4px;
-      min-height: 52px;
-    }
-    .tab-item .tab-svg { width: 24px; height: 24px; opacity: 0.55; transition: opacity 0.15s; }
-    .tab-item.on { color: var(--primary); }
-    .tab-item.on .tab-svg { opacity: 1; color: var(--primary); }
-    .tab-item.on::after {
-      content: "";
-      display: block;
-      width: 32px;
-      height: 3px;
-      background: var(--primary);
-      border-radius: 2px;
-      margin-top: 2px;
-      box-shadow: 0 0 12px rgba(234, 179, 8, 0.45);
-    }
+    /* Baseline §2.4 其它 */
+    --ff-red: #FF3B30;
+    --ff-success: #3CC76A;
 
-    .ff-logo-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 18px 12px;
-      font-weight: 700;
-      font-size: 19px;
-      letter-spacing: -0.03em;
-    }
-    .ff-flame {
-      width: 26px;
-      height: 26px;
-      border-radius: 8px;
-      background: linear-gradient(145deg, #fb923c 0%, #ea580c 45%, #b91c1c 100%);
-      box-shadow: 0 4px 12px rgba(234, 88, 12, 0.35);
-    }
-    .strip-e4 {
-      margin: 0 14px 12px;
-      padding: 12px 14px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, rgba(234, 179, 8, 0.18), rgba(234, 179, 8, 0.06));
-      border: 1px solid rgba(234, 179, 8, 0.42);
-      font-size: 12px;
-      line-height: 1.45;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-    }
-    .hero {
-      margin: 0 14px;
-      height: 220px;
-      border-radius: 16px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-    }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(180deg, transparent 35%, rgba(0, 0, 0, 0.85) 100%),
-        linear-gradient(125deg, #4c1d95 0%, #7c2d12 35%, #0f172a 100%);
-    }
-    .hero-bg::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
-      mix-blend-mode: overlay;
-      pointer-events: none;
-    }
-    .hero-meta {
-      position: absolute;
-      left: 16px;
-      right: 16px;
-      bottom: 56px;
-      font-size: 11px;
-      font-weight: 600;
-      color: rgba(255, 255, 255, 0.75);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-    .hero-title {
-      position: absolute;
-      left: 16px;
-      right: 16px;
-      bottom: 76px;
-      font-size: 18px;
-      font-weight: 700;
-      line-height: 1.2;
-      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
-    }
-    .hero-cta-wrap {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 14px;
-      display: flex;
-      justify-content: center;
-    }
-    .play-now {
-      background: #fff;
-      color: #09090b;
-      font-weight: 700;
-      font-size: 14px;
-      padding: 11px 26px;
-      border-radius: 999px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-      border: none;
-    }
-    .play-now svg { flex-shrink: 0; }
+    /* Baseline §5 圆角 */
+    --ff-radius-card: 12px;
+    --ff-radius-product: 16px;
+    --ff-radius-sheet-top: 20px;
+  }
 
-    .sec-title {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 18px 18px 10px;
-      font-size: 15px;
-      font-weight: 650;
-    }
-    .sec-title span:last-child { color: var(--muted-fg); font-size: 20px; font-weight: 300; }
-    .poster-row {
-      display: flex;
-      gap: 10px;
-      padding: 0 14px 16px;
-      overflow: hidden;
-    }
-    .poster {
-      width: 76px;
-      flex: 0 0 76px;
-      aspect-ratio: 2 / 3;
-      border-radius: 10px;
-      background: linear-gradient(160deg, #3f3f46 0%, #18181b 100%);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-      position: relative;
-      overflow: hidden;
-    }
-    .poster::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.55) 100%);
-    }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--ff-bg);
+    color: var(--ff-text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
 
-    /* Reels — 全屏沉浸 */
-    .reels-root { position: absolute; inset: 0; padding-bottom: 76px; }
-    .reels-video {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(185deg, #1e1b2e 0%, #0c0a12 45%, #050508 100%);
-    }
-    .reels-video::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 80% 50% at 50% 20%, rgba(120, 80, 200, 0.15), transparent 70%);
-    }
-    .reels-vignette {
-      position: absolute;
-      inset: 0;
-      box-shadow: inset 0 -120px 100px rgba(0, 0, 0, 0.65), inset 0 0 80px rgba(0, 0, 0, 0.35);
-      pointer-events: none;
-    }
-    .reels-logo-tr {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      opacity: 0.9;
-      z-index: 2;
-    }
-    .reels-rail {
-      position: absolute;
-      right: 12px;
-      top: 36%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 18px;
-      z-index: 3;
-    }
-    .rail-btn {
-      width: 48px;
-      min-height: 48px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      font-weight: 600;
-      color: #fff;
-      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
-      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
-    }
-    .rail-glass {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      background: rgba(0, 0, 0, 0.35);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 4px;
-      backdrop-filter: blur(8px);
-    }
-    .reels-bottom {
-      position: absolute;
-      left: 0;
-      right: 64px;
-      bottom: 96px;
-      padding: 0 16px;
-      font-size: 12px;
-      z-index: 2;
-    }
-    .reels-bottom .t {
-      font-weight: 700;
-      font-size: 15px;
-      margin-bottom: 6px;
-      line-height: 1.25;
-      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
-    }
-    .reels-bottom .desc { color: #d4d4d8; line-height: 1.45; text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7); }
-    .ep-row { display: flex; align-items: center; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
-    .ep-pill {
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 7px 12px;
-      border-radius: 10px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      font-weight: 600;
-      background: rgba(0, 0, 0, 0.35);
-      backdrop-filter: blur(6px);
-    }
+  /* —— Layout —— */
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 32px 24px 96px; }
+  h1 { font-size: 32px; font-weight: 700; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 22px; font-weight: 700; margin: 48px 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--ff-divider); }
+  h3 { font-size: 18px; font-weight: 600; margin: 28px 0 12px; color: var(--ff-text-primary); }
+  h4 { font-size: 15px; font-weight: 600; margin: 20px 0 10px; color: var(--ff-text-primary); }
+  p { margin: 0 0 14px; }
+  ul, ol { margin: 0 0 14px; padding-left: 22px; }
+  li { margin-bottom: 6px; }
+  a { color: var(--ff-gold); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    background: var(--ff-surface-1);
+    color: var(--ff-gold);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+  }
+  strong { color: var(--ff-text-primary); font-weight: 700; }
+  blockquote {
+    margin: 16px 0;
+    padding: 12px 18px;
+    background: var(--ff-surface-1);
+    border-left: 3px solid var(--ff-gold);
+    border-radius: 0 var(--ff-radius-card) var(--ff-radius-card) 0;
+    color: #D0D0D2;
+    font-size: 13.5px;
+  }
 
-    /* My List */
-    .ml-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 18px;
-      font-weight: 700;
-      font-size: 20px;
-      letter-spacing: -0.03em;
-    }
-    .seg {
-      display: flex;
-      margin: 0 16px 14px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      overflow: hidden;
-      background: rgba(0, 0, 0, 0.25);
-    }
-    .seg div {
-      flex: 1;
-      text-align: center;
-      padding: 12px;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--muted-fg);
-    }
-    .seg .on {
-      background: rgba(234, 179, 8, 0.12);
-      color: var(--primary);
-      box-shadow: inset 0 0 0 2px var(--primary);
-      color: #fde047;
-    }
-    .grid3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      padding: 0 14px 16px;
-    }
-    .cell {
-      aspect-ratio: 2 / 3;
-      background: linear-gradient(165deg, #3f3f46, #18181b);
-      border-radius: 10px;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-    }
+  /* —— Meta header —— */
+  .meta {
+    color: var(--ff-text-secondary);
+    font-size: 13px;
+    margin: 0 0 32px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--ff-divider);
+  }
+  .meta-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    background: var(--ff-surface-1);
+    color: var(--ff-text-primary);
+    border-radius: 4px;
+    font-size: 12px;
+    margin-right: 6px;
+  }
+  .meta-tag.gold {
+    background: var(--ff-gold-gradient);
+    color: #1A1500;
+    font-weight: 700;
+  }
 
-    /* Profile */
-    .pf-card {
-      margin: 14px;
-      padding: 18px;
-      border-radius: 16px;
-      background: linear-gradient(180deg, #1c1c22 0%, #141418 100%);
-      border: 1px solid var(--border);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
-    }
-    .pf-row { display: flex; justify-content: space-between; align-items: flex-start; }
-    .pf-av {
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      background: linear-gradient(145deg, #fb923c, #dc2626);
-      box-shadow: 0 4px 16px rgba(220, 38, 38, 0.35);
-    }
-    .topup {
-      width: 100%;
-      margin-top: 14px;
-      background: linear-gradient(180deg, var(--primary-hover), var(--primary));
-      color: #18181b;
-      font-weight: 800;
-      text-align: center;
-      padding: 14px;
-      border-radius: 12px;
-      font-size: 15px;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 8px 24px rgba(234, 179, 8, 0.25);
-    }
-    .pf-secondary {
-      margin-top: 12px;
-      padding: 14px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      font-size: 13px;
-      color: var(--muted-fg);
-      text-align: center;
-      cursor: pointer;
-      background: rgba(0, 0, 0, 0.2);
-    }
+  /* —— Open instructions —— */
+  .howto {
+    background: var(--ff-surface-1);
+    border-radius: var(--ff-radius-card);
+    padding: 18px 22px;
+    margin: 0 0 32px;
+    font-size: 13px;
+    color: #C8C8CC;
+  }
+  .howto h4 { margin-top: 0; color: var(--ff-text-primary); font-size: 14px; }
+  .howto ul { padding-left: 18px; margin: 8px 0 0; }
 
-    /* 弹层 — 卡片 + 底部 Sheet */
-    .dialog-mockup {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      max-width: 400px;
-      margin: 16px 0;
-      overflow: hidden;
-      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
-    }
-    .dialog-mockup.sheet-phone {
-      max-width: var(--device-w);
-      border-radius: 20px 20px 0 0;
-      margin-top: 24px;
-    }
-    .dialog-header {
-      padding: 16px 18px;
-      border-bottom: 1px solid var(--border);
-      font-weight: 650;
-      font-size: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      letter-spacing: -0.02em;
-    }
-    .dialog-body { padding: 16px 18px; font-size: 14px; color: #d4d4d8; line-height: 1.6; }
-    .dialog-body .policy-link { color: var(--primary); font-weight: 600; }
-    .dialog-footer {
-      padding: 14px 18px 18px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-      flex-wrap: wrap;
-      background: rgba(0, 0, 0, 0.25);
-    }
-    .dialog-footer.stack { flex-direction: column; align-items: stretch; }
-    .btn {
-      border: 1px solid var(--border);
-      padding: 11px 18px;
-      border-radius: 11px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      background: #27272a;
-      color: var(--fg);
-      text-align: center;
-    }
-    .btn-primary {
-      background: linear-gradient(180deg, var(--primary-hover), var(--primary));
-      color: #18181b;
-      border-color: transparent;
-    }
+  /* —— TOC —— */
+  .toc {
+    background: var(--ff-surface-1);
+    border-radius: var(--ff-radius-card);
+    padding: 16px 22px;
+    margin: 0 0 36px;
+    font-size: 13px;
+  }
+  .toc-title { font-weight: 700; margin-bottom: 8px; color: var(--ff-text-primary); }
+  .toc a { display: inline-block; margin: 4px 14px 4px 0; color: var(--ff-text-secondary); }
+  .toc a:hover { color: var(--ff-gold); text-decoration: none; }
 
-    [data-jump] { cursor: pointer !important; position: relative; transition: outline 0.15s; }
-    [data-jump]:hover { outline: 2px dashed var(--primary); outline-offset: 3px; border-radius: 6px; }
-    [data-jump]:hover::after {
-      content: "→ " attr(data-jump-label);
-      position: absolute;
-      bottom: calc(100% + 8px);
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--primary);
-      color: #18181b;
-      padding: 6px 12px;
-      border-radius: 8px;
-      font-size: 11px;
-      font-weight: 600;
-      white-space: nowrap;
-      z-index: 50;
-      pointer-events: none;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
-    }
-    .jump-highlight { animation: jf 1.4s ease-out; }
-    @keyframes jf {
-      0% { box-shadow: 0 0 0 4px rgba(234, 179, 8, 0.5); }
-      100% { box-shadow: 0 0 0 0 transparent; }
-    }
-    .sec-anchor { scroll-margin-top: 16px; }
+  /* —— Tables —— */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0 24px;
+    font-size: 13px;
+    background: var(--ff-surface-1);
+    border-radius: var(--ff-radius-card);
+    overflow: hidden;
+  }
+  th, td {
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--ff-divider);
+    vertical-align: top;
+  }
+  th {
+    color: var(--ff-text-secondary);
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.02);
+    font-size: 12px;
+    text-transform: none;
+  }
+  tr:last-child td { border-bottom: none; }
 
-    /* 产品截图：固定机壳比例，contain 不拉伸 */
-    .ref-row { display: flex; flex-wrap: nowrap; gap: 20px; overflow-x: auto; padding: 8px 0 16px; scroll-snap-type: x mandatory; }
-    .ref-block { flex: 0 0 var(--device-w); width: var(--device-w); scroll-snap-align: start; }
-    .ref-label { font-size: 11px; color: var(--muted-fg); margin-bottom: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
-    .ref-frame {
-      width: var(--device-w);
-      height: var(--device-h);
-      border-radius: var(--radius-device);
-      border: 3px solid #2d2d35;
-      background: #000;
-      overflow: hidden;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .ref-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      object-position: center top;
-      display: block;
-    }
-    .ref-miss {
-      font-size: 12px;
-      color: var(--muted-fg);
-      padding: 24px;
-      border: 1px dashed var(--border);
-      border-radius: 12px;
-      text-align: center;
-      display: none;
-      flex-direction: column;
-      height: 100%;
-      align-items: center;
-      justify-content: center;
-      line-height: 1.5;
-    }
+  /* —— Tag chips for identity —— */
+  .id-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: "SF Mono", Menlo, monospace;
+    margin: 0 2px;
+  }
+  .id-tag.visitor { background: rgba(255, 255, 255, 0.08); color: var(--ff-text-secondary); border: 1px solid #3A3A3D; }
+  .id-tag.guest { background: rgba(255, 210, 74, 0.16); color: var(--ff-gold); border: 1px solid rgba(255, 210, 74, 0.4); }
+  .id-tag.loggedin { background: var(--ff-gold-gradient); color: #1A1500; }
 
-    /* §4 高保真：访客 Discover 顶栏 + 弹窗①②（与 .md §4 语义一致；本页不展示 ASCII） */
-    .sec4-proto-label {
-      font-size: 11px;
-      color: var(--muted-fg);
-      margin-bottom: 8px;
-      font-weight: 650;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-    .vh-toolbar {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 12px 10px;
-      flex-wrap: nowrap;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    }
-    .vh-logo {
-      font-weight: 800;
-      font-size: 17px;
-      letter-spacing: -0.03em;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      min-width: 0;
-    }
-    .vh-exit {
-      flex-shrink: 0;
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--primary);
-      padding: 7px 10px;
-      border-radius: 8px;
-      border: 1px solid rgba(234, 179, 8, 0.45);
-      background: rgba(234, 179, 8, 0.1);
-      white-space: nowrap;
-      line-height: 1.15;
-      text-align: center;
-    }
-    .vh-icons {
-      flex-shrink: 0;
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      margin-left: auto;
-      font-size: 16px;
-      opacity: 0.88;
-    }
-    .vh-feed-placeholder {
-      flex: 1;
-      margin: 14px;
-      min-height: 380px;
-      border-radius: 16px;
-      border: 1px dashed rgba(255, 255, 255, 0.14);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.22));
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: var(--muted-fg);
-      font-size: 12px;
-      line-height: 1.5;
-      text-align: center;
-      padding: 20px;
-    }
-    .proto-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.78);
-      z-index: 30;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-    }
-    .proto-consent-card {
-      width: 100%;
-      max-width: 342px;
-      background: linear-gradient(180deg, #1a1a22 0%, #141418 100%);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
-    }
-    .proto-consent-title {
-      padding: 18px 18px 6px;
-      font-size: 18px;
-      font-weight: 750;
-      letter-spacing: -0.02em;
-    }
-    .proto-consent-lead {
-      padding: 0 18px 12px;
-      font-size: 13px;
-      color: #d4d4d8;
-      line-height: 1.45;
-    }
-    .proto-consent-links {
-      padding: 0 18px 14px;
-      font-size: 13px;
-    }
-    .proto-consent-links span {
-      color: var(--primary);
-      font-weight: 650;
-      text-decoration: underline;
-      text-underline-offset: 2px;
-    }
-    .proto-btn-row {
-      display: flex;
-      gap: 10px;
-      padding: 14px 16px 16px;
-      border-top: 1px solid var(--border);
-      background: rgba(0, 0, 0, 0.35);
-    }
-    .proto-btn-row .btn {
-      flex: 1;
-      text-align: center;
-      padding: 12px 10px;
-    }
-  </style>
+  /* —— Mockup container: 单台手机 ——
+     按 baseline §1 移动端竖屏 390×844；缩放展示在 web 上 */
+  .mockup-row {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+    margin: 24px 0 32px;
+    flex-wrap: wrap;
+  }
+  .mockup-col { flex: 1 1 280px; min-width: 280px; }
+  .mockup-col h4 { margin-top: 0; }
+
+  .phone {
+    width: 300px;
+    height: 650px;
+    background: var(--ff-bg);
+    border: 1px solid #2A2A2E;
+    border-radius: 32px;
+    padding: 6px;
+    margin: 0 auto;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  }
+  .phone-screen {
+    width: 100%;
+    height: 100%;
+    background: var(--ff-bg);
+    border-radius: 26px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 22px 4px;
+    font-size: 12px;
+    color: var(--ff-text-primary);
+    font-weight: 600;
+  }
+  .status-right { display: flex; gap: 5px; opacity: 0.8; }
+  .backdrop {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.7);
+    /* 模糊背后内容效果 */
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    position: relative;
+  }
+  .backdrop::before {
+    /* 模糊播放页背景示意 */
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 30% 40%, rgba(120, 80, 60, 0.35), transparent 60%),
+      radial-gradient(circle at 70% 70%, rgba(80, 60, 50, 0.3), transparent 70%),
+      #0A0A0A;
+    z-index: -1;
+  }
+
+  /* —— Privacy popup —— */
+  .privacy-dialog {
+    width: 100%;
+    background: var(--ff-surface-1);
+    border-radius: 20px;
+    padding: 22px 20px 18px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7);
+  }
+  .privacy-dialog .pd-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ff-text-primary);
+    margin-bottom: 8px;
+  }
+  .privacy-dialog .pd-lead {
+    font-size: 13px;
+    color: var(--ff-text-secondary);
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+  .privacy-dialog .pd-links {
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+  .privacy-dialog .pd-links a { color: var(--ff-text-primary); text-decoration: underline; }
+  .privacy-dialog .pd-checkbox {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    margin-bottom: 18px;
+    font-size: 12px;
+    color: var(--ff-text-secondary);
+  }
+  .pd-cb-box {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    border: 1.5px solid var(--ff-text-secondary);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  /* 隐私按钮 · 双等权（baseline §0 + 本 PRD §4.4 按钮合规） */
+  .privacy-actions {
+    display: flex;
+    gap: 10px;
+  }
+  .btn-privacy {
+    flex: 1;
+    height: 42px;
+    background: var(--ff-surface-2);
+    color: var(--ff-text-primary);
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .btn-privacy:active { background: #3A3A3D; }
+
+  /* 主操作按钮（期望用户点击的）——baseline §3 CTA-A 橙色 */
+  .btn-privacy-primary {
+    flex: 1;
+    height: 42px;
+    background: var(--ff-orange-gradient);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    box-shadow: 0 4px 14px rgba(255, 107, 61, 0.28);
+  }
+  .btn-privacy-primary:active {
+    background: linear-gradient(135deg, #E5703E, #D44218);
+  }
+
+  /* —— Retention modal 叠在隐私弹窗之上 —— */
+  .retention-stack {
+    position: relative;
+    width: 100%;
+  }
+  /* 背后的隐私弹窗：复用 .privacy-dialog 样式 + 缩小+淡化 表示叠层 */
+  .retention-back {
+    opacity: 0.4;
+    transform: scale(0.92);
+    transform-origin: top center;
+    filter: blur(0.5px);
+    margin-bottom: -130px;
+    pointer-events: none;
+  }
+  /* 前面的挽留弹窗：复用 .privacy-dialog 完整样式（圆角/padding/阴影） */
+  .retention-front {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* —— Tab bar mockup mini (used in matrix section) —— */
+  .tab-bar-mockup {
+    display: flex;
+    background: var(--ff-bg);
+    border-top: 1px solid var(--ff-divider);
+    padding: 6px 0 12px;
+  }
+  .tab-item {
+    flex: 1;
+    text-align: center;
+    font-size: 10px;
+    color: var(--ff-text-secondary);
+  }
+  .tab-item.selected { color: var(--ff-text-primary); }
+  .tab-icon {
+    width: 22px;
+    height: 22px;
+    margin: 0 auto 2px;
+    background: currentColor;
+    border-radius: 4px;
+    opacity: 0.85;
+  }
+
+  /* —— data-jump flash animation —— */
+  .jump-target { transition: outline 0.3s, outline-offset 0.3s; }
+  .jump-target.flash { outline: 2px solid var(--ff-orange); outline-offset: 4px; border-radius: 8px; }
+  [data-jump] { cursor: pointer; }
+
+  /* —— Footer —— */
+  .footer {
+    margin-top: 64px;
+    padding-top: 22px;
+    border-top: 1px solid var(--ff-divider);
+    font-size: 12px;
+    color: var(--ff-text-placeholder);
+  }
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="notice notice-info">
-      <strong>高保真 HTML 原型（开发对齐稿）</strong> · 逻辑画幅固定 <strong>390 × 844 pt</strong>（与 Figma iPhone 14/15 竖屏一致），机壳横向<strong>不随浏览器拉宽而拉伸</strong>；窄屏请横向滑动查看多台设备。<br />
-      <strong>展示范围：</strong>本页<strong>仅</strong>呈现高保真机壳与弹层；<strong>不包含</strong> ASCII 线框图。线框对照见同目录 <code>*_PRD.md</code>「## 4. 线框」。<br />
-      <strong>Figma 真理源：</strong><a href="https://www.figma.com/design/N3UP43Liicg9GDmo6lrLjW/FlareFlow-UI" target="_blank" rel="noopener">FlareFlow-UI</a> · Page <strong>FF-V1.7.5</strong> · 四 Tab：Discover / Reels / My List / Profile。<br />
-      <strong>截图：</strong>放入 <code>assets/screen-reference/</code> 后，下方「产品截图」在 <strong>390×844 框内 object-fit: contain</strong> 显示，<strong>不变形</strong>。<br />
-      <strong>导出给设计/开发：</strong>Chrome 打开本页 → F12 → Device Toolbar 选 iPhone 14 Pro（390）→ 每台机壳分别截图；或从 Figma Export @3x（1170×2532）。事实以同目录 <code>.md</code> 为准。
-    </div>
+<div class="wrap">
 
-    <h1>FlareFlow App · 访客模式与游客身份</h1>
-    <p class="meta">20260513 · 原生竖屏 App · 底部四 Tab · 琥珀主色 #EAB308（FF-V1.7.5）</p>
+<header>
+  <h1>FlareFlow · 访客模式与游客身份</h1>
+  <div class="meta">
+    <span class="meta-tag">P0</span>
+    <span class="meta-tag">v1.0</span>
+    <span class="meta-tag gold">baseline v1.0 校准</span>
+    <span style="margin-left: 10px;">2026-05-13 创建 · 2026-05-29 视觉重生</span>
+  </div>
+</header>
 
-    <div class="toc">
-      <a href="#sec-4-0">§4.0 App 规范</a>
-      <a href="#sec-4-proto">§4 高保真原型</a>
-      <a href="#sec-ref">产品截图</a>
-      <a href="#sec-screens">四 Tab 高保真机壳</a>
-      <a href="#sec-5-0">§5.0 矩阵</a>
-      <a href="#sec-ui-more">弹层</a>
-      <a href="#sec-5-2-13">§5.2.13</a>
-      <a href="#sec-5-2-6-c1">§5.2.6</a>
-      <a href="#sec-5-3-6-c1">§5.3</a>
-      <a href="#sec-5-4-6-c1">§5.4</a>
-      <a href="#sec-5-5-6-c1">§5.5</a>
-      <a href="#sec-5-6-6-c1">§5.6</a>
-      <a href="#sec-8-3-0">§8.3.0</a>
-      <a href="#sec-8-5">§8.5</a>
-      <a href="#sec-10">§10</a>
-    </div>
+<section class="howto">
+  <h4>怎么打开本 HTML</h4>
+  <ul>
+    <li><strong>方式 A · 终端</strong>：<code>git clone https://github.com/king460357/ff-app-prd.git &amp;&amp; cd ff-app-prd &amp;&amp; open docs/20260513/PRD/访客模式与游客身份/20260513_访客模式与游客身份_PRD.html</code></li>
+    <li><strong>方式 B · Finder 双击</strong>：下载后进入对应目录，双击 <code>*_PRD.html</code></li>
+    <li><strong>方式 C · 拖到浏览器</strong>：下载后直接拖入任意浏览器</li>
+  </ul>
+  <p style="margin-top: 10px; color: var(--ff-text-placeholder); font-size: 12px;">⚠️ GitHub 网页直接点 HTML 链接看到的是源码 —— 必须下载到本地浏览器打开才能看到 dark theme + 实物 UI 渲染。</p>
+</section>
 
-    <h2 id="sec-4-0" class="sec-anchor">§4.0 移动端 App 设计规范（摘要）</h2>
-    <ul class="muted" style="padding-left:18px;line-height:1.85;">
-      <li>形态：<strong>原生 iOS / Android</strong>，竖屏；本页 HTML 按 <strong>390×844</strong> 出图。</li>
-      <li>导航：底部固定 <strong>4 Tab</strong>，顺序 Discover → Reels → My List → Profile。</li>
-      <li>触控：主按钮与 Tab <strong>≥ 44pt</strong> 等效；底部预留 Home Indicator 安全区。</li>
-      <li>视觉：Dark；主强调色 <strong>#EAB308</strong>。</li>
-      <li>高保真事实源：<strong>Figma FF-V1.7.5</strong> + <code>assets/screen-reference/*.png</code>；本 HTML 为可交互对齐稿。</li>
-    </ul>
+<nav class="toc">
+  <div class="toc-title">目录</div>
+  <a href="#sec-1">1. 需求背景</a>
+  <a href="#sec-2">2. 需求概述</a>
+  <a href="#sec-3">3. 身份定义</a>
+  <a href="#sec-4">4. 隐私弹窗</a>
+  <a href="#sec-5">5. 触发场景与需求逻辑</a>
+  <a href="#sec-6">6. 访客态弹层策略</a>
+  <a href="#sec-7">7. 播放页相关逻辑</a>
+  <a href="#sec-8">8. 各身份能力一览</a>
+  <a href="#sec-9">9. 访客态第三方 SDK</a>
+  <a href="#sec-10">10. Toast 提示文案</a>
+  <a href="#sec-11">11. 验收要点</a>
+  <a href="#sec-12">12. 服务端能力</a>
+  <a href="#sec-13">13. 法务</a>
+</nav>
 
-    <!-- SVG：Tab 图标（§4 高保真与下方「四 Tab」机壳共用） -->
-    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-      <defs>
-        <symbol id="ico-discover" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
-        <symbol id="ico-reels" viewBox="0 0 24 24"><rect x="3" y="5" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M17 9l4-2v10l-4-2V9z" fill="currentColor"/></symbol>
-        <symbol id="ico-list" viewBox="0 0 24 24"><path d="M6 4h15v3H6V4zm0 7h15v3H6v-3zm0 7h15v3H6v-3zM4 5h1v1H4V5zm0 7h1v1H4v-1zm0 7h1v1H4v-1z" fill="currentColor"/></symbol>
-        <symbol id="ico-profile" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6 20v-1a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
-      </defs>
-    </svg>
+<!-- ============= §1 需求背景 ============= -->
+<h2 id="sec-1">1. 需求背景</h2>
 
-    <h2 id="sec-4-proto" class="sec-anchor">§4 高保真原型（与 PRD <code>.md</code> §4 语义一致）</h2>
-    <p class="muted">三屏：<strong>Discover · VISITOR</strong> 首页态；<strong>弹窗①</strong> 主授权（Agree / Disagree）；<strong>弹窗②</strong> 二次确认（Agree and continue / Disagree）。布局与文案骨架以 <code>.md</code> §3.0 / §4 为准。</p>
+<p>FlareFlow 是出海短剧 App，业务与数据会触达多国用户，须满足隐私与用户同意方面的合规要求（含公司上市筹备对「同意可追溯、未同意前数据最小化」的约束）。</p>
 
-    <div class="app-row">
-      <div class="app-col">
-        <div class="sec4-proto-label">Discover · VISITOR</div>
-        <div class="app-device">
-          <div class="app-device-inner">
-            <div class="status-wrap">
-              <div class="dynamic-island" aria-hidden="true"></div>
-              <div class="status-bar">
-                <span>9:41</span>
-                <div class="status-icons" aria-hidden="true">
-                  <svg width="18" height="12" viewBox="0 0 18 12" fill="none"><path d="M1 9h2v2H1V9zm4-2h2v4H5V7zm4-3h2v7H9V4zm4-2h2v9h-2V2z" fill="currentColor"/></svg>
-                  <svg width="27" height="12" viewBox="0 0 27 12" fill="none"><rect x="1" y="1" width="21" height="10" rx="2" stroke="currentColor" stroke-width="1.5" opacity="0.9"/><rect x="23" y="4" width="3" height="5" rx="0.5" fill="currentColor"/></svg>
-                </div>
-              </div>
-            </div>
-            <div class="app-main">
-              <div class="app-scroll" style="display:flex;flex-direction:column;min-height:0;">
-                <div class="vh-toolbar">
-                  <div class="vh-logo"><span class="ff-flame" aria-hidden="true"></span>FlareFlow</div>
-                  <div class="vh-exit">Exit visitor mode</div>
-                  <div class="vh-icons" aria-hidden="true"><span>🔍</span><span>⋯</span></div>
-                </div>
-                <div class="vh-feed-placeholder">轮播 / 海报 / 列表<br /><span style="font-size:11px;opacity:0.88">（内容区占位，与现网 Discover 一致）</span></div>
-              </div>
-              <nav class="tab-bar" aria-label="Main tabs">
-                <div class="tab-item on"><svg class="tab-svg"><use href="#ico-discover"/></svg>Discover</div>
-                <div class="tab-item"><svg class="tab-svg"><use href="#ico-reels"/></svg>Reels</div>
-                <div class="tab-item"><svg class="tab-svg"><use href="#ico-list"/></svg>My List</div>
-                <div class="tab-item"><svg class="tab-svg"><use href="#ico-profile"/></svg>Profile</div>
-              </nav>
-            </div>
-          </div>
+<p>在「用户还没明确同意 Privacy Policy / Terms」的阶段，产品仍希望用户能先体验核心内容（浏览首页、看免费剧），但不能按「已同意用户」的方式采集、上报或开通营销能力。</p>
+
+<p>因此需要在本期把两件事说清楚并落到同一套产品规则里：</p>
+
+<ul>
+  <li><strong>合规边界</strong>：未同意前做到什么程度算合规、同意之后才能开放什么。</li>
+  <li><strong>体验边界</strong>：未同意时用户仍能用到哪些功能、哪些必须等同意或登录后再说。</li>
+</ul>
+
+<!-- ============= §2 需求概述 ============= -->
+<h2 id="sec-2">2. 需求概述</h2>
+
+<table>
+  <thead><tr><th style="width: 26%;">维度</th><th>规则</th></tr></thead>
+  <tbody>
+    <tr><td>访客默认可用</td><td>底部 Tab 选中 <strong>Discover</strong>；可搜索、列表、按现网播免费集</td></tr>
+    <tr><td>须弹隐私弹窗的入口</td><td>冷启未决策；访客点 Reels / My List / Profile；顶栏「退出访客模式」；进入待解锁页；播放页部分点按（§7）</td></tr>
+    <tr><td>隐私合规弹窗</td><td>仅 <strong>隐私弹窗</strong> + <strong>隐私二级挽留弹窗</strong> 两枚；各入口 <strong>同一套 UI</strong></td></tr>
+    <tr><td>访客可弹其它</td><td>系统通知（推送）权限及必要说明（§6 白名单）</td></tr>
+    <tr><td>充值</td><td>仅 <span class="id-tag loggedin">LOGGED_IN</span> 可 IAP / Top-up</td></tr>
+    <tr><td>SDK</td><td><span class="id-tag visitor">VISITOR</span> 路径不 init 归因、分析、广告联盟（§9）</td></tr>
+    <tr><td>服务端写数据</td><td><strong>访客</strong>不得保存点赞、收藏、观看进度等到账号侧（无游客会话凭证）；<strong>游客 / 已登录</strong>按现网。失败提示见 §10</td></tr>
+  </tbody>
+</table>
+
+<!-- ============= §3 身份定义 ============= -->
+<h2 id="sec-3">3. 身份定义</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>用户侧</th>
+      <th>枚举</th>
+      <th>服务端有无「同意隐私」临时凭证</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>访客</td>
+      <td><span class="id-tag visitor">VISITOR</span></td>
+      <td><strong>无</strong></td>
+      <td>仅本地浏览；运营弹窗关断；不可把点赞/收藏/进度等写入服务端账号数据</td>
+    </tr>
+    <tr>
+      <td>游客</td>
+      <td><span class="id-tag guest">GUEST</span></td>
+      <td><strong>有</strong>（游客会话凭证 <code>guest_session_token</code>）</td>
+      <td>未注册登录，但已同意政策；收藏、进度等与 <strong>现网游客</strong> 一致</td>
+    </tr>
+    <tr>
+      <td>已登录</td>
+      <td><span class="id-tag loggedin">LOGGED_IN</span></td>
+      <td>正式登录态（账号 token）</td>
+      <td>充值、会员等</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote><strong>游客会话凭证是什么</strong>：用户在 <strong>隐私弹窗</strong> 点「同意」，或在 <strong>隐私二级挽留弹窗</strong> 点「同意并继续」后，<strong>服务端</strong>记录隐私同意，并返回一串令牌给 App 保存；之后需要「记住用户行为」的接口（点赞、My List、进度等）须携带该令牌。过期或失效后须重新走同意流程（见 §10、§12）。</blockquote>
+
+<!-- ============= §4 隐私弹窗 ============= -->
+<h2 id="sec-4">4. 隐私弹窗</h2>
+
+<p>全 App 共用下表；<strong>§5</strong> 按场景补充 <strong>关窗后的页面 / Tab / 路由</strong> 逻辑（弹窗按钮与身份变化不重复写）。</p>
+
+<h3>4.1 何时出现</h3>
+<table>
+  <thead><tr><th>弹窗</th><th>出现条件</th></tr></thead>
+  <tbody>
+    <tr><td><strong>隐私弹窗</strong>（主授权）</td><td>§5 各触发条件满足时</td></tr>
+    <tr><td><strong>隐私二级挽留弹窗</strong></td><td><strong>仅当</strong>在隐私弹窗点击 <strong>不同意</strong>；可反复「隐私弹窗 → 隐私二级挽留弹窗」，直至在挽留弹窗上结束</td></tr>
+  </tbody>
+</table>
+
+<p>出现二级挽留时，<strong>隐私二级挽留弹窗叠在隐私弹窗之上</strong>（或与之同时展示）；两枚弹窗在全 App <strong>同一套 UI 组件</strong>，视觉细节以 Figma 为准。</p>
+
+<h3>4.2 隐私弹窗</h3>
+
+<div class="mockup-row">
+  <div class="mockup-col">
+    <h4>实物 UI（高保真示意）</h4>
+    <div class="phone">
+      <div class="phone-screen">
+        <div class="status-bar">
+          <span>9:41</span>
+          <span class="status-right">●●● ▮▮</span>
         </div>
-        <p class="muted" style="margin-top:8px">顶栏 <strong>Exit visitor mode</strong> 与 Reels / My List / Profile → 弹窗①；底部选中态仍为 Discover。</p>
-      </div>
-
-      <div class="app-col">
-        <div class="sec4-proto-label">弹窗① — Privacy &amp; terms</div>
-        <div class="app-device">
-          <div class="app-device-inner">
-            <div class="status-wrap">
-              <div class="dynamic-island" aria-hidden="true"></div>
-              <div class="status-bar">
-                <span>9:41</span>
-                <div class="status-icons" aria-hidden="true">
-                  <svg width="18" height="12" viewBox="0 0 18 12" fill="none"><path d="M1 9h2v2H1V9zm4-2h2v4H5V7zm4-3h2v7H9V4zm4-2h2v9h-2V2z" fill="currentColor"/></svg>
-                  <svg width="27" height="12" viewBox="0 0 27 12" fill="none"><rect x="1" y="1" width="21" height="10" rx="2" stroke="currentColor" stroke-width="1.5" opacity="0.9"/><rect x="23" y="4" width="3" height="5" rx="0.5" fill="currentColor"/></svg>
-                </div>
-              </div>
+        <div class="backdrop">
+          <div class="privacy-dialog jump-target" id="mock-consent-dialog">
+            <div class="pd-title">Privacy &amp; terms</div>
+            <div class="pd-lead">Please read and agree to our Privacy Policy and Terms of Service to use the full app.</div>
+            <div class="pd-links">
+              <a>Privacy Policy</a> · <a>Terms of Service</a>
             </div>
-            <div class="app-main" style="position:relative;background:#09090b">
-              <div class="proto-overlay">
-                <div class="proto-consent-card" role="dialog" aria-labelledby="proto-c1-title">
-                  <div id="proto-c1-title" class="proto-consent-title">Privacy &amp; terms</div>
-                  <div class="proto-consent-lead">Please read and agree to our Privacy Policy and Terms of Service to use the full app.</div>
-                  <div class="proto-consent-links"><span>Privacy Policy</span> · <span>Terms of Service</span></div>
-                  <div class="proto-btn-row">
-                    <span class="btn btn-primary">Agree</span>
-                    <span class="btn">Disagree</span>
-                  </div>
-                </div>
-              </div>
+            <div class="pd-checkbox">
+              <span class="pd-cb-box"></span>
+              <span>I have read and agree to the Privacy Policy and Terms of Service.</span>
             </div>
-          </div>
-        </div>
-        <p class="muted" style="margin-top:8px">全屏或底部大弹层均可；各入口同一套界面（见 <code>.md</code> §3.0.1）。</p>
-      </div>
-
-      <div class="app-col">
-        <div class="sec4-proto-label">弹窗② — Continue in visitor mode?</div>
-        <div class="app-device">
-          <div class="app-device-inner">
-            <div class="status-wrap">
-              <div class="dynamic-island" aria-hidden="true"></div>
-              <div class="status-bar">
-                <span>9:41</span>
-                <div class="status-icons" aria-hidden="true">
-                  <svg width="18" height="12" viewBox="0 0 18 12" fill="none"><path d="M1 9h2v2H1V9zm4-2h2v4H5V7zm4-3h2v7H9V4zm4-2h2v9h-2V2z" fill="currentColor"/></svg>
-                  <svg width="27" height="12" viewBox="0 0 27 12" fill="none"><rect x="1" y="1" width="21" height="10" rx="2" stroke="currentColor" stroke-width="1.5" opacity="0.9"/><rect x="23" y="4" width="3" height="5" rx="0.5" fill="currentColor"/></svg>
-                </div>
-              </div>
-            </div>
-            <div class="app-main" style="position:relative;background:#09090b">
-              <div class="proto-overlay">
-                <div class="proto-consent-card" role="dialog" aria-labelledby="proto-c2-title">
-                  <div id="proto-c2-title" class="proto-consent-title">Continue in visitor mode?</div>
-                  <div class="proto-consent-lead">If you don’t agree to the Privacy Policy and Terms of Service, you’ll use FlareFlow in visitor mode with basic browsing only.</div>
-                  <div class="proto-btn-row">
-                    <span class="btn btn-primary">Agree and continue</span>
-                    <span class="btn">Disagree</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <p class="muted" style="margin-top:8px">仅在弹窗①点 Disagree 后出现（见 <code>.md</code> §3.0.4）。</p>
-      </div>
-    </div>
-
-    <h2 id="sec-ref" class="sec-anchor">产品截图（390×844 框内 contain，不拉伸）</h2>
-    <p class="muted">与 PRD <code>.md</code> §4.0.5 路径一致；缺文件时框内显示灰提示。</p>
-    <div class="ref-row">
-      <div class="ref-block">
-        <div class="ref-label">01 Discover</div>
-        <div class="ref-frame">
-          <img src="assets/screen-reference/01-discover-tab.png" alt="Discover" onerror="this.style.display='none';document.getElementById('miss-01').style.display='flex'" />
-          <p id="miss-01" class="ref-miss">未找到<br><code>01-discover-tab.png</code></p>
-        </div>
-      </div>
-      <div class="ref-block">
-        <div class="ref-label">02 Reels</div>
-        <div class="ref-frame">
-          <img src="assets/screen-reference/02-reels-tab.png" alt="Reels" onerror="this.style.display='none';document.getElementById('miss-02').style.display='flex'" />
-          <p id="miss-02" class="ref-miss">未找到<br><code>02-reels-tab.png</code></p>
-        </div>
-      </div>
-      <div class="ref-block">
-        <div class="ref-label">03 My List</div>
-        <div class="ref-frame">
-          <img src="assets/screen-reference/03-my-list-tab.png" alt="My List" onerror="this.style.display='none';document.getElementById('miss-03').style.display='flex'" />
-          <p id="miss-03" class="ref-miss">未找到<br><code>03-my-list-tab.png</code></p>
-        </div>
-      </div>
-    </div>
-
-    <h2 id="sec-screens" class="sec-anchor">四 Tab · 高保真示意机壳（390×844）</h2>
-    <p class="muted">Discover：顶栏 + 解锁条 + Hero 轮播位 + Play Now + 横滑海报；Reels：沉浸层 + 玻璃态侧栏 + 底信息；My List：分段 + 2:3 栅格；Profile：访客主 CTA「同意隐私」。</p>
-
-    <div class="app-row">
-      <!-- Discover -->
-      <div class="app-col">
-        <h3>Discover</h3>
-        <div class="app-device">
-          <div class="app-device-inner">
-            <div class="status-wrap">
-              <div class="dynamic-island" aria-hidden="true"></div>
-              <div class="status-bar">
-                <span>9:41</span>
-                <div class="status-icons" aria-hidden="true">
-                  <svg width="18" height="12" viewBox="0 0 18 12" fill="none"><path d="M1 9h2v2H1V9zm4-2h2v4H5V7zm4-3h2v7H9V4zm4-2h2v9h-2V2z" fill="currentColor"/></svg>
-                  <svg width="27" height="12" viewBox="0 0 27 12" fill="none"><rect x="1" y="1" width="21" height="10" rx="2" stroke="currentColor" stroke-width="1.5" opacity="0.9"/><rect x="23" y="4" width="3" height="5" rx="0.5" fill="currentColor"/></svg>
-                </div>
-              </div>
-            </div>
-            <div class="app-main">
-              <div class="app-scroll">
-                <div class="ff-logo-row"><span class="ff-flame" aria-hidden="true"></span> FlareFlow</div>
-                <div class="strip-e4" data-jump="sec-5-2-13" data-jump-label="见 5.2.13 E4 Discover 条"><strong>Unlock full experience</strong> — Tap to agree to our privacy policy and enjoy personalized recommendations.</div>
-                <div class="hero">
-                  <div class="hero-bg" aria-hidden="true"></div>
-                  <div class="hero-meta">Featured · Romance</div>
-                  <div class="hero-title">The Reunion of<br/>Genius Baby</div>
-                  <div class="hero-cta-wrap">
-                    <span class="play-now" data-jump="sec-5-3-6-c1" data-jump-label="见 5.3 Play Now 起播">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-                      Play Now
-                    </span>
-                  </div>
-                </div>
-                <div class="sec-title"><span>Trending</span><span>›</span></div>
-                <div class="poster-row">
-                  <div class="poster" aria-hidden="true"></div>
-                  <div class="poster" aria-hidden="true"></div>
-                  <div class="poster" aria-hidden="true"></div>
-                  <div class="poster" aria-hidden="true"></div>
-                </div>
-              </div>
-              <nav class="tab-bar" aria-label="Main tabs">
-                <div class="tab-item on"><svg class="tab-svg"><use href="#ico-discover"/></svg>Discover</div>
-                <div class="tab-item"><svg class="tab-svg"><use href="#ico-reels"/></svg>Reels</div>
-                <div class="tab-item"><svg class="tab-svg"><use href="#ico-list"/></svg>My List</div>
-                <div class="tab-item"><svg class="tab-svg"><use href="#ico-profile"/></svg>Profile</div>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Reels -->
-      <div class="app-col">
-        <h3>Reels</h3>
-        <div class="app-device">
-          <div class="app-device-inner">
-            <div class="status-wrap">
-              <div class="dynamic-island" aria-hidden="true"></div>
-              <div class="status-bar">
-                <span>9:41</span>
-                <div class="status-icons" aria-hidden="true">
-                  <svg width="18" height="12" viewBox="0 0 18 12" fill="none"><path d="M1 9h2v2H1V9zm4-2h2v4H5V7zm4-3h2v7H9V4zm4-2h2v9h-2V2z" fill="currentColor"/></svg>
-                  <svg width="27" height="12" viewBox="0 0 27 12" fill="none"><rect x="1" y="1" width="21" height="10" rx="2" stroke="currentColor" stroke-width="1.5" opacity="0.9"/><rect x="23" y="4" width="3" height="5" rx="0.5" fill="currentColor"/></svg>
-                </div>
-              </div>
-            </div>
-            <div class="app-main">
-              <div class="reels-root">
-                <div class="reels-video">
-                  <div class="reels-vignette"></div>
-                  <div class="reels-logo-tr">FlareFlow</div>
-                  <div class="reels-rail">
-                    <div class="rail-btn" data-jump="sec-5-4-6-c1" data-jump-label="见 5.4.6 Like">
-                      <div class="rail-glass">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 21s-6.5-4.35-9-7.5C.5 9.57 2.5 6 6 6c2.1 0 3.45 1.35 4 2.1.55-.75 1.9-2.1 4-2.1 3.5 0 5.5 3.57 3 7.5-2.5 3.15-9 7.5-9 7.5z"/></svg>
-                      </div>
-                      30.8K
-                    </div>
-                    <div class="rail-btn">
-                      <div class="rail-glass"><svg width="22" height="22" viewBox="0 0 24 24" fill="var(--primary)"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7L12 17.8 5.7 21l2.3-7L2 9.4h7.6L12 2z"/></svg></div>
-                      VIP
-                    </div>
-                  </div>
-                  <div class="reels-bottom">
-                    <div class="t">The Reunion of Genius Baby</div>
-                    <div class="desc muted">She never knew the CEO was the father of her child… Episode 1 — free to watch.</div>
-                    <div class="ep-row">
-                      <div class="ep-pill">EP.1 <span aria-hidden="true">🔒</span></div>
-                      <span class="muted">All 90 Episodes ›</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <nav class="tab-bar">
-                <div class="tab-item"><svg class="tab-svg"><use href="#ico-discover"/></svg>Discover</div>
-                <div class="tab-item on"><svg class="tab-svg"><use href="#ico-reels"/></svg>Reels</div>
-                <div class="tab-item"><svg class="tab-svg"><use href="#ico-list"/></svg>My List</div>
-                <div class="tab-item"><svg class="tab-svg"><use href="#ico-profile"/></svg>Profile</div>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- My List -->
-      <div class="app-col">
-        <h3>My List</h3>
-        <div class="app-device">
-          <div class="app-device-inner">
-            <div class="status-wrap">
-              <div class="dynamic-island" aria-hidden="true"></div>
-              <div class="status-bar">
-                <span>9:41</span>
-                <div class="status-icons" aria-hidden="true">
-                  <svg width="18" height="12" viewBox="0 0 18 12" fill="none"><path d="M1 9h2v2H1V9zm4-2h2v4H5V7zm4-3h2v7H9V4zm4-2h2v9h-2V2z" fill="currentColor"/></svg>
-                  <svg width="27" height="12" viewBox="0 0 27 12" fill="none"><rect x="1" y="1" width="21" height="10" rx="2" stroke="currentColor" stroke-width="1.5" opacity="0.9"/><rect x="23" y="4" width="3" height="5" rx="0.5" fill="currentColor"/></svg>
-                </div>
-              </div>
-            </div>
-            <div class="app-main">
-              <div class="app-scroll">
-                <div class="ml-head">My List <span class="muted" style="font-size:18px;font-weight:400;">✎</span></div>
-                <div class="seg">
-                  <div class="on">Favorites</div>
-                  <div>History</div>
-                </div>
-                <div class="grid3">
-                  <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-                  <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-                </div>
-              </div>
-              <nav class="tab-bar">
-                <div class="tab-item"><svg class="tab-svg"><use href="#ico-discover"/></svg>Discover</div>
-                <div class="tab-item"><svg class="tab-svg"><use href="#ico-reels"/></svg>Reels</div>
-                <div class="tab-item on"><svg class="tab-svg"><use href="#ico-list"/></svg>My List</div>
-                <div class="tab-item"><svg class="tab-svg"><use href="#ico-profile"/></svg>Profile</div>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Profile VISITOR -->
-      <div class="app-col">
-        <h3>Profile · VISITOR</h3>
-        <div class="app-device">
-          <div class="app-device-inner">
-            <div class="status-wrap">
-              <div class="dynamic-island" aria-hidden="true"></div>
-              <div class="status-bar">
-                <span>9:41</span>
-                <div class="status-icons" aria-hidden="true">
-                  <svg width="18" height="12" viewBox="0 0 18 12" fill="none"><path d="M1 9h2v2H1V9zm4-2h2v4H5V7zm4-3h2v7H9V4zm4-2h2v9h-2V2z" fill="currentColor"/></svg>
-                  <svg width="27" height="12" viewBox="0 0 27 12" fill="none"><rect x="1" y="1" width="21" height="10" rx="2" stroke="currentColor" stroke-width="1.5" opacity="0.9"/><rect x="23" y="4" width="3" height="5" rx="0.5" fill="currentColor"/></svg>
-                </div>
-              </div>
-            </div>
-            <div class="app-main">
-              <div class="app-scroll">
-                <div class="ml-head">Profile <span style="color:var(--primary);font-size:13px;font-weight:700;" data-jump="sec-5-6-6-c1" data-jump-label="5.6.6 Log in">Log in</span></div>
-                <div class="pf-card">
-                  <div class="pf-row">
-                    <div style="display:flex;gap:14px;">
-                      <div class="pf-av" aria-hidden="true"></div>
-                      <div>
-                        <div style="font-weight:700;font-size:17px;">Visitor</div>
-                        <div class="muted" style="font-size:12px;margin-top:4px;">Browsing mode · no account</div>
-                      </div>
-                    </div>
-                  </div>
-                  <button type="button" class="topup" data-jump="sec-5-6-6-c1" data-jump-label="5.6.6 同意隐私">Agree to Privacy Policy</button>
-                  <div class="pf-secondary" data-jump="sec-5-6-6-c1" data-jump-label="5.6.6 VIP/钱包">VIP / Wallet</div>
-                </div>
-              </div>
-              <nav class="tab-bar">
-                <div class="tab-item"><svg class="tab-svg"><use href="#ico-discover"/></svg>Discover</div>
-                <div class="tab-item"><svg class="tab-svg"><use href="#ico-reels"/></svg>Reels</div>
-                <div class="tab-item"><svg class="tab-svg"><use href="#ico-list"/></svg>My List</div>
-                <div class="tab-item on"><svg class="tab-svg"><use href="#ico-profile"/></svg>Profile</div>
-              </nav>
+            <div class="privacy-actions">
+              <button class="btn-privacy" data-jump="#sec-4-3-row">Disagree</button>
+              <button class="btn-privacy-primary" data-jump="#sec-3">Agree</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <h2 id="sec-5-0" class="sec-anchor">§5.0 三态能力矩阵</h2>
-    <table class="spec">
-      <thead><tr><th>能力</th><th>VISITOR</th><th>GUEST</th><th>LOGGED_IN</th></tr></thead>
-      <tbody>
-        <tr><td>四 Tab 浏览</td><td>✅</td><td>✅</td><td>✅</td></tr>
-        <tr><td>免费集播放</td><td>✅</td><td>✅</td><td>✅</td></tr>
-        <tr><td>付费集正片</td><td>❌</td><td>❌</td><td>依会员</td></tr>
-        <tr><td>点赞写后端</td><td>❌</td><td>✅</td><td>✅</td></tr>
-        <tr><td>My List 同步</td><td>❌</td><td>✅</td><td>✅</td></tr>
-        <tr><td>IAP / Top-up</td><td>❌</td><td>❌</td><td>✅</td></tr>
-      </tbody>
-    </table>
-
-    <h2 id="sec-ui-more" class="sec-anchor">系统弹层（高保真组件级）</h2>
-    <p class="muted">与 PRD 真值一致的完整机壳态见 <a href="#sec-4-proto">§4 高保真原型</a>；本节为窄 Sheet 切片，便于对照旧 §5.2.6 锚点。</p>
-    <h3>弹窗① · Privacy &amp; terms（主授权）</h3>
-    <div class="dialog-mockup sheet-phone">
-      <div class="dialog-header">Privacy &amp; terms</div>
-      <div class="dialog-body">
-        Please read and agree to our <span class="policy-link">Privacy Policy</span> and <span class="policy-link">Terms of Service</span> to use the full app.
-      </div>
-      <div class="dialog-footer">
-        <span class="btn" data-jump="sec-5-2-6-c1" data-jump-label="弹窗① Disagree">Disagree</span>
-        <span class="btn btn-primary" data-jump="sec-5-2-6-c1" data-jump-label="弹窗① Agree">Agree</span>
-      </div>
-    </div>
-    <h3>付费门闸 · VISITOR</h3>
-    <div class="dialog-mockup sheet-phone">
-      <div class="dialog-header">Episode locked</div>
-      <div class="dialog-body">This episode requires VIP. As a visitor you can agree to our privacy policy first to unlock account features, or browse free episodes.</div>
-      <div class="dialog-footer stack">
-        <span class="btn btn-primary" data-jump="sec-5-3-6-c1" data-jump-label="5.3.7">Agree to Privacy Policy</span>
-        <span class="btn" data-jump="sec-5-3-6-c1" data-jump-label="5.3.7">Review privacy policy</span>
-        <span class="btn" data-jump="sec-5-3-6-c1" data-jump-label="5.3.7">Close</span>
-      </div>
-    </div>
-    <h3>Reels · Like 半屏</h3>
-    <div class="dialog-mockup sheet-phone">
-      <div class="dialog-header">Save likes &amp; lists <span style="color:var(--muted-fg);font-weight:400;font-size:20px;">×</span></div>
-      <div class="dialog-body">Agree to the Privacy Policy so we can sync your likes and My List across devices.</div>
-      <div class="dialog-footer">
-        <span class="btn" data-jump="sec-5-4-6-c1" data-jump-label="5.4.6">Not now</span>
-        <span class="btn btn-primary" data-jump="sec-5-4-6-c1" data-jump-label="5.4.6">Agree and continue</span>
-      </div>
-    </div>
-
-    <h2 id="sec-5-2-13" class="sec-anchor">§5.2.13 隐私入口 E1–E9</h2>
-    <p class="muted">详见 .md；E1–E8 P0；E9 可选频控。</p>
-
-    <h3 id="sec-5-2-6-c1" class="sec-anchor">§5.2.6 隐私弹窗控件</h3>
-    <table class="spec"><tbody>
-      <tr><th>c1</th><td><strong>Agree</strong>（勾选等满足法务）→ 游客</td></tr>
-      <tr><th>c2</th><td><strong>Disagree</strong> → 仅出弹窗②；仍为 VISITOR</td></tr>
-      <tr><th>c3</th><td>Privacy Policy / Terms 可点链接（勾选若需见 <code>.md</code> §3.0.1）</td></tr>
-    </tbody></table>
-
-    <h3 id="sec-5-3-6-c1" class="sec-anchor">§5.3 播放 / 门闸</h3>
-    <p class="muted">episode_pay_type 服务端校验；VISITOR 门闸须保留同意路径。</p>
-
-    <h3 id="sec-5-4-6-c1" class="sec-anchor">§5.4 Reels 互动</h3>
-    <p class="muted">VISITOR：点心形 → 半屏同意；不调写接口。</p>
-
-    <h3 id="sec-5-5-6-c1" class="sec-anchor">§5.5 My List</h3>
-    <p class="muted">VISITOR 空态 Agree；Favorites/History 控件与现稿一致。</p>
-
-    <h3 id="sec-5-6-6-c1" class="sec-anchor">§5.6 Profile</h3>
-    <table class="spec"><thead><tr><th>控件</th><th>VISITOR</th><th>GUEST</th></tr></thead><tbody>
-      <tr><td>同意 / VIP 区</td><td>→ 隐私授权</td><td>—</td></tr>
-      <tr><td>Top-up</td><td>隐藏</td><td>Login to recharge</td></tr>
-    </tbody></table>
-
-    <h2 id="sec-8-3-0" class="sec-anchor">§8.3.0 接口意图（节选）</h2>
-    <p class="muted">同意签发 · 点赞/列表/进度 · merge · 起播鉴权 — 完整表见 .md。</p>
-
-    <h2 id="sec-8-5" class="sec-anchor">§8.5 SDK</h2>
-    <p class="muted">VISITOR：归因/分析关；支付关；Crash 匿名。</p>
-
-    <h2 id="sec-10" class="sec-anchor">§10 默认策略（摘要）</h2>
-    <ul class="muted"><li>10.1 merge updated_at</li><li>10.2 撤回 GUEST only</li><li>10.3 Crash 无 ID</li><li>10.4 回上下文不自动 IAP</li></ul>
+    <p style="text-align: center; font-size: 12px; color: var(--ff-text-placeholder); margin-top: 8px;">点 Disagree 跳 §4.3；点 Agree 跳 §3 身份变化</p>
   </div>
 
-  <script>
-(function () {
-  document.querySelectorAll("[data-jump]").forEach(function (el) {
-    el.addEventListener("click", function (e) {
-      e.preventDefault();
+  <div class="mockup-col">
+    <h4>需求逻辑 · UI 结构</h4>
+    <ol>
+      <li>短标题</li>
+      <li>导语 1～2 句（长披露进政策全文页，主弹窗禁止长列表）</li>
+      <li>Privacy Policy、Terms of Service 链接</li>
+      <li>法务要求时：必选勾选一条；<strong>禁止</strong>用登录替代 consent</li>
+      <li>按钮：<strong>同意</strong> / <strong>不同意</strong>（与线框一致）</li>
+    </ol>
+    <ul>
+      <li>未读全文能否点同意：<strong>置灰同意</strong> 或 <strong>点前二次提示</strong> 二选一 → 远程配置 + 法务定稿。</li>
+      <li>营销/推送与主条款分拆时：可加第二条可选勾选（默认不勾）；未分拆则不加。</li>
+    </ul>
+
+    <h4>需求逻辑 · 按钮与身份</h4>
+    <table>
+      <thead><tr><th>操作</th><th>关窗</th><th>身份</th></tr></thead>
+      <tbody>
+        <tr><td><strong>同意</strong>（勾选等满足法务）</td><td>关隐私弹窗</td><td><span class="id-tag guest">GUEST</span>（服务端记录同意并下发凭证，见 §12.1）</td></tr>
+        <tr><td><strong>不同意</strong></td><td>不关隐私弹窗，出隐私二级挽留弹窗</td><td>仍 <span class="id-tag visitor">VISITOR</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<h3 id="sec-4-3-row">4.3 二次挽留弹窗</h3>
+
+<div class="mockup-row">
+  <div class="mockup-col">
+    <h4>实物 UI（隐私弹窗 + 挽留叠层）</h4>
+    <div class="phone">
+      <div class="phone-screen">
+        <div class="status-bar">
+          <span>9:41</span>
+          <span class="status-right">●●● ▮▮</span>
+        </div>
+        <div class="backdrop">
+          <div class="retention-stack">
+            <div class="privacy-dialog retention-back">
+              <div class="pd-title">Privacy &amp; terms</div>
+              <div class="pd-lead">Please read and agree…</div>
+              <div class="privacy-actions">
+                <button class="btn-privacy">Disagree</button>
+                <button class="btn-privacy-primary">Agree</button>
+              </div>
+            </div>
+            <div class="privacy-dialog retention-front jump-target" id="mock-retention-dialog">
+              <div class="pd-title">Continue in visitor mode?</div>
+              <div class="pd-lead">If you don't agree to the Privacy Policy and Terms of Service, you'll use FlareFlow in visitor mode with basic browsing only.</div>
+              <div class="privacy-actions">
+                <button class="btn-privacy" data-jump="#sec-8">Disagree</button>
+                <button class="btn-privacy-primary" data-jump="#sec-3">Agree and continue</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="text-align: center; font-size: 12px; color: var(--ff-text-placeholder); margin-top: 8px;">主操作橙色（baseline §3 CTA-A 强引导）；按钮尺寸/位置/字号/可点击区域等同（§4.4 防弱化）；Disagree 跳 §8；Agree 跳 §3</p>
+  </div>
+
+  <div class="mockup-col">
+    <h4>需求逻辑 · UI 结构</h4>
+    <ul>
+      <li>说明不同意则进入访客模式、能力受限。</li>
+      <li>按钮：<strong>同意并继续</strong> / <strong>不同意</strong>（中文产品文案可为「不同意」；与线框一致）。</li>
+      <li>法务若要求挽留弹窗内保留政策链/勾选：与隐私弹窗 <strong>同等满足</strong> 后才可点「同意并继续」。</li>
+    </ul>
+
+    <h4>需求逻辑 · 按钮与身份</h4>
+    <table>
+      <thead><tr><th>操作</th><th>关窗</th><th>身份</th></tr></thead>
+      <tbody>
+        <tr><td><strong>不同意</strong></td><td>关两枚隐私弹窗</td><td><span class="id-tag visitor">VISITOR</span></td></tr>
+        <tr><td><strong>同意并继续</strong></td><td>关两枚隐私弹窗</td><td><span class="id-tag guest">GUEST</span>（与隐私弹窗「同意」同效；<strong>不再回到隐私弹窗</strong>）</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<h3>4.4 按钮合规</h3>
+<p>隐私二级挽留弹窗上「不同意」须与「同意并继续」<strong>同等可点</strong>，不得弱化——通过隐藏、置灰、缩小尺寸、加重操作步数等方式弱化「不同意」均禁止。<strong>颜色可主次区分</strong>（主操作橙色 + 次操作中性深色），<strong>但按钮尺寸、位置、字号、字重、可读性、点击区域应等同</strong>。</p>
+<blockquote>HTML 实现：两按钮使用相同高度/字号/字重/宽度/圆角/可点击区域；「同意并继续」使用 <code>.btn-privacy-primary</code>（baseline §3 CTA-A 橙色），「不同意」使用 <code>.btn-privacy</code>（中性深色）。</blockquote>
+
+<h3>4.5 文案 Key</h3>
+
+<h4>隐私弹窗（<code>consent_*</code>）</h4>
+<table>
+  <thead><tr><th style="width: 38%;">Key</th><th>英文骨架</th></tr></thead>
+  <tbody>
+    <tr><td><code>consent_title</code></td><td>Privacy &amp; terms</td></tr>
+    <tr><td><code>consent_lead</code></td><td>Please read and agree to our Privacy Policy and Terms of Service to use the full app.</td></tr>
+    <tr><td><code>consent_link_privacy</code></td><td>Privacy Policy</td></tr>
+    <tr><td><code>consent_link_terms</code></td><td>Terms of Service</td></tr>
+    <tr><td><code>consent_checkbox_required</code></td><td>I have read and agree to the Privacy Policy and Terms of Service.</td></tr>
+    <tr><td><code>consent_primary_cta</code></td><td>Agree</td></tr>
+    <tr><td><code>consent_decline_cta</code></td><td>Disagree</td></tr>
+  </tbody>
+</table>
+
+<h4>隐私二级挽留弹窗（<code>visitor_confirm_*</code>）</h4>
+<table>
+  <thead><tr><th style="width: 38%;">Key</th><th>英文骨架</th></tr></thead>
+  <tbody>
+    <tr><td><code>visitor_confirm_title</code></td><td>Continue in visitor mode?</td></tr>
+    <tr><td><code>visitor_confirm_body</code></td><td>If you don't agree to the Privacy Policy and Terms of Service, you'll use FlareFlow in visitor mode with basic browsing only.</td></tr>
+    <tr><td><code>visitor_confirm_primary_cta</code></td><td>Agree and continue</td></tr>
+    <tr><td><code>visitor_confirm_secondary_cta</code></td><td>Disagree</td></tr>
+  </tbody>
+</table>
+
+<p><strong>其它 Key</strong>：<code>discover_exit_visitor_cta</code>（Exit visitor mode）；<code>paid_gate_agree</code>（Agree to Privacy Policy，Guest 沿用现网）。</p>
+
+<!-- ============= §5 触发场景与需求逻辑 ============= -->
+<h2 id="sec-5">5. 触发场景与需求逻辑</h2>
+
+<blockquote>两枚隐私弹窗的按钮、关窗、身份：<strong>一律按 §4.2、§4.3</strong>（先看线框再看表）。下表用 <strong>场景</strong> 列写清页面/入口，<strong>需求逻辑</strong> 列写完整行为。</blockquote>
+
+<table>
+  <thead><tr><th style="width: 18%;">场景</th><th style="width: 22%;">触发条件</th><th>需求逻辑</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>冷启</strong></td>
+      <td>冷启，隐私未决策</td>
+      <td>进 App 即弹隐私弹窗。用户完成 §4.2 或 §4.3 任一合法按钮路径后：若变为 <span class="id-tag guest">GUEST</span>，关窗并在 Discover 正常浏览（对齐现网冷启同意后）；若仍为 <span class="id-tag visitor">VISITOR</span>，关两枚隐私弹窗后访客浏览。埋点按现网冷启隐私流程。</td>
+    </tr>
+    <tr>
+      <td><strong>底部 Tab</strong>（Reels / My List / Profile）</td>
+      <td><span class="id-tag visitor">VISITOR</span> 点 Reels / My List / Profile（含经 Profile Tab 进设置）</td>
+      <td>弹隐私弹窗；<strong>同意前底部 Tab 不得切走</strong>，选中态保持 Discover。变 <span class="id-tag guest">GUEST</span> 后关窗并 <strong>切至用户所点 Tab</strong> 进入对应页；若在隐私弹窗点不同意、进入挽留弹窗后在挽留弹窗点「不同意」，关两枚弹窗后 <strong>底部仍 Discover</strong>。埋点按现网各 Tab 入口。</td>
+    </tr>
+    <tr>
+      <td><strong>Discover 顶栏「退出访客模式」</strong></td>
+      <td><span class="id-tag visitor">VISITOR</span> 点该入口</td>
+      <td>弹隐私弹窗（及可能出现的隐私二级挽留弹窗）。变 <span class="id-tag guest">GUEST</span> 后关窗，顶栏恢复非访客态（现网一致）；最终在挽留弹窗选「不同意」则关两枚弹窗、仍为 <span class="id-tag visitor">VISITOR</span>。埋点按现网退出访客入口。</td>
+    </tr>
+    <tr>
+      <td><strong>待解锁页</strong></td>
+      <td><span class="id-tag visitor">VISITOR</span> 进入待解锁页（路由同现网）</td>
+      <td><strong>进店即弹隐私弹窗</strong>（非进店后再点其它才弹）。变 <span class="id-tag guest">GUEST</span> 后关隐私弹窗，<strong>留在待解锁页</strong>，解锁/登录/会员按现网。若经两枚弹窗均在挽留弹窗点「不同意」：关两枚弹窗，<strong>默认 pop 回上一层</strong>；路由栈无上一层（如深链直开）时可留页但 <strong>禁止白屏/卡死</strong>。页内任何「同意隐私」入口须拉起 <strong>与全局相同的隐私弹窗</strong>，禁止仅用「请登录」代替勾选同意。埋点按现网待解锁页。</td>
+    </tr>
+    <tr>
+      <td><strong>播放页部分点按</strong></td>
+      <td><strong>访客</strong>在播放页点 <strong>须先同意隐私的控件</strong>（范围见 §7）</td>
+      <td><strong>每次点按</strong>弹隐私弹窗（可用半屏，仍为同一套两枚弹窗）。变 <span class="id-tag guest">GUEST</span> 后关窗，<strong>再点一次</strong>完成原操作；失败 Toast 见 §10。经两枚弹窗均在挽留弹窗点「不同意」则关两枚弹窗，留播放页且仍为 <span class="id-tag visitor">VISITOR</span>；再次点同一控件须再弹隐私弹窗，直至 <span class="id-tag guest">GUEST</span> 或 <span class="id-tag loggedin">LOGGED_IN</span>。若点按会进待解锁/收银，仍须先走完两枚隐私弹窗流程；进入待解锁页后按上表「待解锁页」行执行。</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ============= §6 访客态弹层策略 ============= -->
+<h2 id="sec-6">6. 访客态弹层策略</h2>
+
+<h3>6.1 允许弹出</h3>
+<ol>
+  <li>隐私弹窗、隐私二级挽留弹窗</li>
+  <li>系统通知（推送）权限框及必要短说明（频次克制）；<strong>不含</strong> ATT / 定位 / 通讯录等（另文拍板除外）</li>
+</ol>
+
+<h3>6.2 禁止自动弹出</h3>
+<p>在 <strong>访客</strong>身份路径（<span class="id-tag visitor">VISITOR</span>）关断触发器，含全屏 / 半屏 / BottomSheet：</p>
+<ul>
+  <li>登录引导（三方、付费后、到首页、切换账号、绑定领奖等）</li>
+  <li>付费 / 转化 / 挽留（解锁、订阅、到期、各类退出挽留、广告挽留等）</li>
+  <li>增长 / 运营（闪屏推荐、Tab 运营位等）</li>
+  <li>好评引导</li>
+  <li>非合规确认（如搜索历史一键清除）</li>
+</ul>
+<p><strong>播放页</strong>：黑名单适用于沉浸路由；运营层 <strong>不得遮挡</strong> 两枚隐私弹窗。<br>
+<strong>Toast</strong> 不计入弹窗黑名单。不得新增第三套隐私合规弹窗。</p>
+
+<!-- ============= §7 播放页相关逻辑 ============= -->
+<h2 id="sec-7">7. 播放页相关逻辑</h2>
+
+<blockquote>适用 <strong>访客</strong>（未同意隐私；研发枚举 <span class="id-tag visitor">VISITOR</span>）。<strong>游客</strong>、<strong>已登录</strong>按现网，不适用本节。</blockquote>
+
+<table>
+  <thead><tr><th style="width: 60%;">用户操作</th><th>是否弹隐私弹窗</th></tr></thead>
+  <tbody>
+    <tr><td>播放、暂停、返回（含等同行为的系统返回）</td><td>否</td></tr>
+    <tr><td>上下滑换集；拖进度/音量/亮度（未点图标）；点空白仅唤出控制条；纯手势快进</td><td>否</td></tr>
+    <tr><td>其余可点控件（选集、清晰度、倍速、字幕、点进度跳转、点赞、收藏、弹幕、任务、横竖屏、解锁等）</td><td><strong>是，每次点按</strong></td></tr>
+    <tr><td>游客 / 已登录</td><td>按现网，不适用本节</td></tr>
+  </tbody>
+</table>
+
+<p>关窗后仍为 <strong>访客</strong> 时，再次点同一控件须 <strong>再次弹隐私弹窗</strong>，直至变为 <strong>游客</strong> 或 <strong>已登录</strong>。</p>
+
+<!-- ============= §8 各身份能力一览 ============= -->
+<h2 id="sec-8">8. 各身份能力一览</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>能力</th>
+      <th><span class="id-tag visitor">VISITOR</span></th>
+      <th><span class="id-tag guest">GUEST</span></th>
+      <th><span class="id-tag loggedin">LOGGED_IN</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Discover 浏览、搜索</td><td>✓</td><td>✓</td><td>✓</td></tr>
+    <tr><td>Reels / My List / Profile 根页</td><td>✗（底部 Tab 场景：先隐私弹窗，同意前 Tab 不切）</td><td>✓</td><td>✓</td></tr>
+    <tr><td>免费集正片</td><td>✓</td><td>✓</td><td>✓</td></tr>
+    <tr><td>付费集正片</td><td>✗；进待解锁页场景</td><td>✗</td><td>现网权益</td></tr>
+    <tr><td>点赞 / 收藏 / 进度保存到服务端</td><td>✗（无凭证，请求应拒绝或客户端不发起）</td><td>✓（带游客会话凭证）</td><td>✓（登录态）</td></tr>
+    <tr><td>Top-up / IAP</td><td>✗</td><td>✗</td><td>✓</td></tr>
+    <tr><td>归因 / 分析 / 广告 SDK</td><td>✗</td><td>依法务</td><td>✓</td></tr>
+    <tr><td>运营类阻断弹层</td><td>不自动弹</td><td>现网</td><td>现网</td></tr>
+  </tbody>
+</table>
+
+<!-- ============= §9 访客态第三方 SDK ============= -->
+<h2 id="sec-9">9. 访客态第三方 SDK</h2>
+
+<table>
+  <thead><tr><th style="width: 30%;">类型</th><th>要求</th></tr></thead>
+  <tbody>
+    <tr><td>归因、行为分析、广告联盟、IAP</td><td>不 init</td></tr>
+    <tr><td>Crash</td><td>仅匿名（无 user id / IDFA / GAID）</td></tr>
+  </tbody>
+</table>
+
+<p>无法细粒度关闭时：延至 <span class="id-tag guest">GUEST</span> 或 <span class="id-tag loggedin">LOGGED_IN</span> 后首屏再 init。禁止为运营弹窗在访客态提前 init 依赖 SDK。</p>
+
+<!-- ============= §10 Toast ============= -->
+<h2 id="sec-10">10. 用户可见提示文案（Toast）</h2>
+
+<table>
+  <thead><tr><th style="width: 48%;">场景（白话）</th><th>英文示例</th></tr></thead>
+  <tbody>
+    <tr><td>点了同意，但提交隐私同意失败（网络/服务异常）</td><td>Couldn't connect. Check your network and try again.</td></tr>
+    <tr><td>同意已成功，但服务端未返回游客会话凭证</td><td>Something went wrong. Please restart the app.</td></tr>
+    <tr><td>该剧集需付费或会员，当前身份不能播正片</td><td>This episode is locked.</td></tr>
+    <tr><td>游客会话凭证过期或被服务端作废，须重新同意隐私</td><td>Session expired. Tap to agree to Privacy Policy again.</td></tr>
+  </tbody>
+</table>
+
+<!-- ============= §11 验收 ============= -->
+<h2 id="sec-11">11. 验收要点</h2>
+
+<table>
+  <thead><tr><th style="width: 20%;">类别</th><th>要点</th></tr></thead>
+  <tbody>
+    <tr><td>身份 / Tab</td><td>访客无游客会话凭证；Discover 选中；底部 Tab / 退出访客场景：同意前不切 Tab</td></tr>
+    <tr><td>弹窗</td><td>§4.2、§4.3 全入口一致；线框与按钮表一致；§4.4 按钮合规</td></tr>
+    <tr><td>弹层</td><td>仅白名单；黑名单不自动弹、不挡两枚隐私弹窗</td></tr>
+    <tr><td>场景</td><td>§5 五类场景（冷启、底部 Tab、退出访客、待解锁页、播放页部分点按）</td></tr>
+    <tr><td>播放页</td><td>§7（播放页相关逻辑）</td></tr>
+    <tr><td>服务端 / SDK</td><td>访客：无游客会话凭证、不写点赞/收藏/进度等；冷启不 init 归因/分析/广告（§9、§12）</td></tr>
+  </tbody>
+</table>
+
+<!-- ============= §12 服务端能力 ============= -->
+<h2 id="sec-12">12. 服务端能力</h2>
+
+<p>本节说明 <strong>服务端要提供哪些能力</strong> 才能支撑 §3～§8 的客户端行为。路径、方法名由研发在技术方案中映射现网或新增接口（<strong>本 PRD 不写具体接口 URL</strong>）；验收以 <strong>行为</strong> 为准。</p>
+
+<h3>12.1 同意隐私与游客凭证</h3>
+<table>
+  <thead><tr><th>能力</th><th>何时发生</th><th>服务端应做什么</th><th>客户端结果</th></tr></thead>
+  <tbody>
+    <tr><td><strong>记录隐私同意并创建游客身份</strong></td><td>隐私弹窗「同意」，或挽留弹窗「同意并继续」</td><td>持久化同意记录（版本、时间等按法务）；生成并返回 <strong>游客会话凭证</strong>（<code>guest_session_token</code>）</td><td>身份变为 <span class="id-tag guest">GUEST</span>；后续写数据请求携带该凭证</td></tr>
+    <tr><td><strong>续期凭证</strong></td><td>游客长期使用、凭证将过期</td><td>在合法前提下延长或换发凭证，使用户无感</td><td>用户仍可点赞、同步进度等</td></tr>
+    <tr><td><strong>作废凭证</strong></td><td>用户撤回同意、风控、长时间未用、服务端策略等</td><td>使旧凭证失效</td><td>再调用写接口失败；可提示 §10「须重新同意隐私」并回到隐私弹窗流程</td></tr>
+    <tr><td><strong>访客路径</strong></td><td>仍为 <span class="id-tag visitor">VISITOR</span></td><td><strong>不得</strong>为仅浏览 Discover 的用户创建上述凭证</td><td>与「未同意隐私」一致；不得误当成游客写库</td></tr>
+  </tbody>
+</table>
+
+<h3>12.2 内容与播放</h3>
+<table>
+  <thead><tr><th>能力</th><th>何时发生</th><th>服务端应做什么</th><th>验收（白话）</th></tr></thead>
+  <tbody>
+    <tr><td><strong>能否播放某一集</strong></td><td>起播、换集、进待解锁前后</td><td>按剧集付费/免费规则、用户身份返回 <strong>可播 / 不可播 / 须解锁</strong></td><td>访客可播免费集；付费集不可直接播正片，与「待解锁页」场景、§8 一致</td></tr>
+    <tr><td><strong>Discover 列表与搜索</strong></td><td>访客浏览首页</td><td>提供与现网一致的列表/搜索数据（不要求登录）</td><td>访客可不弹窗浏览 Discover</td></tr>
+  </tbody>
+</table>
+
+<h3>12.3 点赞收藏与进度</h3>
+<p>以下能力在 <span class="id-tag guest">GUEST</span> / <span class="id-tag loggedin">LOGGED_IN</span> 下按现网游客或登录用户处理；<strong><span class="id-tag visitor">VISITOR</span> 不得成功写入</strong>（客户端不应带凭证发起，服务端亦应拒绝）。</p>
+
+<table>
+  <thead><tr><th>能力</th><th>典型产品行为</th><th><span class="id-tag visitor">VISITOR</span></th><th><span class="id-tag guest">GUEST</span> / <span class="id-tag loggedin">LOGGED_IN</span></th></tr></thead>
+  <tbody>
+    <tr><td>点赞 / 取消赞</td><td>播放页、列表心形等</td><td>不写入；客户端可先弹隐私弹窗，同意后再点一次</td><td>写入，须带对应身份凭证</td></tr>
+    <tr><td>收藏 / My List</td><td>加入或移除「我的列表」</td><td>同上</td><td>同上</td></tr>
+    <tr><td>观看进度</td><td>续播、进度条同步</td><td>同上</td><td>同上</td></tr>
+    <tr><td>弹幕等其它账号侧数据</td><td>若产品已开放给游客</td><td>同上</td><td>按现网</td></tr>
+  </tbody>
+</table>
+
+<h3>12.4 登录后数据合并</h3>
+<p>用户从 <strong>游客</strong> 注册/登录为 <strong>正式账号</strong> 时，若现网支持 <strong>合并</strong> 游客期间的收藏、进度等到账号下，行为 <strong>保持不变</strong>；本需求不新增合并规则，但不得因访客/游客分流而破坏既有合并。</p>
+
+<h3>12.5 接口说明</h3>
+<ul>
+  <li>具体 REST / RPC <strong>URL、字段名</strong> 不在本 PRD 列出，避免与实现脱节。</li>
+  <li>接口清单在技术方案或 API 文档维护。</li>
+</ul>
+
+<!-- ============= §13 法务 ============= -->
+<h2 id="sec-13">13. 法务</h2>
+<p>与已发布 Privacy Policy / Terms 冲突时，以法务书面为准；未收变更单前按本文实现。</p>
+
+<!-- ============= Footer ============= -->
+<footer class="footer">
+  <p><strong>设计基线</strong>：<a href="https://github.com/king460357/ff-app-prd-skill/blob/main/design-system/flareflow-visual-baseline.md">flareflow-visual-baseline.md v1.0</a>（2026-05-29）</p>
+  <p>真理源 markdown：<code>20260513_访客模式与游客身份_PRD.md</code> · 旧版 HTML 已归档至 <code>_archive/</code></p>
+  <p>本 HTML 由 prd-writer-master skill 按 baseline 自动生成；视觉与现网不符时优先核查 baseline 是否过期。</p>
+</footer>
+
+</div>
+
+<script>
+  // data-jump 跳转三件套（baseline §7.5）
+  document.querySelectorAll('[data-jump]').forEach(el => {
+    el.addEventListener('click', e => {
       e.stopPropagation();
-      var id = el.getAttribute("data-jump");
-      var t = document.getElementById(id);
-      if (t) {
-        t.scrollIntoView({ behavior: "smooth", block: "start" });
-        t.classList.add("jump-highlight");
-        setTimeout(function () { t.classList.remove("jump-highlight"); }, 1400);
-      } else {
-        var toast = document.createElement("div");
-        toast.style.cssText = "position:fixed;bottom:24px;right:24px;background:#18181b;border:1px solid #EAB308;padding:12px 18px;border-radius:10px;font-size:13px;color:#F4F4F5;z-index:99;box-shadow:0 12px 40px rgba(0,0,0,.5);";
-        toast.textContent = "\u26A0\uFE0F " + (el.getAttribute("data-jump-label") || "No section");
-        document.body.appendChild(toast);
-        setTimeout(function () { toast.remove(); }, 2200);
-      }
+      const sel = el.getAttribute('data-jump');
+      if (!sel) return;
+      const target = document.querySelector(sel);
+      if (!target) return;
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      target.classList.add('flash');
+      setTimeout(() => target.classList.remove('flash'), 1400);
     });
   });
-})();
-  </script>
+</script>
+
 </body>
 </html>
