@@ -1,514 +1,514 @@
 <!DOCTYPE html>
 <!-- Generated against design-system/flareflow-visual-baseline.md v1.1 (2026-05-29).
-     如视觉与现网不符，先核查 baseline.md 是否过期，再改 HTML。 -->
+ 如视觉与现网不符，先核查 baseline.md 是否过期，再改 HTML。 -->
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>FlareFlow · 画中画（Picture-in-Picture） · PRD（baseline v1.1）</title>
 <style>
-  :root {
-    --ff-bg: #000000;
-    --ff-surface-1: #1F1F22;
-    --ff-surface-2: #2A2A2E;
-    --ff-divider: #262629;
-    --ff-text-primary: #FFFFFF;
-    --ff-text-secondary: #8A8A8E;
-    --ff-text-placeholder: #5E5E62;
-    --ff-text-disabled: #3A3A3D;
-    --ff-gold: #FFD24A;
-    --ff-gold-gradient: linear-gradient(135deg, #FFCB47, #E5A82B);
-    --ff-orange: #FF6B3D;
-    --ff-orange-gradient: linear-gradient(135deg, #FF8050, #FF5028);
-    --ff-red: #FF3B30;
-    --ff-success: #3CC76A;
-    --ff-radius-card: 12px;
-    --ff-radius-product: 16px;
-  }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    background: var(--ff-bg);
-    color: var(--ff-text-primary);
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
-    font-size: 14px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 32px 24px 96px; }
-  h1 { font-size: 32px; font-weight: 700; line-height: 1.25; margin: 0 0 8px; }
-  h2 { font-size: 22px; font-weight: 700; margin: 48px 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--ff-divider); }
-  h3 { font-size: 18px; font-weight: 600; margin: 32px 0 14px; }
-  h4 { font-size: 16px; font-weight: 600; margin: 22px 0 10px; color: #DCDCE0; }
-  h5 { font-size: 14px; font-weight: 600; margin: 18px 0 8px; color: var(--ff-text-secondary); text-transform: uppercase; letter-spacing: 0.04em; }
-  p { margin: 0 0 14px; }
-  ul, ol { margin: 0 0 14px; padding-left: 22px; }
-  li { margin-bottom: 6px; }
-  strong { color: var(--ff-text-primary); font-weight: 700; }
-  a { color: var(--ff-gold); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  code {
-    background: var(--ff-surface-1);
-    color: var(--ff-gold);
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-family: "SF Mono", Menlo, Consolas, monospace;
-  }
-  blockquote {
-    margin: 14px 0;
-    padding: 12px 18px;
-    background: var(--ff-surface-1);
-    border-left: 3px solid var(--ff-gold);
-    border-radius: 0 var(--ff-radius-card) var(--ff-radius-card) 0;
-    color: #D0D0D2;
-    font-size: 13.5px;
-  }
-  blockquote.plain-talk {
-    border-left-color: var(--ff-orange);
-    background: rgba(255, 107, 61, 0.08);
-  }
-  blockquote.plain-talk::before {
-    content: "白话 · ";
-    color: var(--ff-orange);
-    font-weight: 700;
-  }
-  .meta {
-    color: var(--ff-text-secondary);
-    font-size: 13px;
-    margin: 0 0 28px;
-    padding-bottom: 22px;
-    border-bottom: 1px solid var(--ff-divider);
-  }
-  .meta-tag {
-    display: inline-block;
-    padding: 3px 10px;
-    background: var(--ff-surface-1);
-    color: var(--ff-text-primary);
-    border-radius: 4px;
-    font-size: 12px;
-    margin-right: 6px;
-  }
-  .meta-tag.gold { background: var(--ff-gold-gradient); color: #1A1500; font-weight: 700; }
-  .meta-tag.platform-ios { background: rgba(0, 122, 255, 0.16); color: #5BA8FF; border: 1px solid rgba(91, 168, 255, 0.3); }
-  .meta-tag.platform-and { background: rgba(60, 199, 106, 0.16); color: var(--ff-success); border: 1px solid rgba(60, 199, 106, 0.3); }
+ :root {
+ --ff-bg: #000000;
+ --ff-surface-1: #1F1F22;
+ --ff-surface-2: #2A2A2E;
+ --ff-divider: #262629;
+ --ff-text-primary: #FFFFFF;
+ --ff-text-secondary: #8A8A8E;
+ --ff-text-placeholder: #5E5E62;
+ --ff-text-disabled: #3A3A3D;
+ --ff-gold: #FFD24A;
+ --ff-gold-gradient: linear-gradient(135deg, #FFCB47, #E5A82B);
+ --ff-orange: #FF6B3D;
+ --ff-orange-gradient: linear-gradient(135deg, #FF8050, #FF5028);
+ --ff-red: #FF3B30;
+ --ff-success: #3CC76A;
+ --ff-radius-card: 12px;
+ --ff-radius-product: 16px;
+ }
+ * { box-sizing: border-box; }
+ html { scroll-behavior: smooth; }
+ body {
+ margin: 0;
+ background: var(--ff-bg);
+ color: var(--ff-text-primary);
+ font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+ font-size: 14px;
+ line-height: 1.6;
+ -webkit-font-smoothing: antialiased;
+ }
+ .wrap { max-width: 1080px; margin: 0 auto; padding: 32px 24px 96px; }
+ h1 { font-size: 32px; font-weight: 700; line-height: 1.25; margin: 0 0 8px; }
+ h2 { font-size: 22px; font-weight: 700; margin: 48px 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--ff-divider); }
+ h3 { font-size: 18px; font-weight: 600; margin: 32px 0 14px; }
+ h4 { font-size: 16px; font-weight: 600; margin: 22px 0 10px; color: #DCDCE0; }
+ h5 { font-size: 14px; font-weight: 600; margin: 18px 0 8px; color: var(--ff-text-secondary); text-transform: uppercase; letter-spacing: 0.04em; }
+ p { margin: 0 0 14px; }
+ ul, ol { margin: 0 0 14px; padding-left: 22px; }
+ li { margin-bottom: 6px; }
+ strong { color: var(--ff-text-primary); font-weight: 700; }
+ a { color: var(--ff-gold); text-decoration: none; }
+ a:hover { text-decoration: underline; }
+ code {
+ background: var(--ff-surface-1);
+ color: var(--ff-gold);
+ padding: 2px 6px;
+ border-radius: 4px;
+ font-size: 12px;
+ font-family: "SF Mono", Menlo, Consolas, monospace;
+ }
+ blockquote {
+ margin: 14px 0;
+ padding: 12px 18px;
+ background: var(--ff-surface-1);
+ border-left: 3px solid var(--ff-gold);
+ border-radius: 0 var(--ff-radius-card) var(--ff-radius-card) 0;
+ color: #D0D0D2;
+ font-size: 13.5px;
+ }
+ blockquote.plain-talk {
+ border-left-color: var(--ff-orange);
+ background: rgba(255, 107, 61, 0.08);
+ }
+ blockquote.plain-talk::before {
+ content: "白话 · ";
+ color: var(--ff-orange);
+ font-weight: 700;
+ }
+ .meta {
+ color: var(--ff-text-secondary);
+ font-size: 13px;
+ margin: 0 0 28px;
+ padding-bottom: 22px;
+ border-bottom: 1px solid var(--ff-divider);
+ }
+ .meta-tag {
+ display: inline-block;
+ padding: 3px 10px;
+ background: var(--ff-surface-1);
+ color: var(--ff-text-primary);
+ border-radius: 4px;
+ font-size: 12px;
+ margin-right: 6px;
+ }
+ .meta-tag.gold { background: var(--ff-gold-gradient); color: #1A1500; font-weight: 700; }
+ .meta-tag.platform-ios { background: rgba(0, 122, 255, 0.16); color: #5BA8FF; border: 1px solid rgba(91, 168, 255, 0.3); }
+ .meta-tag.platform-and { background: rgba(60, 199, 106, 0.16); color: var(--ff-success); border: 1px solid rgba(60, 199, 106, 0.3); }
 
-  .howto {
-    background: var(--ff-surface-1);
-    border-radius: var(--ff-radius-card);
-    padding: 18px 22px;
-    margin: 0 0 32px;
-    font-size: 13px;
-    color: #C8C8CC;
-  }
-  .howto h4 { margin-top: 0; color: var(--ff-text-primary); font-size: 14px; }
-  .howto ul { padding-left: 18px; margin: 8px 0 0; }
+ .howto {
+ background: var(--ff-surface-1);
+ border-radius: var(--ff-radius-card);
+ padding: 18px 22px;
+ margin: 0 0 32px;
+ font-size: 13px;
+ color: #C8C8CC;
+ }
+ .howto h4 { margin-top: 0; color: var(--ff-text-primary); font-size: 14px; }
+ .howto ul { padding-left: 18px; margin: 8px 0 0; }
 
-  .toc {
-    background: var(--ff-surface-1);
-    border-radius: var(--ff-radius-card);
-    padding: 16px 22px;
-    margin: 0 0 36px;
-    font-size: 13px;
-  }
-  .toc-title { font-weight: 700; margin-bottom: 8px; color: var(--ff-text-primary); }
-  .toc a { display: inline-block; margin: 4px 14px 4px 0; color: var(--ff-text-secondary); }
-  .toc a:hover { color: var(--ff-gold); text-decoration: none; }
+ .toc {
+ background: var(--ff-surface-1);
+ border-radius: var(--ff-radius-card);
+ padding: 16px 22px;
+ margin: 0 0 36px;
+ font-size: 13px;
+ }
+ .toc-title { font-weight: 700; margin-bottom: 8px; color: var(--ff-text-primary); }
+ .toc a { display: inline-block; margin: 4px 14px 4px 0; color: var(--ff-text-secondary); }
+ .toc a:hover { color: var(--ff-gold); text-decoration: none; }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 14px 0 24px;
-    font-size: 13px;
-    background: var(--ff-surface-1);
-    border-radius: var(--ff-radius-card);
-    overflow: hidden;
-  }
-  th, td {
-    padding: 10px 14px;
-    text-align: left;
-    border-bottom: 1px solid var(--ff-divider);
-    vertical-align: top;
-  }
-  th { color: var(--ff-text-secondary); font-weight: 600; background: rgba(255, 255, 255, 0.02); font-size: 12px; }
-  tr:last-child td { border-bottom: none; }
+ table {
+ width: 100%;
+ border-collapse: collapse;
+ margin: 14px 0 24px;
+ font-size: 13px;
+ background: var(--ff-surface-1);
+ border-radius: var(--ff-radius-card);
+ overflow: hidden;
+ }
+ th, td {
+ padding: 10px 14px;
+ text-align: left;
+ border-bottom: 1px solid var(--ff-divider);
+ vertical-align: top;
+ }
+ th { color: var(--ff-text-secondary); font-weight: 600; background: rgba(255, 255, 255, 0.02); font-size: 12px; }
+ tr:last-child td { border-bottom: none; }
 
-  /* Identity tags */
-  .id-tag {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 11px;
-    font-weight: 700;
-    font-family: "SF Mono", Menlo, monospace;
-    margin: 0 2px;
-  }
-  .id-tag.visitor { background: rgba(255, 255, 255, 0.08); color: var(--ff-text-secondary); border: 1px solid #3A3A3D; }
-  .id-tag.guest { background: rgba(255, 210, 74, 0.16); color: var(--ff-gold); border: 1px solid rgba(255, 210, 74, 0.4); }
-  .id-tag.loggedin { background: var(--ff-gold-gradient); color: #1A1500; }
+ /* Identity tags */
+ .id-tag {
+ display: inline-block;
+ padding: 2px 8px;
+ border-radius: 4px;
+ font-size: 11px;
+ font-weight: 700;
+ font-family: "SF Mono", Menlo, monospace;
+ margin: 0 2px;
+ }
+ .id-tag.visitor { background: rgba(255, 255, 255, 0.08); color: var(--ff-text-secondary); border: 1px solid #3A3A3D; }
+ .id-tag.guest { background: rgba(255, 210, 74, 0.16); color: var(--ff-gold); border: 1px solid rgba(255, 210, 74, 0.4); }
+ .id-tag.loggedin { background: var(--ff-gold-gradient); color: #1A1500; }
 
-  /* Code / Gherkin / ASCII */
-  pre {
-    background: #0F0F12;
-    border: 1px solid var(--ff-divider);
-    border-radius: var(--ff-radius-card);
-    padding: 16px 20px;
-    overflow-x: auto;
-    font-family: "SF Mono", Menlo, Consolas, monospace;
-    font-size: 12.5px;
-    line-height: 1.55;
-    color: #D8D8DC;
-    margin: 14px 0;
-  }
-  pre.gherkin { border-left: 3px solid var(--ff-success); }
-  pre.gherkin .kw { color: var(--ff-orange); font-weight: 700; }
-  pre.gherkin .scenario { color: var(--ff-gold); font-weight: 700; }
-  pre.ascii { border-left: 3px solid var(--ff-gold); white-space: pre; }
+ /* Code / Gherkin / ASCII */
+ pre {
+ background: #0F0F12;
+ border: 1px solid var(--ff-divider);
+ border-radius: var(--ff-radius-card);
+ padding: 16px 20px;
+ overflow-x: auto;
+ font-family: "SF Mono", Menlo, Consolas, monospace;
+ font-size: 12.5px;
+ line-height: 1.55;
+ color: #D8D8DC;
+ margin: 14px 0;
+ }
+ pre.gherkin { border-left: 3px solid var(--ff-success); }
+ pre.gherkin .kw { color: var(--ff-orange); font-weight: 700; }
+ pre.gherkin .scenario { color: var(--ff-gold); font-weight: 700; }
+ pre.ascii { border-left: 3px solid var(--ff-gold); white-space: pre; }
 
-  /* Mermaid container */
-  .mermaid-wrap {
-    background: var(--ff-surface-1);
-    border-radius: var(--ff-radius-card);
-    padding: 18px;
-    margin: 14px 0 24px;
-    overflow-x: auto;
-    border: 1px solid var(--ff-divider);
-  }
-  .mermaid { color: var(--ff-text-primary); font-family: inherit; }
+ /* Mermaid container */
+ .mermaid-wrap {
+ background: var(--ff-surface-1);
+ border-radius: var(--ff-radius-card);
+ padding: 18px;
+ margin: 14px 0 24px;
+ overflow-x: auto;
+ border: 1px solid var(--ff-divider);
+ }
+ .mermaid { color: var(--ff-text-primary); font-family: inherit; }
 
-  /* Mockup container */
-  .mockup-section {
-    background: rgba(255, 255, 255, 0.015);
-    border-radius: var(--ff-radius-card);
-    padding: 20px 18px;
-    margin: 18px 0 28px;
-    border: 1px solid var(--ff-divider);
-  }
-  .mockup-section h4 { margin-top: 0; }
-  .mockup-section .caption {
-    text-align: center;
-    font-size: 12px;
-    color: var(--ff-text-placeholder);
-    margin: 8px 0 0;
-  }
-  .mockup-row {
-    display: flex;
-    gap: 24px;
-    align-items: flex-start;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 12px 0 8px;
-  }
+ /* Mockup container */
+ .mockup-section {
+ background: rgba(255, 255, 255, 0.015);
+ border-radius: var(--ff-radius-card);
+ padding: 20px 18px;
+ margin: 18px 0 28px;
+ border: 1px solid var(--ff-divider);
+ }
+ .mockup-section h4 { margin-top: 0; }
+ .mockup-section .caption {
+ text-align: center;
+ font-size: 12px;
+ color: var(--ff-text-placeholder);
+ margin: 8px 0 0;
+ }
+ .mockup-row {
+ display: flex;
+ gap: 24px;
+ align-items: flex-start;
+ justify-content: center;
+ flex-wrap: wrap;
+ margin: 12px 0 8px;
+ }
 
-  /* Phone frame for mockups */
-  .phone {
-    width: 280px;
-    height: 600px;
-    background: var(--ff-bg);
-    border: 1px solid #2A2A2E;
-    border-radius: 28px;
-    padding: 5px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
-  }
-  .phone-screen {
-    width: 100%;
-    height: 100%;
-    background: var(--ff-bg);
-    border-radius: 24px;
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-  }
-  .status-bar {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 22px 4px;
-    font-size: 12px;
-    color: var(--ff-text-primary);
-    font-weight: 600;
-  }
+ /* Phone frame for mockups */
+ .phone {
+ width: 280px;
+ height: 600px;
+ background: var(--ff-bg);
+ border: 1px solid #2A2A2E;
+ border-radius: 28px;
+ padding: 5px;
+ box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+ }
+ .phone-screen {
+ width: 100%;
+ height: 100%;
+ background: var(--ff-bg);
+ border-radius: 24px;
+ overflow: hidden;
+ position: relative;
+ display: flex;
+ flex-direction: column;
+ }
+ .status-bar {
+ display: flex;
+ justify-content: space-between;
+ padding: 10px 22px 4px;
+ font-size: 12px;
+ color: var(--ff-text-primary);
+ font-weight: 600;
+ }
 
-  /* === 标准居中弹窗（baseline §6.8.1） === */
-  .backdrop {
-    flex: 1;
-    background: rgba(0, 0, 0, 0.65);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
-    position: relative;
-  }
-  .backdrop::before {
-    content: ""; position: absolute; inset: 0;
-    background: radial-gradient(circle at 50% 40%, rgba(120, 80, 60, 0.2), transparent 60%), #0A0A0A;
-    z-index: -1;
-  }
-  .center-dialog {
-    width: 100%;
-    background: var(--ff-surface-1);
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 22px 20px 18px;
-    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.75);
-    position: relative;
-  }
-  .center-dialog .cd-close-x {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.08);
-    color: var(--ff-text-primary);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    line-height: 1;
-  }
-  .center-dialog .cd-title {
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--ff-text-primary);
-    text-align: center;
-    margin: 4px 0 12px;
-  }
-  .center-dialog .cd-body {
-    font-size: 13.5px;
-    color: var(--ff-text-secondary);
-    line-height: 1.6;
-    text-align: center;
-    margin-bottom: 22px;
-  }
-  .center-dialog .cd-actions {
-    display: flex;
-    gap: 10px;
-  }
-  .btn-secondary {
-    flex: 1;
-    height: 42px;
-    background: var(--ff-surface-2);
-    border: 1px solid #3A3A3D;
-    color: var(--ff-text-primary);
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    font-family: inherit;
-  }
-  .btn-primary {
-    flex: 1;
-    height: 42px;
-    background: var(--ff-orange-gradient);
-    color: #FFFFFF;
-    border: none;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    font-family: inherit;
-    box-shadow: 0 4px 14px rgba(255, 107, 61, 0.28);
-  }
+ /* === 标准居中弹窗（baseline §6.8.1） === */
+ .backdrop {
+ flex: 1;
+ background: rgba(0, 0, 0, 0.65);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ padding: 16px;
+ position: relative;
+ }
+ .backdrop::before {
+ content: ""; position: absolute; inset: 0;
+ background: radial-gradient(circle at 50% 40%, rgba(120, 80, 60, 0.2), transparent 60%), #0A0A0A;
+ z-index: -1;
+ }
+ .center-dialog {
+ width: 100%;
+ background: var(--ff-surface-1);
+ border-radius: 16px;
+ border: 1px solid rgba(255, 255, 255, 0.08);
+ padding: 22px 20px 18px;
+ box-shadow: 0 12px 36px rgba(0, 0, 0, 0.75);
+ position: relative;
+ }
+ .center-dialog .cd-close-x {
+ position: absolute;
+ top: 12px;
+ right: 12px;
+ width: 26px;
+ height: 26px;
+ border-radius: 50%;
+ background: rgba(255, 255, 255, 0.08);
+ color: var(--ff-text-primary);
+ border: 1px solid rgba(255, 255, 255, 0.18);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ font-size: 14px;
+ line-height: 1;
+ }
+ .center-dialog .cd-title {
+ font-size: 17px;
+ font-weight: 700;
+ color: var(--ff-text-primary);
+ text-align: center;
+ margin: 4px 0 12px;
+ }
+ .center-dialog .cd-body {
+ font-size: 13.5px;
+ color: var(--ff-text-secondary);
+ line-height: 1.6;
+ text-align: center;
+ margin-bottom: 22px;
+ }
+ .center-dialog .cd-actions {
+ display: flex;
+ gap: 10px;
+ }
+ .btn-secondary {
+ flex: 1;
+ height: 42px;
+ background: var(--ff-surface-2);
+ border: 1px solid #3A3A3D;
+ color: var(--ff-text-primary);
+ border-radius: 12px;
+ font-size: 14px;
+ font-weight: 600;
+ cursor: pointer;
+ font-family: inherit;
+ }
+ .btn-primary {
+ flex: 1;
+ height: 42px;
+ background: var(--ff-orange-gradient);
+ color: #FFFFFF;
+ border: none;
+ border-radius: 12px;
+ font-size: 14px;
+ font-weight: 700;
+ cursor: pointer;
+ font-family: inherit;
+ box-shadow: 0 4px 14px rgba(255, 107, 61, 0.28);
+ }
 
-  /* === ··· 菜单 + 切换开关 === */
-  .menu-sheet {
-    position: absolute;
-    top: 60px;
-    right: 16px;
-    width: 220px;
-    background: var(--ff-surface-1);
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 8px;
-    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7);
-  }
-  .menu-item {
-    padding: 12px 10px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 13px;
-    color: var(--ff-text-primary);
-  }
-  .menu-item + .menu-item { border-top: 1px solid var(--ff-divider); }
-  .toggle-switch {
-    width: 36px;
-    height: 22px;
-    border-radius: 11px;
-    position: relative;
-    transition: background 0.2s;
-  }
-  .toggle-switch::after {
-    content: "";
-    position: absolute;
-    top: 2px;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: white;
-    transition: left 0.2s;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-  }
-  .toggle-switch.on { background: var(--ff-success); }
-  .toggle-switch.on::after { left: 16px; }
-  .toggle-switch.off { background: #3A3A3D; }
-  .toggle-switch.off::after { left: 2px; }
-  .toggle-switch.disabled { background: #1F1F22; opacity: 0.5; }
-  .toggle-switch.disabled::after { left: 2px; background: #5E5E62; }
-  .menu-label { color: var(--ff-text-secondary); font-size: 11px; padding: 2px 10px; }
+ /* === ··· 菜单 + 切换开关 === */
+ .menu-sheet {
+ position: absolute;
+ top: 60px;
+ right: 16px;
+ width: 220px;
+ background: var(--ff-surface-1);
+ border-radius: 16px;
+ border: 1px solid rgba(255, 255, 255, 0.08);
+ padding: 8px;
+ box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7);
+ }
+ .menu-item {
+ padding: 12px 10px;
+ border-radius: 8px;
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ font-size: 13px;
+ color: var(--ff-text-primary);
+ }
+ .menu-item + .menu-item { border-top: 1px solid var(--ff-divider); }
+ .toggle-switch {
+ width: 36px;
+ height: 22px;
+ border-radius: 11px;
+ position: relative;
+ transition: background 0.2s;
+ }
+ .toggle-switch::after {
+ content: "";
+ position: absolute;
+ top: 2px;
+ width: 18px;
+ height: 18px;
+ border-radius: 50%;
+ background: white;
+ transition: left 0.2s;
+ box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+ }
+ .toggle-switch.on { background: var(--ff-success); }
+ .toggle-switch.on::after { left: 16px; }
+ .toggle-switch.off { background: #3A3A3D; }
+ .toggle-switch.off::after { left: 2px; }
+ .toggle-switch.disabled { background: #1F1F22; opacity: 0.5; }
+ .toggle-switch.disabled::after { left: 2px; background: #5E5E62; }
+ .menu-label { color: var(--ff-text-secondary); font-size: 11px; padding: 2px 10px; }
 
-  /* === PiP 浮窗（with locked cover） === */
-  .pip-floating {
-    position: absolute;
-    bottom: 80px;
-    right: 12px;
-    width: 100px;
-    height: 178px;
-    background: #0A0A0A;
-    border-radius: 8px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7);
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  .pip-cover {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(180deg, rgba(180, 80, 60, 0.6), rgba(60, 20, 30, 0.7)), #2a1810;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 11px;
-    font-weight: 700;
-    text-align: center;
-    padding: 4px;
-    position: relative;
-  }
-  .pip-tap-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.6);
-    padding: 4px 10px;
-    border-radius: 4px;
-    color: white;
-    font-size: 10px;
-    font-weight: 600;
-    white-space: nowrap;
-  }
-  .pip-controls {
-    position: absolute;
-    bottom: 6px;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: space-around;
-    color: rgba(255,255,255,0.85);
-    font-size: 11px;
-  }
-  .pip-close-x {
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    width: 16px;
-    height: 16px;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 9px;
-  }
-  .home-bar-area {
-    flex: 1;
-    background: var(--ff-bg);
-    padding: 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .home-search {
-    background: var(--ff-surface-1);
-    border-radius: 6px;
-    padding: 6px 10px;
-    font-size: 10px;
-    color: var(--ff-text-placeholder);
-  }
-  .home-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; flex: 1; }
-  .home-cell { background: var(--ff-surface-1); border-radius: 6px; aspect-ratio: 3/4; }
-  .home-tabbar {
-    display: flex;
-    gap: 4px;
-    padding-top: 4px;
-    border-top: 1px solid var(--ff-divider);
-    font-size: 8px;
-    color: var(--ff-text-secondary);
-    justify-content: space-around;
-  }
-  .home-tabbar .selected { color: var(--ff-text-primary); font-weight: 700; }
+ /* === PiP 浮窗（with locked cover） === */
+ .pip-floating {
+ position: absolute;
+ bottom: 80px;
+ right: 12px;
+ width: 100px;
+ height: 178px;
+ background: #0A0A0A;
+ border-radius: 8px;
+ box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7);
+ overflow: hidden;
+ border: 1px solid rgba(255, 255, 255, 0.1);
+ }
+ .pip-cover {
+ width: 100%;
+ height: 100%;
+ background: linear-gradient(180deg, rgba(180, 80, 60, 0.6), rgba(60, 20, 30, 0.7)), #2a1810;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ color: white;
+ font-size: 11px;
+ font-weight: 700;
+ text-align: center;
+ padding: 4px;
+ position: relative;
+ }
+ .pip-tap-overlay {
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+ background: rgba(0, 0, 0, 0.6);
+ padding: 4px 10px;
+ border-radius: 4px;
+ color: white;
+ font-size: 10px;
+ font-weight: 600;
+ white-space: nowrap;
+ }
+ .pip-controls {
+ position: absolute;
+ bottom: 6px;
+ left: 0;
+ right: 0;
+ display: flex;
+ justify-content: space-around;
+ color: rgba(255,255,255,0.85);
+ font-size: 11px;
+ }
+ .pip-close-x {
+ position: absolute;
+ top: 4px;
+ right: 4px;
+ width: 16px;
+ height: 16px;
+ background: rgba(0, 0, 0, 0.5);
+ border-radius: 50%;
+ color: white;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ font-size: 9px;
+ }
+ .home-bar-area {
+ flex: 1;
+ background: var(--ff-bg);
+ padding: 8px;
+ display: flex;
+ flex-direction: column;
+ gap: 6px;
+ }
+ .home-search {
+ background: var(--ff-surface-1);
+ border-radius: 6px;
+ padding: 6px 10px;
+ font-size: 10px;
+ color: var(--ff-text-placeholder);
+ }
+ .home-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; flex: 1; }
+ .home-cell { background: var(--ff-surface-1); border-radius: 6px; aspect-ratio: 3/4; }
+ .home-tabbar {
+ display: flex;
+ gap: 4px;
+ padding-top: 4px;
+ border-top: 1px solid var(--ff-divider);
+ font-size: 8px;
+ color: var(--ff-text-secondary);
+ justify-content: space-around;
+ }
+ .home-tabbar .selected { color: var(--ff-text-primary); font-weight: 700; }
 
-  /* Player phase mockup */
-  .player-phase {
-    flex: 1;
-    background: linear-gradient(180deg, #1a1410 0%, #0a0805 100%);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-  }
-  .player-content {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--ff-text-placeholder);
-    font-size: 11px;
-  }
-  .player-topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 12px 0;
-  }
-  .player-ep-tag {
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    padding: 2px 8px;
-    border-radius: 3px;
-    font-size: 10px;
-    font-weight: 600;
-  }
-  .player-more {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    line-height: 1;
-  }
+ /* Player phase mockup */
+ .player-phase {
+ flex: 1;
+ background: linear-gradient(180deg, #1a1410 0%, #0a0805 100%);
+ position: relative;
+ display: flex;
+ flex-direction: column;
+ }
+ .player-content {
+ flex: 1;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ color: var(--ff-text-placeholder);
+ font-size: 11px;
+ }
+ .player-topbar {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ padding: 8px 12px 0;
+ }
+ .player-ep-tag {
+ background: rgba(0, 0, 0, 0.5);
+ color: white;
+ padding: 2px 8px;
+ border-radius: 3px;
+ font-size: 10px;
+ font-weight: 600;
+ }
+ .player-more {
+ width: 24px;
+ height: 24px;
+ border-radius: 50%;
+ background: rgba(0, 0, 0, 0.5);
+ color: white;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ font-size: 14px;
+ line-height: 1;
+ }
 
-  /* data-jump flash */
-  .jump-target { transition: outline 0.3s, outline-offset 0.3s; }
-  .jump-target.flash { outline: 2px solid var(--ff-orange); outline-offset: 4px; border-radius: 8px; }
-  [data-jump] { cursor: pointer; }
+ /* data-jump flash */
+ .jump-target { transition: outline 0.3s, outline-offset 0.3s; }
+ .jump-target.flash { outline: 2px solid var(--ff-orange); outline-offset: 4px; border-radius: 8px; }
+ [data-jump] { cursor: pointer; }
 
-  .footer {
-    margin-top: 64px;
-    padding-top: 22px;
-    border-top: 1px solid var(--ff-divider);
-    font-size: 12px;
-    color: var(--ff-text-placeholder);
-  }
+ .footer {
+ margin-top: 64px;
+ padding-top: 22px;
+ border-top: 1px solid var(--ff-divider);
+ font-size: 12px;
+ color: var(--ff-text-placeholder);
+ }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
 </head>
@@ -516,72 +516,72 @@
 <div class="wrap">
 
 <header>
-  <h1>FlareFlow · 画中画（Picture-in-Picture）</h1>
-  <div class="meta">
-    <span class="meta-tag">P0</span>
-    <span class="meta-tag">v1.0</span>
-    <span class="meta-tag platform-ios">iOS 14.0+</span>
-    <span class="meta-tag platform-and">Android 8.0+</span>
-    <span class="meta-tag gold">baseline v1.1 校准</span>
-    <span style="margin-left: 10px;">2026-05-29 创建</span>
-  </div>
+ <h1>FlareFlow · 画中画（Picture-in-Picture）</h1>
+ <div class="meta">
+ <span class="meta-tag">P0</span>
+ <span class="meta-tag">v1.0</span>
+ <span class="meta-tag platform-ios">iOS 14.0+</span>
+ <span class="meta-tag platform-and">Android 8.0+</span>
+ <span class="meta-tag gold">baseline v1.1 校准</span>
+ <span style="margin-left: 10px;">2026-05-29 创建</span>
+ </div>
 </header>
 
 <section class="howto">
-  <h4>怎么打开本 HTML</h4>
-  <ul>
-    <li><strong>方式 A · 终端</strong>：<code>git clone …/ff-app-prd.git &amp;&amp; open docs/20260529/PRD/画中画/20260529_画中画_PRD.html</code></li>
-    <li><strong>方式 B · Finder 双击</strong>：下载后双击 <code>*_PRD.html</code></li>
-    <li><strong>方式 C · 拖到浏览器</strong>：下载后拖入任意浏览器</li>
-  </ul>
-  <p style="margin-top: 10px; color: var(--ff-text-placeholder); font-size: 12px;">⚠️ Mermaid 流程图需联网首次渲染；离线状态显示源码。</p>
+ <h4>怎么打开本 HTML</h4>
+ <ul>
+ <li><strong>方式 A · 终端</strong>：<code>git clone …/ff-app-prd.git &amp;&amp; open docs/20260529/PRD/画中画/20260529_画中画_PRD.html</code></li>
+ <li><strong>方式 B · Finder 双击</strong>：下载后双击 <code>*_PRD.html</code></li>
+ <li><strong>方式 C · 拖到浏览器</strong>：下载后拖入任意浏览器</li>
+ </ul>
+ <p style="margin-top: 10px; color: var(--ff-text-placeholder); font-size: 12px;">⚠️ Mermaid 流程图需联网首次渲染；离线状态显示源码。</p>
 </section>
 
 <nav class="toc">
-  <div class="toc-title">目录</div>
-  <a href="#sec-1">1. 需求背景</a>
-  <a href="#sec-2">2. 需求概述</a>
-  <a href="#sec-3">3. 目标用户与分群</a>
-  <a href="#sec-4">4. 核心用户动线</a>
-  <a href="#sec-5">5. 功能详细描述</a>
-  <a href="#sec-5-1">5.1 触发与进入</a>
-  <a href="#sec-5-4">5.4 锁定集处理</a>
-  <a href="#sec-5-9">5.9 验收</a>
-  <a href="#sec-6">6. 影响范围</a>
-  <a href="#sec-7">7. 待确认</a>
-  <a href="#sec-8">8. 版本规划</a>
+ <div class="toc-title">目录</div>
+ <a href="#sec-1">1. 需求背景</a>
+ <a href="#sec-2">2. 需求概述</a>
+ <a href="#sec-3">3. 目标用户与分群</a>
+ <a href="#sec-4">4. 核心用户动线</a>
+ <a href="#sec-5">5. 功能详细描述</a>
+ <a href="#sec-5-1">5.1 触发与进入</a>
+ <a href="#sec-5-4">5.4 锁定集处理</a>
+ <a href="#sec-5-9">5.9 验收</a>
+ <a href="#sec-6">6. 影响范围</a>
+ <a href="#sec-7">7. 待确认</a>
+ <a href="#sec-8">8. 版本规划</a>
 </nav>
 
 <!-- §1 -->
 <h2 id="sec-1">1. 需求背景</h2>
 
-<p>FlareFlow Android 端使用 <code>mediaPlayback</code> 类型的前台服务（FGS，关联 <a href="../../../20260514/PRD/Android-FCM高优先级透传唤醒与常驻通知/">0514 Android-FCM 高优先级透传与常驻通知</a>）维持 FCM 透传保活、常驻通知等链路。Android 12+ 起对 FGS 的合规判定收紧——<code>mediaPlayback</code> 类 FGS 须有"用户可见 media 真在播"的证据，否则会被系统回收，进而拖垮 FCM / 保活链路。<strong>画中画（PiP）是合规的核心证据之一</strong>：用户切走 App 时 PiP 浮窗仍可见、视频仍在播，FGS 维持成立。</p>
+<p>FlareFlow Android 端使用 <code>mediaPlayback</code> 类型的前台服务（关联 <a href="../../../20260514/PRD/Android-FCM高优先级透传唤醒与常驻通知/">0514 Android-FCM 高优先级透传与常驻通知</a>）维持 FCM 透传保活、常驻通知等链路。Android 12+ 起对前台服务的合规判定收紧——<code>mediaPlayback</code> 类前台服务须有"用户可见 media 真在播"的证据，否则会被系统回收，进而拖垮 FCM / 保活链路。<strong>画中画（PiP）是合规的核心证据之一</strong>：用户切走 App 时 PiP 浮窗仍可见、视频仍在播，前台服务 维持成立。</p>
 
-<p>iOS 没有等价的 FGS 概念，但 PiP 同样能延长用户观看时长——用户切换 App、聊天、复制粘贴时不必关掉 FlareFlow。</p>
+<p>iOS 没有等价的前台服务概念，但 PiP 同样能延长用户观看时长——用户切换 App、聊天、复制粘贴时不必关掉 FlareFlow。</p>
 
 <p>因此本期把 PiP 正式做成一个独立功能，统一规则：</p>
 <ul>
-  <li><strong>合规边界（Android 主因）</strong>：PiP 是 FGS 续命的核心证据；无 PiP 链路则 FCM 透传/保活/常驻通知受影响。</li>
-  <li><strong>体验边界（两平台共同）</strong>：用户在多任务切换时仍能继续看剧；锁定集场景下 PiP 不打扰但给出明确的解锁回流入口。</li>
+ <li><strong>合规边界（Android 主因）</strong>：PiP 是前台服务续命的核心证据；无 PiP 链路则 FCM 透传/保活/常驻通知受影响。</li>
+ <li><strong>体验边界（两平台共同）</strong>：用户在多任务切换时仍能继续看剧；锁定集场景下 PiP 不打扰但给出明确的解锁回流入口。</li>
 </ul>
 
 <!-- §2 -->
 <h2 id="sec-2">2. 需求概述</h2>
 <table>
-  <thead><tr><th style="width: 24%;">维度</th><th>规则</th></tr></thead>
-  <tbody>
-    <tr><td>平台</td><td>iOS + Android；<strong>Android 优先（合规）</strong></td></tr>
-    <tr><td><strong>系统最低支持</strong></td><td><strong>Android 8.0 (API 26)</strong> / <strong>iOS 14.0</strong>——低于此版本设备 PiP 不可用，按现网退后台（FGS 在低版本设备降级）</td></tr>
-    <tr><td>适用身份</td><td><span class="id-tag visitor">VISITOR</span> / <span class="id-tag guest">GUEST</span> / <span class="id-tag loggedin">LOGGED_IN</span> <strong>三档全部可用</strong>（限可免费观看的集；锁定集策略见 §5.4）</td></tr>
-    <tr><td>触发方式</td><td><strong>A. 系统手势</strong>（Android 按 Home / iOS App 切后台自动） + <strong>B. 沉浸播放页右上角 <code>···</code> 菜单内切换开关</strong>（用户可控偏好；不一键立即进 PiP）</td></tr>
-    <tr><td>切集</td><td><strong>自动连播下一集</strong> + PiP 窗系统位上/下一集按钮</td></tr>
-    <tr><td>锁定集</td><td>PiP <strong>暂停在锁定集封面 + "Tap to unlock" overlay</strong>；用户点 PiP 回 App 待解锁页</td></tr>
-    <tr><td>横屏剧支持</td><td><strong>是</strong>——进入 PiP 时按视频实际 aspect ratio 交 OS 处理</td></tr>
-    <tr><td>VIP 差异</td><td><strong>无差异</strong>（VIP 自然受益于"无锁定集"）</td></tr>
-    <tr><td>PiP 期间广告</td><td><strong>全部豁免</strong>（切集插页 / 开屏 / 激励均不触发）</td></tr>
-    <tr><td>Watchdog</td><td>PiP <strong>实际未播放视频满 30 分钟</strong>（停留在锁定封面）自动关闭 PiP</td></tr>
-    <tr><td>本期不做</td><td>跨剧 PiP 连播 / PiP 内点赞收藏倍速清晰度 / 弹幕 PiP</td></tr>
-  </tbody>
+ <thead><tr><th style="width: 24%;">维度</th><th>规则</th></tr></thead>
+ <tbody>
+ <tr><td>平台</td><td>iOS + Android；<strong>Android 优先（合规）</strong></td></tr>
+ <tr><td><strong>系统最低支持</strong></td><td><strong>Android 8.0 (API 26)</strong> / <strong>iOS 14.0</strong>——低于此版本设备 PiP 不可用，按现网退后台（前台服务 在低版本设备降级）</td></tr>
+ <tr><td>适用身份</td><td><span class="id-tag visitor">VISITOR</span> / <span class="id-tag guest">GUEST</span> / <span class="id-tag loggedin">LOGGED_IN</span> <strong>三档全部可用</strong>（限可免费观看的集；锁定集策略见 §5.4）</td></tr>
+ <tr><td>触发方式</td><td><strong>A. 系统手势</strong>（Android 按 Home / iOS App 切后台自动） + <strong>B. 沉浸播放页右上角 <code>···</code> 菜单内切换开关</strong>（用户可控偏好；不一键立即进 PiP）</td></tr>
+ <tr><td>切集</td><td><strong>自动连播下一集</strong> + PiP 窗系统位上/下一集按钮</td></tr>
+ <tr><td>锁定集</td><td>PiP <strong>暂停在锁定集封面 + "Tap to unlock" overlay</strong>；用户点 PiP 回 App 待解锁页</td></tr>
+ <tr><td>横屏剧支持</td><td><strong>是</strong>——进入 PiP 时按视频实际 aspect ratio 交 OS 处理</td></tr>
+ <tr><td>VIP 差异</td><td><strong>无差异</strong>（VIP 自然受益于"无锁定集"）</td></tr>
+ <tr><td>PiP 期间广告</td><td><strong>全部豁免</strong>（切集插页 / 开屏 / 激励均不触发）</td></tr>
+ <tr><td>Watchdog</td><td>PiP <strong>实际未播放视频满 30 分钟</strong>（停留在锁定封面）自动关闭 PiP</td></tr>
+ <tr><td>本期不做</td><td>跨剧 PiP 连播 / PiP 内点赞收藏倍速清晰度 / 弹幕 PiP</td></tr>
+ </tbody>
 </table>
 
 <blockquote class="plain-talk">用户在沉浸播放页<strong>按 Home 键</strong>（Android）或<strong>切走 App</strong>（iOS）即可让剧集变成浮窗继续播放。</blockquote>
@@ -591,13 +591,13 @@
 <!-- §3 -->
 <h2 id="sec-3">3. 目标用户与分群</h2>
 <table>
-  <thead><tr><th>分群</th><th>PiP 可用</th><th>锁定集触发后回 App 行为</th></tr></thead>
-  <tbody>
-    <tr><td><span class="id-tag visitor">VISITOR</span> 访客</td><td>✓</td><td>用户点 PiP 回 App → <strong>先弹隐私弹窗</strong>（沿用 <a href="../../../20260513/PRD/访客模式与游客身份/">访客 PRD §7</a>）；同意后才进待解锁页</td></tr>
-    <tr><td><span class="id-tag guest">GUEST</span> 游客</td><td>✓</td><td>用户点 PiP 回 App → 直接进待解锁页</td></tr>
-    <tr><td><span class="id-tag loggedin">LOGGED_IN</span> 非 VIP</td><td>✓</td><td>同 GUEST；待解锁页按现网权益</td></tr>
-    <tr><td><span class="id-tag loggedin">LOGGED_IN</span> VIP</td><td>✓</td><td>全集可播；<strong>无锁定集触发</strong>；连播到底</td></tr>
-  </tbody>
+ <thead><tr><th>分群</th><th>PiP 可用</th><th>锁定集触发后回 App 行为</th></tr></thead>
+ <tbody>
+ <tr><td><span class="id-tag visitor">VISITOR</span> 访客</td><td>✓</td><td>用户点 PiP 回 App → <strong>先弹隐私弹窗</strong>（沿用 <a href="../../../20260513/PRD/访客模式与游客身份/">访客 PRD §7</a>）；同意后才进待解锁页</td></tr>
+ <tr><td><span class="id-tag guest">GUEST</span> 游客</td><td>✓</td><td>用户点 PiP 回 App → 直接进待解锁页</td></tr>
+ <tr><td><span class="id-tag loggedin">LOGGED_IN</span> 非 VIP</td><td>✓</td><td>同 GUEST；待解锁页按现网权益</td></tr>
+ <tr><td><span class="id-tag loggedin">LOGGED_IN</span> VIP</td><td>✓</td><td>全集可播；<strong>无锁定集触发</strong>；连播到底</td></tr>
+ </tbody>
 </table>
 
 <!-- §4 -->
@@ -607,16 +607,16 @@
 <div class="mermaid-wrap">
 <pre class="mermaid">
 flowchart TD
-  A0[沉浸播放页正在播放正片] --> A1{触发方式?}
-  A1 -->|按 Home / iOS 切后台| A2{切换开关偏好 ON 且 系统权限 ON?}
-  A1 -->|点 ··· 菜单内切换开关| A3{系统 PiP 权限状态?}
-  A2 -->|是| A4[设 aspect ratio 进 PiP]
-  A2 -->|否| A5[沿用现网 App 退后台]
-  A3 -->|系统权限 ON| A6[翻转切换开关偏好并持久化]
-  A3 -->|系统权限 OFF 置灰| A7[弹标准居中权限引导弹窗]
-  A7 -->|点 去设置| A8[deeplink 跳系统设置]
-  A7 -->|点 取消| A9[关弹窗留在菜单]
-  A4 --> A10[PiP 浮窗显示 视频继续播]
+ A0[沉浸播放页正在播放正片] --> A1{触发方式?}
+ A1 -->|按 Home / iOS 切后台| A2{切换开关偏好 ON 且 系统权限 ON?}
+ A1 -->|点 ··· 菜单内切换开关| A3{系统 PiP 权限状态?}
+ A2 -->|是| A4[设 aspect ratio 进 PiP]
+ A2 -->|否| A5[沿用现网 App 退后台]
+ A3 -->|系统权限 ON| A6[翻转切换开关偏好并持久化]
+ A3 -->|系统权限 OFF 置灰| A7[弹标准居中权限引导弹窗]
+ A7 -->|点 去设置| A8[deeplink 跳系统设置]
+ A7 -->|点 取消| A9[关弹窗留在菜单]
+ A4 --> A10[PiP 浮窗显示 视频继续播]
 </pre>
 </div>
 
@@ -624,18 +624,18 @@ flowchart TD
 <div class="mermaid-wrap">
 <pre class="mermaid">
 flowchart TD
-  B0[PiP 内当前集播放中] --> B1{本集播完 或 用户点下一集?}
-  B1 -->|否 继续播| B0
-  B1 -->|是| B2{下一集存在?}
-  B2 -->|否 最后一集| B3[PiP 显示已播完 暂停]
-  B2 -->|是| B4{下一集可免费观看?}
-  B4 -->|免费集| B5[继续播 aspect ratio 按需更新]
-  B5 --> B0
-  B4 -->|锁定集| B6[PiP 暂停 显示封面 + Tap to unlock]
-  B6 --> B7{用户行为?}
-  B7 -->|点 PiP 窗体| B8[关 PiP 回 App 待解锁页]
-  B7 -->|30min 内未恢复| B9[watchdog 自动关 PiP FGS 退出]
-  B7 -->|关闭 X / swipe| B9
+ B0[PiP 内当前集播放中] --> B1{本集播完 或 用户点下一集?}
+ B1 -->|否 继续播| B0
+ B1 -->|是| B2{下一集存在?}
+ B2 -->|否 最后一集| B3[PiP 显示已播完 暂停]
+ B2 -->|是| B4{下一集可免费观看?}
+ B4 -->|免费集| B5[继续播 aspect ratio 按需更新]
+ B5 --> B0
+ B4 -->|锁定集| B6[PiP 暂停 显示封面 + Tap to unlock]
+ B6 --> B7{用户行为?}
+ B7 -->|点 PiP 窗体| B8[关 PiP 回 App 待解锁页]
+ B7 -->|30min 内未恢复| B9[watchdog 自动关 PiP 前台服务退出]
+ B7 -->|关闭 X / swipe| B9
 </pre>
 </div>
 
@@ -646,14 +646,14 @@ flowchart TD
 
 <h4>5.1.1 触发方式总览</h4>
 <table>
-  <thead><tr><th style="width: 22%;">项</th><th>规则</th></tr></thead>
-  <tbody>
-    <tr><td><strong>Android 自动触发</strong></td><td>用户在沉浸播放页正在播放正片时按 Home / 任务键 / 上滑手势 → 若<strong>用户切换开关偏好 = ON</strong> + 系统 PiP 权限 ON → 自动调用 <code>enterPictureInPictureMode()</code>；按当前集 orientation 配置 <code>setPictureInPictureParams</code>。<strong>正片正在播是前提</strong>；暂停态时按 Home 沿用现网</td></tr>
-    <tr><td><strong>iOS 自动触发</strong></td><td>App lifecycle 进入后台时，若沉浸播放器正在播放正片 + 用户切换开关偏好 = ON + 系统 PiP 权限 ON → 调用 <code>AVPictureInPictureController.startPictureInPicture()</code></td></tr>
-    <tr><td><strong>菜单切换开关</strong></td><td>沉浸播放页右上角 <code>···</code> 菜单内的「画中画」切换开关项（下方 §5.1.2 详细）</td></tr>
-    <tr><td><strong>正在播广告时按 Home</strong></td><td>进入 PiP 链路被阻断；沿用现网，不强制进 PiP</td></tr>
-    <tr><td><strong>正在弹合规弹窗时按 Home</strong></td><td>沿用现网（与访客 PRD 不冲突）</td></tr>
-  </tbody>
+ <thead><tr><th style="width: 22%;">项</th><th>规则</th></tr></thead>
+ <tbody>
+ <tr><td><strong>Android 自动触发</strong></td><td>用户在沉浸播放页正在播放正片时按 Home / 任务键 / 上滑手势 → 若<strong>用户切换开关偏好 = ON</strong> + 系统 PiP 权限 ON → 自动调用 <code>enterPictureInPictureMode()</code>；按当前集 orientation 配置 <code>setPictureInPictureParams</code>。<strong>正片正在播是前提</strong>；暂停态时按 Home 沿用现网</td></tr>
+ <tr><td><strong>iOS 自动触发</strong></td><td>App lifecycle 进入后台时，若沉浸播放器正在播放正片 + 用户切换开关偏好 = ON + 系统 PiP 权限 ON → 调用 <code>AVPictureInPictureController.startPictureInPicture()</code></td></tr>
+ <tr><td><strong>菜单切换开关</strong></td><td>沉浸播放页右上角 <code>···</code> 菜单内的「画中画」切换开关项（下方 §5.1.2 详细）</td></tr>
+ <tr><td><strong>正在播广告时按 Home</strong></td><td>进入 PiP 链路被阻断；沿用现网，不强制进 PiP</td></tr>
+ <tr><td><strong>正在弹合规弹窗时按 Home</strong></td><td>沿用现网（与访客 PRD 不冲突）</td></tr>
+ </tbody>
 </table>
 
 <h4 id="sec-5-1-2">5.1.2 菜单切换开关（核心 UX · 用户可控）</h4>
@@ -664,101 +664,101 @@ flowchart TD
 <div class="mockup-section">
 <h4 style="margin-top: 0;">实物 UI · ··· 菜单内的切换开关（3 状态）</h4>
 <div class="mockup-row">
-  <!-- State 1: ON -->
-  <div class="phone">
-    <div class="phone-screen">
-      <div class="status-bar"><span>9:41</span><span>●●● ▮▮</span></div>
-      <div class="player-phase">
-        <div class="player-topbar"><span class="player-ep-tag">EP. 3</span><span class="player-more">···</span></div>
-        <div class="player-content">正片画面</div>
-        <div class="menu-sheet">
-          <div class="menu-label">设置</div>
-          <div class="menu-item">
-            <span>画中画</span>
-            <div class="toggle-switch on"></div>
-          </div>
-          <div class="menu-item">
-            <span style="color: var(--ff-text-secondary);">分享</span>
-          </div>
-          <div class="menu-item">
-            <span style="color: var(--ff-text-secondary);">举报</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- State 2: OFF (user pref) -->
-  <div class="phone">
-    <div class="phone-screen">
-      <div class="status-bar"><span>9:41</span><span>●●● ▮▮</span></div>
-      <div class="player-phase">
-        <div class="player-topbar"><span class="player-ep-tag">EP. 3</span><span class="player-more">···</span></div>
-        <div class="player-content">正片画面</div>
-        <div class="menu-sheet">
-          <div class="menu-label">设置</div>
-          <div class="menu-item">
-            <span>画中画</span>
-            <div class="toggle-switch off"></div>
-          </div>
-          <div class="menu-item">
-            <span style="color: var(--ff-text-secondary);">分享</span>
-          </div>
-          <div class="menu-item">
-            <span style="color: var(--ff-text-secondary);">举报</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- State 3: OFF + Disabled (system perm) -->
-  <div class="phone jump-target" data-jump="#sec-5-1-3">
-    <div class="phone-screen">
-      <div class="status-bar"><span>9:41</span><span>●●● ▮▮</span></div>
-      <div class="player-phase">
-        <div class="player-topbar"><span class="player-ep-tag">EP. 3</span><span class="player-more">···</span></div>
-        <div class="player-content">正片画面</div>
-        <div class="menu-sheet">
-          <div class="menu-label">设置</div>
-          <div class="menu-item">
-            <span style="color: var(--ff-text-placeholder);">画中画</span>
-            <div class="toggle-switch disabled"></div>
-          </div>
-          <div class="menu-item">
-            <span style="color: var(--ff-text-secondary);">分享</span>
-          </div>
-          <div class="menu-item">
-            <span style="color: var(--ff-text-secondary);">举报</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+ <!-- State 1: ON -->
+ <div class="phone">
+ <div class="phone-screen">
+ <div class="status-bar"><span>9:41</span><span>●●● ▮▮</span></div>
+ <div class="player-phase">
+ <div class="player-topbar"><span class="player-ep-tag">EP. 3</span><span class="player-more">···</span></div>
+ <div class="player-content">正片画面</div>
+ <div class="menu-sheet">
+ <div class="menu-label">设置</div>
+ <div class="menu-item">
+ <span>画中画</span>
+ <div class="toggle-switch on"></div>
+ </div>
+ <div class="menu-item">
+ <span style="color: var(--ff-text-secondary);">分享</span>
+ </div>
+ <div class="menu-item">
+ <span style="color: var(--ff-text-secondary);">举报</span>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ <!-- State 2: OFF (user pref) -->
+ <div class="phone">
+ <div class="phone-screen">
+ <div class="status-bar"><span>9:41</span><span>●●● ▮▮</span></div>
+ <div class="player-phase">
+ <div class="player-topbar"><span class="player-ep-tag">EP. 3</span><span class="player-more">···</span></div>
+ <div class="player-content">正片画面</div>
+ <div class="menu-sheet">
+ <div class="menu-label">设置</div>
+ <div class="menu-item">
+ <span>画中画</span>
+ <div class="toggle-switch off"></div>
+ </div>
+ <div class="menu-item">
+ <span style="color: var(--ff-text-secondary);">分享</span>
+ </div>
+ <div class="menu-item">
+ <span style="color: var(--ff-text-secondary);">举报</span>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ <!-- State 3: OFF + Disabled (system perm) -->
+ <div class="phone jump-target" data-jump="#sec-5-1-3">
+ <div class="phone-screen">
+ <div class="status-bar"><span>9:41</span><span>●●● ▮▮</span></div>
+ <div class="player-phase">
+ <div class="player-topbar"><span class="player-ep-tag">EP. 3</span><span class="player-more">···</span></div>
+ <div class="player-content">正片画面</div>
+ <div class="menu-sheet">
+ <div class="menu-label">设置</div>
+ <div class="menu-item">
+ <span style="color: var(--ff-text-placeholder);">画中画</span>
+ <div class="toggle-switch disabled"></div>
+ </div>
+ <div class="menu-item">
+ <span style="color: var(--ff-text-secondary);">分享</span>
+ </div>
+ <div class="menu-item">
+ <span style="color: var(--ff-text-secondary);">举报</span>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
 </div>
 <p class="caption">左：<strong>ON 状态</strong>（系统 + 用户偏好都开）｜中：<strong>OFF 状态</strong>（用户主动关）｜右：<strong>OFF 置灰</strong>（系统权限关，点击 → 弹引导弹窗，跳 §5.1.3）</p>
 </div>
 
 <h5>状态决定矩阵</h5>
 <table>
-  <thead><tr><th>系统 PiP 权限</th><th>用户持久化偏好</th><th>切换开关显示</th><th>用户点击切换开关行为</th></tr></thead>
-  <tbody>
-    <tr><td><strong>ON</strong></td><td>未设置（首次）</td><td><strong>ON</strong>（默认）</td><td>切换为 OFF 并持久化；FlareFlow PiP 关闭</td></tr>
-    <tr><td><strong>ON</strong></td><td><strong>ON</strong></td><td><strong>ON</strong></td><td>切换为 OFF 并持久化</td></tr>
-    <tr><td><strong>ON</strong></td><td><strong>OFF</strong>（用户曾主动关） </td><td><strong>OFF</strong></td><td>切换为 ON 并持久化；FlareFlow PiP 恢复</td></tr>
-    <tr><td><strong>OFF</strong></td><td>任意</td><td><strong>OFF + 置灰</strong></td><td>弹标准居中权限引导弹窗（见 §5.1.3）；切换开关状态不变</td></tr>
-  </tbody>
+ <thead><tr><th>系统 PiP 权限</th><th>用户持久化偏好</th><th>切换开关显示</th><th>用户点击切换开关行为</th></tr></thead>
+ <tbody>
+ <tr><td><strong>ON</strong></td><td>未设置（首次）</td><td><strong>ON</strong>（默认）</td><td>切换为 OFF 并持久化；FlareFlow PiP 关闭</td></tr>
+ <tr><td><strong>ON</strong></td><td><strong>ON</strong></td><td><strong>ON</strong></td><td>切换为 OFF 并持久化</td></tr>
+ <tr><td><strong>ON</strong></td><td><strong>OFF</strong>（用户曾主动关） </td><td><strong>OFF</strong></td><td>切换为 ON 并持久化；FlareFlow PiP 恢复</td></tr>
+ <tr><td><strong>OFF</strong></td><td>任意</td><td><strong>OFF + 置灰</strong></td><td>弹标准居中权限引导弹窗（见 §5.1.3）；切换开关状态不变</td></tr>
+ </tbody>
 </table>
 
 <p><strong>状态联动</strong>：</p>
 <ul>
-  <li>系统权限 OFF → 切换开关<strong>强制显示</strong> OFF + 置灰（不论用户持久化偏好）</li>
-  <li>用户从系统设置开启权限后回到 App → 切换开关恢复显示<strong>用户持久化偏好</strong>（如未设置则 ON）</li>
-  <li>持久化存储：客户端本地（iOS NSUserDefaults / Android SharedPreferences），<strong>不</strong>上服务端</li>
+ <li>系统权限 OFF → 切换开关<strong>强制显示</strong> OFF + 置灰（不论用户持久化偏好）</li>
+ <li>用户从系统设置开启权限后回到 App → 切换开关恢复显示<strong>用户持久化偏好</strong>（如未设置则 ON）</li>
+ <li>持久化存储：客户端本地（iOS NSUserDefaults / Android SharedPreferences），<strong>不</strong>上服务端</li>
 </ul>
 
 <p><strong>关于「立即进 PiP」的入口</strong>：</p>
 <ul>
-  <li><strong>自动触发</strong>：按 Home 系统手势（Android）/ App 切到后台（iOS）—— 需切换开关偏好 ON + 系统权限 ON</li>
-  <li><strong>手动一键立即进 PiP</strong>：<strong>本期不提供</strong>——切换开关点击仅切状态；这与 iOS 标准 PiP 模式一致</li>
+ <li><strong>自动触发</strong>：按 Home 系统手势（Android）/ App 切到后台（iOS）—— 需切换开关偏好 ON + 系统权限 ON</li>
+ <li><strong>手动一键立即进 PiP</strong>：<strong>本期不提供</strong>——切换开关点击仅切状态；这与 iOS 标准 PiP 模式一致</li>
 </ul>
 
 <h4 id="sec-5-1-3">5.1.3 权限引导弹窗（系统权限关 → 用户点切换开关时弹）</h4>
@@ -767,62 +767,62 @@ flowchart TD
 <div class="mockup-section">
 <h4 style="margin-top: 0;">实物 UI · 权限引导弹窗</h4>
 <div class="mockup-row">
-  <div class="phone">
-    <div class="phone-screen">
-      <div class="status-bar"><span>9:41</span><span>●●● ▮▮</span></div>
-      <div class="backdrop">
-        <div class="center-dialog">
-          <div class="cd-close-x">×</div>
-          <div class="cd-title">画中画权限未开启</div>
-          <div class="cd-body">画中画功能需要在系统设置中开启相应权限。</div>
-          <div class="cd-actions">
-            <button class="btn-secondary">取消</button>
-            <button class="btn-primary">去设置</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+ <div class="phone">
+ <div class="phone-screen">
+ <div class="status-bar"><span>9:41</span><span>●●● ▮▮</span></div>
+ <div class="backdrop">
+ <div class="center-dialog">
+ <div class="cd-close-x">×</div>
+ <div class="cd-title">画中画权限未开启</div>
+ <div class="cd-body">画中画功能需要在系统设置中开启相应权限。</div>
+ <div class="cd-actions">
+ <button class="btn-secondary">取消</button>
+ <button class="btn-primary">去设置</button>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
 </div>
 <p class="caption">baseline §6.8.1 标准居中弹窗 + CTA-A 橙色「去设置」（baseline §3 主操作）</p>
 </div>
 
 <table>
-  <thead><tr><th>元素</th><th>内容</th></tr></thead>
-  <tbody>
-    <tr><td>标题</td><td>「画中画权限未开启」（<code>pip_perm_dialog_title</code>）</td></tr>
-    <tr><td>正文</td><td>「画中画功能需要在系统设置中开启相应权限。」（<code>pip_perm_dialog_body</code>）</td></tr>
-    <tr><td>按钮 1 次</td><td>「取消」（<code>pip_perm_dialog_cancel</code>）—— baseline 中性深色风格</td></tr>
-    <tr><td>按钮 2 主</td><td>「去设置」（<code>pip_perm_dialog_confirm</code>）—— baseline CTA-A 橙色</td></tr>
-    <tr><td>点取消</td><td>关弹窗，留在 <code>···</code> 菜单</td></tr>
-    <tr><td>点去设置</td><td>跳系统设置 PiP 权限页（Android：deeplink，OS 不支持则跳 App 详情页；iOS：Settings.app FlareFlow 项）</td></tr>
-    <tr><td>关闭 X</td><td>同「取消」</td></tr>
-  </tbody>
+ <thead><tr><th>元素</th><th>内容</th></tr></thead>
+ <tbody>
+ <tr><td>标题</td><td>「画中画权限未开启」（<code>pip_perm_dialog_title</code>）</td></tr>
+ <tr><td>正文</td><td>「画中画功能需要在系统设置中开启相应权限。」（<code>pip_perm_dialog_body</code>）</td></tr>
+ <tr><td>按钮 1 次</td><td>「取消」（<code>pip_perm_dialog_cancel</code>）—— baseline 中性深色风格</td></tr>
+ <tr><td>按钮 2 主</td><td>「去设置」（<code>pip_perm_dialog_confirm</code>）—— baseline CTA-A 橙色</td></tr>
+ <tr><td>点取消</td><td>关弹窗，留在 <code>···</code> 菜单</td></tr>
+ <tr><td>点去设置</td><td>跳系统设置 PiP 权限页（Android：deeplink，OS 不支持则跳 App 详情页；iOS：Settings.app FlareFlow 项）</td></tr>
+ <tr><td>关闭 X</td><td>同「取消」</td></tr>
+ </tbody>
 </table>
 
 <h4 id="sec-5-1-4">5.1.4 菜单文案多语言</h4>
 <table>
-  <thead><tr><th>Key</th><th>中文</th><th>建议英文</th></tr></thead>
-  <tbody>
-    <tr><td><code>pip_menu_entry</code></td><td>画中画</td><td>Picture-in-Picture</td></tr>
-    <tr><td><code>pip_perm_dialog_title</code></td><td>画中画权限未开启</td><td>Picture-in-Picture is off</td></tr>
-    <tr><td><code>pip_perm_dialog_body</code></td><td>画中画功能需要在系统设置中开启相应权限。</td><td>Enable Picture-in-Picture in System Settings to use this feature.</td></tr>
-    <tr><td><code>pip_perm_dialog_cancel</code></td><td>取消</td><td>Cancel</td></tr>
-    <tr><td><code>pip_perm_dialog_confirm</code></td><td>去设置</td><td>Open Settings</td></tr>
-  </tbody>
+ <thead><tr><th>Key</th><th>中文</th><th>建议英文</th></tr></thead>
+ <tbody>
+ <tr><td><code>pip_menu_entry</code></td><td>画中画</td><td>Picture-in-Picture</td></tr>
+ <tr><td><code>pip_perm_dialog_title</code></td><td>画中画权限未开启</td><td>Picture-in-Picture is off</td></tr>
+ <tr><td><code>pip_perm_dialog_body</code></td><td>画中画功能需要在系统设置中开启相应权限。</td><td>Enable Picture-in-Picture in System Settings to use this feature.</td></tr>
+ <tr><td><code>pip_perm_dialog_cancel</code></td><td>取消</td><td>Cancel</td></tr>
+ <tr><td><code>pip_perm_dialog_confirm</code></td><td>去设置</td><td>Open Settings</td></tr>
+ </tbody>
 </table>
 <p style="font-size: 12px; color: var(--ff-text-placeholder);">⚠️ 其它语言由本地化补齐；最终译文以法务/本地化定稿为准。</p>
 
 <h3 id="sec-5-2">5.2 PiP 窗内控件</h3>
 <p>PiP 窗内<strong>仅使用 OS PiP API 提供的系统位</strong>，不绘制自定义浮层 UI（OS PiP 多数版本仅允许 3 个系统控件位 + 默认关闭 X）。</p>
 <table>
-  <thead><tr><th>位</th><th>控件</th><th>行为</th></tr></thead>
-  <tbody>
-    <tr><td>1</td><td><strong>上一集</strong>（系统 skip prev icon）</td><td>切换到上一集；规则同 §5.3</td></tr>
-    <tr><td>2</td><td><strong>播放 / 暂停</strong>（系统 play/pause icon）</td><td>切换播放状态；暂停时 FGS 仍可维持，<strong>不触发</strong> watchdog</td></tr>
-    <tr><td>3</td><td><strong>下一集</strong>（系统 skip next icon）</td><td>切换到下一集；规则同 §5.3</td></tr>
-    <tr><td>—</td><td>关闭 X（系统默认提供）</td><td>关 PiP；按 §5.6 退出流程</td></tr>
-  </tbody>
+ <thead><tr><th>位</th><th>控件</th><th>行为</th></tr></thead>
+ <tbody>
+ <tr><td>1</td><td><strong>上一集</strong>（系统 skip prev icon）</td><td>切换到上一集；规则同 §5.3</td></tr>
+ <tr><td>2</td><td><strong>播放 / 暂停</strong>（系统 play/pause icon）</td><td>切换播放状态；暂停时前台服务仍可维持，<strong>不触发</strong> watchdog</td></tr>
+ <tr><td>3</td><td><strong>下一集</strong>（系统 skip next icon）</td><td>切换到下一集；规则同 §5.3</td></tr>
+ <tr><td>—</td><td>关闭 X（系统默认提供）</td><td>关 PiP；按 §5.6 退出流程</td></tr>
+ </tbody>
 </table>
 <blockquote class="plain-talk">PiP 浮窗里就 3 个按钮——上一集 / 暂停 / 下一集，加上右上角系统默认的关闭 X。其它任何控件（点赞、收藏、倍速、清晰度、<strong>弹幕开关</strong>等）都不放，用户回 App 全屏再操作。</blockquote>
 
@@ -830,21 +830,21 @@ flowchart TD
 
 <p><strong>音频会话策略</strong>：PiP 期间走 OS 标准音频会话（iOS <code>AVAudioSession.Category.playback</code> / Android 媒体音频流）；与其它 App 共存规则：</p>
 <ul>
-  <li><strong>PiP 进入瞬间</strong>：FlareFlow 视频音轨抢占音频焦点（与全屏播放一致），其它正在播放的音乐 App（Spotify / Apple Music 等）按系统标准被暂停或音量被压低</li>
-  <li><strong>其它 App 主动抢音频</strong>（用户在 PiP 期间打开音乐 App 等）：FlareFlow PiP <strong>视频自动暂停 + 音频静音</strong>；用户回到 FlareFlow 后<strong>手动点 PiP 内播放按钮</strong>才恢复播放，<strong>不自动恢复</strong></li>
-  <li><strong>来电 / 系统警告音</strong>：参 §5.10 OS 自动收起 PiP 流程</li>
+ <li><strong>PiP 进入瞬间</strong>：FlareFlow 视频音轨抢占音频焦点（与全屏播放一致），其它正在播放的音乐 App（Spotify / Apple Music 等）按系统标准被暂停或音量被压低</li>
+ <li><strong>其它 App 主动抢音频</strong>（用户在 PiP 期间打开音乐 App 等）：FlareFlow PiP <strong>视频自动暂停 + 音频静音</strong>；用户回到 FlareFlow 后<strong>手动点 PiP 内播放按钮</strong>才恢复播放，<strong>不自动恢复</strong></li>
+ <li><strong>来电 / 系统警告音</strong>：参 §5.10 OS 自动收起 PiP 流程</li>
 </ul>
 
 <h3 id="sec-5-3">5.3 切集与连播</h3>
 <table>
-  <thead><tr><th>项</th><th>规则</th></tr></thead>
-  <tbody>
-    <tr><td><strong>自动连播</strong></td><td>当前集播完 → 自动切下一集（Reels-style）；下一集请求按现网播放器走</td></tr>
-    <tr><td><strong>手动切集</strong></td><td>系统位上一集 / 下一集按钮直接切；<strong>首集</strong>上一集置灰；<strong>末集</strong>下一集置灰</td></tr>
-    <tr><td><strong>横竖屏切换</strong></td><td>切下一集后若 aspect ratio 与上一集不同（横↔竖），调用 OS API <code>setAspectRatio()</code> 实时更新；PiP 窗轻微动画切换尺寸</td></tr>
-    <tr><td><strong>弱网下一集失败</strong></td><td>超时阈值与现网播放器对齐；3 次重试失败 → "已播完"暂停态（不自动退 PiP）</td></tr>
-    <tr><td><strong>播放归属（任务时长 / 观看进度 / 解锁次数 / 数据上报）</strong></td><td><strong>完全沿用现网</strong>——PiP 期间播放与 App 内沉浸页播放等价（同一播放器，仅渲染容器不同）；看剧任务时长、播放进度同步、广告解锁次数等按现网逻辑累加</td></tr>
-  </tbody>
+ <thead><tr><th>项</th><th>规则</th></tr></thead>
+ <tbody>
+ <tr><td><strong>自动连播</strong></td><td>当前集播完 → 自动切下一集（Reels-style）；下一集请求按现网播放器走</td></tr>
+ <tr><td><strong>手动切集</strong></td><td>系统位上一集 / 下一集按钮直接切；<strong>首集</strong>上一集置灰；<strong>末集</strong>下一集置灰</td></tr>
+ <tr><td><strong>横竖屏切换</strong></td><td>切下一集后若 aspect ratio 与上一集不同（横↔竖），调用 OS API <code>setAspectRatio()</code> 实时更新；PiP 窗轻微动画切换尺寸</td></tr>
+ <tr><td><strong>弱网下一集失败</strong></td><td>超时阈值与现网播放器对齐；3 次重试失败 → "已播完"暂停态（不自动退 PiP）</td></tr>
+ <tr><td><strong>播放归属（任务时长 / 观看进度 / 解锁次数 / 数据上报）</strong></td><td><strong>完全沿用现网</strong>——PiP 期间播放与 App 内沉浸页播放等价（同一播放器，仅渲染容器不同）；看剧任务时长、播放进度同步、广告解锁次数等按现网逻辑累加</td></tr>
+ </tbody>
 </table>
 
 <h3 id="sec-5-4">5.4 锁定集处理（关键路径）</h3>
@@ -852,382 +852,382 @@ flowchart TD
 <div class="mockup-section">
 <h4 style="margin-top: 0;">实物 UI · PiP 锁定集封面态</h4>
 <div class="mockup-row">
-  <div class="phone">
-    <div class="phone-screen">
-      <div class="status-bar"><span>9:41</span><span>●●● ▮▮</span></div>
-      <div class="home-bar-area">
-        <div class="home-search">用户切到 Home / 其它 App</div>
-        <div class="home-grid">
-          <div class="home-cell"></div><div class="home-cell"></div><div class="home-cell"></div>
-          <div class="home-cell"></div><div class="home-cell"></div><div class="home-cell"></div>
-        </div>
-        <div class="home-tabbar"><span>App 在后台</span></div>
-      </div>
-      <!-- PiP floating overlay -->
-      <div class="pip-floating jump-target" data-jump="#sec-5-4-rules">
-        <div class="pip-cover">
-          <div class="pip-close-x">×</div>
-          <span style="opacity: 0.85;">EP. 4<br/>锁定集</span>
-          <div class="pip-tap-overlay">Tap to unlock</div>
-          <div class="pip-controls">
-            <span>⏮</span><span>⏸</span><span>⏭</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+ <div class="phone">
+ <div class="phone-screen">
+ <div class="status-bar"><span>9:41</span><span>●●● ▮▮</span></div>
+ <div class="home-bar-area">
+ <div class="home-search">用户切到 Home / 其它 App</div>
+ <div class="home-grid">
+ <div class="home-cell"></div><div class="home-cell"></div><div class="home-cell"></div>
+ <div class="home-cell"></div><div class="home-cell"></div><div class="home-cell"></div>
+ </div>
+ <div class="home-tabbar"><span>App 在后台</span></div>
+ </div>
+ <!-- PiP floating overlay -->
+ <div class="pip-floating jump-target" data-jump="#sec-5-4-rules">
+ <div class="pip-cover">
+ <div class="pip-close-x">×</div>
+ <span style="opacity: 0.85;">EP. 4<br/>锁定集</span>
+ <div class="pip-tap-overlay">Tap to unlock</div>
+ <div class="pip-controls">
+ <span>⏮</span><span>⏸</span><span>⏭</span>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
 </div>
 <p class="caption">PiP 浮窗叠在 OS 主屏上；视频停止，封面图 + "Tap to unlock" overlay；点 PiP → 回 App 待解锁页（点封面跳 §5.4 详细规则）</p>
 </div>
 
 <table id="sec-5-4-rules">
-  <thead><tr><th style="width: 24%;">项</th><th>规则</th></tr></thead>
-  <tbody>
-    <tr><td><strong>触发条件</strong></td><td>PiP 内自动连播或用户点下一集，命中当前身份下不可免费观看的集</td></tr>
-    <tr><td><strong>PiP 行为</strong></td><td>PiP 窗<strong>不退出</strong>；停止视频播放；窗内显示<strong>锁定集封面图</strong>（与现网待解锁页封面一致）+ overlay 文字 <strong>"Tap to unlock"</strong></td></tr>
-    <tr><td><strong>用户点 PiP 窗体</strong></td><td>关闭 PiP → App 切到前台 → 路由到该剧该锁定集的待解锁页</td></tr>
-    <tr><td><strong>Watchdog</strong></td><td>PiP 状态 = "暂停在锁定集封面" 持续 <strong>30 分钟</strong>未恢复播放 → 自动关闭 PiP → FGS 干净退出</td></tr>
-    <tr><td><strong>Watchdog reset 条件</strong></td><td>用户在 PiP 内点击播放 / 切到下一集 / 点 PiP 回 App，timer 立即清零</td></tr>
-    <tr><td><strong>访客触发锁定集</strong></td><td>点 PiP 回 App → <strong>先弹隐私弹窗</strong>（沿用 <a href="../../../20260513/PRD/访客模式与游客身份/">访客 PRD §7</a>）；同意后才进待解锁页</td></tr>
-  </tbody>
+ <thead><tr><th style="width: 24%;">项</th><th>规则</th></tr></thead>
+ <tbody>
+ <tr><td><strong>触发条件</strong></td><td>PiP 内自动连播或用户点下一集，命中当前身份下不可免费观看的集</td></tr>
+ <tr><td><strong>PiP 行为</strong></td><td>PiP 窗<strong>不退出</strong>；停止视频播放；窗内显示<strong>锁定集封面图</strong>（与现网待解锁页封面一致）+ overlay 文字 <strong>"Tap to unlock"</strong></td></tr>
+ <tr><td><strong>用户点 PiP 窗体</strong></td><td>关闭 PiP → App 切到前台 → 路由到该剧该锁定集的待解锁页</td></tr>
+ <tr><td><strong>Watchdog</strong></td><td>PiP 状态 = "暂停在锁定集封面" 持续 <strong>30 分钟</strong>未恢复播放 → 自动关闭 PiP →前台服务干净退出</td></tr>
+ <tr><td><strong>Watchdog reset 条件</strong></td><td>用户在 PiP 内点击播放 / 切到下一集 / 点 PiP 回 App，timer 立即清零</td></tr>
+ <tr><td><strong>访客触发锁定集</strong></td><td>点 PiP 回 App → <strong>先弹隐私弹窗</strong>（沿用 <a href="../../../20260513/PRD/访客模式与游客身份/">访客 PRD §7</a>）；同意后才进待解锁页</td></tr>
+ </tbody>
 </table>
 
 <p><strong>身份动态变化处理</strong>：PiP 期间用户身份可能动态变化（最典型场景：VIP 订阅期间过期）。客户端在<strong>每次切集判定时实时查身份</strong>，按当下身份重新判定该集是否锁定：</p>
 <ul>
-  <li><strong>VIP 期间进 PiP → 期间 VIP 过期</strong> → 切到下一 VIP 专属集时按本节锁定集策略（PiP 暂停在封面 + "Tap to unlock"）</li>
-  <li><strong>普通用户期间通过其它路径升级 VIP</strong>（如另设备完成订阅且服务端同步） → 切集时按 <span class="id-tag loggedin">LOGGED_IN</span> VIP 身份判定，原本可能锁定的集现可正常播</li>
-  <li><strong>实时身份依据</strong>：客户端缓存的最新身份状态（与现网播放页判定同源）；如服务端身份变化但本地未同步，按本地判定，下次刷新后再一致</li>
+ <li><strong>VIP 期间进 PiP → 期间 VIP 过期</strong> → 切到下一 VIP 专属集时按本节锁定集策略（PiP 暂停在封面 + "Tap to unlock"）</li>
+ <li><strong>普通用户期间通过其它路径升级 VIP</strong>（如另设备完成订阅且服务端同步） → 切集时按 <span class="id-tag loggedin">LOGGED_IN</span> VIP 身份判定，原本可能锁定的集现可正常播</li>
+ <li><strong>实时身份依据</strong>：客户端缓存的最新身份状态（与现网播放页判定同源）；如服务端身份变化但本地未同步，按本地判定，下次刷新后再一致</li>
 </ul>
 
 <h3 id="sec-5-5">5.5 广告交互（全部豁免）</h3>
 <table>
-  <thead><tr><th>广告类型</th><th>PiP 期间行为</th><th>备注</th></tr></thead>
-  <tbody>
-    <tr><td><strong>切集插页</strong> <code>immersion_free_int</code></td><td><strong>豁免，不弹</strong></td><td>与 <a href="../../../20260520/PRD/开屏与免费集插页AB/">0520 AB PRD §5.2.5</a> 一致；<strong>无需改动 0520</strong></td></tr>
-    <tr><td><strong>开屏广告</strong> <code>app_open</code></td><td><strong>不可能触发</strong></td><td>PiP 期间 App 不在前台</td></tr>
-    <tr><td><strong>激励广告</strong></td><td><strong>不主动触发</strong></td><td>PiP 窗系统位不提供激励入口</td></tr>
-    <tr><td><strong>运营开屏 / 闪屏推荐</strong></td><td><strong>不可能触发</strong></td><td>同开屏</td></tr>
-    <tr><td><strong>退出沉浸页挽留</strong></td><td><strong>不触发</strong></td><td>进 PiP 不等同退出沉浸页</td></tr>
-  </tbody>
+ <thead><tr><th>广告类型</th><th>PiP 期间行为</th><th>备注</th></tr></thead>
+ <tbody>
+ <tr><td><strong>切集插页</strong> <code>immersion_free_int</code></td><td><strong>豁免，不弹</strong></td><td>与 <a href="../../../20260520/PRD/开屏与免费集插页AB/">0520 AB PRD §5.2.5</a> 一致；<strong>无需改动 0520</strong></td></tr>
+ <tr><td><strong>开屏广告</strong> <code>app_open</code></td><td><strong>不可能触发</strong></td><td>PiP 期间 App 不在前台</td></tr>
+ <tr><td><strong>激励广告</strong></td><td><strong>不主动触发</strong></td><td>PiP 窗系统位不提供激励入口</td></tr>
+ <tr><td><strong>运营开屏 / 闪屏推荐</strong></td><td><strong>不可能触发</strong></td><td>同开屏</td></tr>
+ <tr><td><strong>退出沉浸页挽留</strong></td><td><strong>不触发</strong></td><td>进 PiP 不等同退出沉浸页</td></tr>
+ </tbody>
 </table>
 
 <h3 id="sec-5-6">5.6 关闭与退出 PiP</h3>
 <table>
-  <thead><tr><th>触发</th><th>行为</th></tr></thead>
-  <tbody>
-    <tr><td>用户点关闭 X</td><td>视频停止 → PiP 收起 → App 仍在后台（不主动前台）→ FGS 退出</td></tr>
-    <tr><td>用户点 PiP 窗体（非控件区）</td><td>关闭 PiP → App 切到前台并恢复沉浸播放页全屏；若是锁定集封面则进待解锁页</td></tr>
-    <tr><td>用户 swipe PiP 离屏（Android）</td><td>等同关闭 X</td></tr>
-    <tr><td>Watchdog 30min 触发</td><td>等同关闭 X</td></tr>
-    <tr><td>系统压力 / 强制关闭</td><td>视为正常退出；不弹提示</td></tr>
-    <tr><td><strong>推送 / Deep link 触发 App 切前台</strong></td><td><strong>立即关闭当前 PiP</strong>（视频停止）→ App 切前台 → 按推送 deeplink 进<strong>目标剧/集</strong>（不是恢复原 PiP 沉浸页）；与"用户点 PiP 窗体"路径等价但目标位置由 deeplink 决定</td></tr>
-  </tbody>
+ <thead><tr><th>触发</th><th>行为</th></tr></thead>
+ <tbody>
+ <tr><td>用户点关闭 X</td><td>视频停止 → PiP 收起 → App 仍在后台（不主动前台）→前台服务退出</td></tr>
+ <tr><td>用户点 PiP 窗体（非控件区）</td><td>关闭 PiP → App 切到前台并恢复沉浸播放页全屏；若是锁定集封面则进待解锁页</td></tr>
+ <tr><td>用户 swipe PiP 离屏（Android）</td><td>等同关闭 X</td></tr>
+ <tr><td>Watchdog 30min 触发</td><td>等同关闭 X</td></tr>
+ <tr><td>系统压力 / 强制关闭</td><td>视为正常退出；不弹提示</td></tr>
+ <tr><td><strong>推送 / Deep link 触发 App 切前台</strong></td><td><strong>立即关闭当前 PiP</strong>（视频停止）→ App 切前台 → 按推送 deeplink 进<strong>目标剧/集</strong>（不是恢复原 PiP 沉浸页）；与"用户点 PiP 窗体"路径等价但目标位置由 deeplink 决定</td></tr>
+ </tbody>
 </table>
 
 <h3 id="sec-5-7">5.7 横屏剧支持</h3>
 <table>
-  <thead><tr><th style="width: 28%;">项</th><th>规则</th></tr></thead>
-  <tbody>
-    <tr><td><strong>识别方式</strong></td><td>沿用现网每集元信息中的 orientation 字段</td></tr>
-    <tr><td><strong>进入 PiP 时</strong></td><td>客户端按<strong>当前集实际 aspect ratio</strong> 调用 OS API；<strong>具体比例完全交 OS 处理</strong></td></tr>
-    <tr><td><strong>连播切横↔竖时</strong></td><td>OS API <code>setPictureInPictureParams</code> 实时更新；PiP 窗轻微动画切换</td></tr>
-    <tr><td><strong>锁定集封面适配</strong></td><td>按集 orientation 选对应封面 + overlay 适配</td></tr>
-    <tr><td><strong>手机自动旋转 vs PiP</strong></td><td>PiP 窗形状由<strong>内容 orientation</strong> 决定，<strong>不</strong>受手机旋转影响</td></tr>
-    <tr><td><strong>超出 OS 比例限制</strong></td><td>客户端 clamp 到 OS 支持范围（iOS 17+ 限制 0.418-2.39；Android 12+ 类似），策略由研发自决</td></tr>
-  </tbody>
+ <thead><tr><th style="width: 28%;">项</th><th>规则</th></tr></thead>
+ <tbody>
+ <tr><td><strong>识别方式</strong></td><td>沿用现网每集元信息中的 orientation 字段</td></tr>
+ <tr><td><strong>进入 PiP 时</strong></td><td>客户端按<strong>当前集实际 aspect ratio</strong> 调用 OS API；<strong>具体比例完全交 OS 处理</strong></td></tr>
+ <tr><td><strong>连播切横↔竖时</strong></td><td>OS API <code>setPictureInPictureParams</code> 实时更新；PiP 窗轻微动画切换</td></tr>
+ <tr><td><strong>锁定集封面适配</strong></td><td>按集 orientation 选对应封面 + overlay 适配</td></tr>
+ <tr><td><strong>手机自动旋转 vs PiP</strong></td><td>PiP 窗形状由<strong>内容 orientation</strong> 决定，<strong>不</strong>受手机旋转影响</td></tr>
+ <tr><td><strong>超出 OS 比例限制</strong></td><td>客户端 clamp 到 OS 支持范围（iOS 17+ 限制 0.418-2.39；Android 12+ 类似），策略由研发自决</td></tr>
+ </tbody>
 </table>
 
 <h3 id="sec-5-8">5.8 状态机</h3>
 <table>
-  <thead><tr><th>状态</th><th>表现</th></tr></thead>
-  <tbody>
-    <tr><td>进入中</td><td>OS 系统过渡动画（约 300ms）；不渲染自定义 loading</td></tr>
-    <tr><td>正常播放</td><td>PiP 窗视频播放中；3 个系统位控件可用</td></tr>
-    <tr><td>手动暂停</td><td>用户点暂停 → 视频暂停；FGS 仍可维持；<strong>不</strong>触发 watchdog</td></tr>
-    <tr><td>锁定集封面态</td><td>显示封面 + "Tap to unlock"；watchdog timer 开始</td></tr>
-    <tr><td>切集中</td><td>短暂 spinner；新集加载完毕继续播放</td></tr>
-    <tr><td>已播完末集</td><td>暂停态显示"已播完"</td></tr>
-    <tr><td>退出中</td><td>OS 系统过渡动画；FGS 退出</td></tr>
-  </tbody>
+ <thead><tr><th>状态</th><th>表现</th></tr></thead>
+ <tbody>
+ <tr><td>进入中</td><td>OS 系统过渡动画（约 300ms）；不渲染自定义 loading</td></tr>
+ <tr><td>正常播放</td><td>PiP 窗视频播放中；3 个系统位控件可用</td></tr>
+ <tr><td>手动暂停</td><td>用户点暂停 → 视频暂停；前台服务 仍可维持；<strong>不</strong>触发 watchdog</td></tr>
+ <tr><td>锁定集封面态</td><td>显示封面 + "Tap to unlock"；watchdog timer 开始</td></tr>
+ <tr><td>切集中</td><td>短暂 spinner；新集加载完毕继续播放</td></tr>
+ <tr><td>已播完末集</td><td>暂停态显示"已播完"</td></tr>
+ <tr><td>退出中</td><td>OS 系统过渡动画；前台服务 退出</td></tr>
+ </tbody>
 </table>
 
 <h3 id="sec-5-9">5.9 验收标准</h3>
 <pre class="gherkin"><span class="kw">Feature:</span> 画中画
 
 <span class="scenario">Scenario:</span> Android 按 Home 自动进入 PiP
-  <span class="kw">Given</span> 用户在沉浸播放页正在播放免费集
-  <span class="kw">And</span> 用户身份为 GUEST 或 LOGGED_IN
-  <span class="kw">And</span> 用户切换开关偏好为 ON 且 系统画中画权限已开启
-  <span class="kw">When</span> 用户按 Home 键
-  <span class="kw">Then</span> 应进入 PiP 浮窗
-  <span class="kw">And</span> 视频应继续播放
-  <span class="kw">And</span> 前台服务（FGS）应继续维持
+ <span class="kw">Given</span> 用户在沉浸播放页正在播放免费集
+ <span class="kw">And</span> 用户身份为 GUEST 或 LOGGED_IN
+ <span class="kw">And</span> 用户切换开关偏好为 ON 且 系统画中画权限已开启
+ <span class="kw">When</span> 用户按 Home 键
+ <span class="kw">Then</span> 应进入 PiP 浮窗
+ <span class="kw">And</span> 视频应继续播放
+ <span class="kw">And</span> 前台服务应继续维持
 
 <span class="scenario">Scenario:</span> iOS App 切后台自动进入 PiP
-  <span class="kw">Given</span> 用户在沉浸播放页正在播放免费集
-  <span class="kw">And</span> 用户切换开关偏好为 ON 且 系统 PiP 权限开
-  <span class="kw">When</span> 用户切换到其它 App 或主屏
-  <span class="kw">Then</span> 应调用 AVPictureInPictureController.startPictureInPicture
-  <span class="kw">And</span> 应进入 PiP 浮窗
+ <span class="kw">Given</span> 用户在沉浸播放页正在播放免费集
+ <span class="kw">And</span> 用户切换开关偏好为 ON 且 系统 PiP 权限开
+ <span class="kw">When</span> 用户切换到其它 App 或主屏
+ <span class="kw">Then</span> 应调用 AVPictureInPictureController.startPictureInPicture
+ <span class="kw">And</span> 应进入 PiP 浮窗
 
 <span class="scenario">Scenario:</span> PiP 内自动连播下一集
-  <span class="kw">Given</span> 用户正在 PiP 内观看第 N 集
-  <span class="kw">And</span> 第 N+1 集为免费集
-  <span class="kw">When</span> 第 N 集播完
-  <span class="kw">Then</span> 应自动开始播放第 N+1 集
+ <span class="kw">Given</span> 用户正在 PiP 内观看第 N 集
+ <span class="kw">And</span> 第 N+1 集为免费集
+ <span class="kw">When</span> 第 N 集播完
+ <span class="kw">Then</span> 应自动开始播放第 N+1 集
 
 <span class="scenario">Scenario:</span> PiP 遇到锁定集暂停在封面
-  <span class="kw">Given</span> 用户正在 PiP 内观看第 N 集
-  <span class="kw">And</span> 第 N+1 集为锁定集
-  <span class="kw">When</span> 第 N 集播完触发自动连播
-  <span class="kw">Then</span> PiP 窗应停止视频播放
-  <span class="kw">And</span> 应显示第 N+1 集的封面图
-  <span class="kw">And</span> 应叠加 "Tap to unlock" overlay
-  <span class="kw">And</span> PiP 窗不应自动退出
+ <span class="kw">Given</span> 用户正在 PiP 内观看第 N 集
+ <span class="kw">And</span> 第 N+1 集为锁定集
+ <span class="kw">When</span> 第 N 集播完触发自动连播
+ <span class="kw">Then</span> PiP 窗应停止视频播放
+ <span class="kw">And</span> 应显示第 N+1 集的封面图
+ <span class="kw">And</span> 应叠加 "Tap to unlock" overlay
+ <span class="kw">And</span> PiP 窗不应自动退出
 
 <span class="scenario">Scenario:</span> 锁定集场景下用户点 PiP 回 App
-  <span class="kw">Given</span> 用户的 PiP 当前显示锁定集封面
-  <span class="kw">When</span> 用户点击 PiP 窗体
-  <span class="kw">Then</span> PiP 应关闭
-  <span class="kw">And</span> App 应切到前台
-  <span class="kw">And</span> 应路由到该剧该锁定集的待解锁页
+ <span class="kw">Given</span> 用户的 PiP 当前显示锁定集封面
+ <span class="kw">When</span> 用户点击 PiP 窗体
+ <span class="kw">Then</span> PiP 应关闭
+ <span class="kw">And</span> App 应切到前台
+ <span class="kw">And</span> 应路由到该剧该锁定集的待解锁页
 
 <span class="scenario">Scenario:</span> Watchdog 30 分钟自动关闭 PiP
-  <span class="kw">Given</span> 用户的 PiP 暂停在锁定集封面已达 30 分钟
-  <span class="kw">When</span> 30 分钟 watchdog 触发
-  <span class="kw">Then</span> PiP 应自动关闭
-  <span class="kw">And</span> 前台服务应退出
+ <span class="kw">Given</span> 用户的 PiP 暂停在锁定集封面已达 30 分钟
+ <span class="kw">When</span> 30 分钟 watchdog 触发
+ <span class="kw">Then</span> PiP 应自动关闭
+ <span class="kw">And</span> 前台服务应退出
 
 <span class="scenario">Scenario:</span> VISITOR 在 PiP 中遇到锁定集
-  <span class="kw">Given</span> 用户为 VISITOR 且在 PiP 内
-  <span class="kw">When</span> 切到锁定集 用户点 PiP 回 App
-  <span class="kw">Then</span> 应先弹隐私弹窗
-  <span class="kw">And</span> 不应直接进入待解锁页
+ <span class="kw">Given</span> 用户为 VISITOR 且在 PiP 内
+ <span class="kw">When</span> 切到锁定集 用户点 PiP 回 App
+ <span class="kw">Then</span> 应先弹隐私弹窗
+ <span class="kw">And</span> 不应直接进入待解锁页
 
 <span class="scenario">Scenario:</span> 切集插页在 PiP 期间豁免
-  <span class="kw">Given</span> 用户的 PiP 正在播放免费集
-  <span class="kw">And</span> 0520 AB 实验插页参数为 1 且本集应弹插页
-  <span class="kw">When</span> 集加载成功
-  <span class="kw">Then</span> 不应触发本需求定义的全屏插页
+ <span class="kw">Given</span> 用户的 PiP 正在播放免费集
+ <span class="kw">And</span> 0520 AB 实验插页参数为 1 且本集应弹插页
+ <span class="kw">When</span> 集加载成功
+ <span class="kw">Then</span> 不应触发本需求定义的全屏插页
 
 <span class="scenario">Scenario:</span> 横屏剧进入 PiP 与切横竖
-  <span class="kw">Given</span> 用户在沉浸播放页观看一部横屏剧
-  <span class="kw">When</span> 用户触发 PiP
-  <span class="kw">Then</span> PiP 窗应按横屏剧实际 aspect ratio 显示
-  <span class="kw">When</span> 切到一集竖屏剧
-  <span class="kw">Then</span> PiP 窗 aspect ratio 应平滑切换为竖屏比
+ <span class="kw">Given</span> 用户在沉浸播放页观看一部横屏剧
+ <span class="kw">When</span> 用户触发 PiP
+ <span class="kw">Then</span> PiP 窗应按横屏剧实际 aspect ratio 显示
+ <span class="kw">When</span> 切到一集竖屏剧
+ <span class="kw">Then</span> PiP 窗 aspect ratio 应平滑切换为竖屏比
 
 <span class="scenario">Scenario:</span> 系统权限关时菜单切换开关显示 OFF 置灰
-  <span class="kw">Given</span> 系统画中画权限被关闭
-  <span class="kw">When</span> 用户打开沉浸播放页右上角 ··· 菜单
-  <span class="kw">Then</span> 画中画切换开关应显示 OFF 并置灰
+ <span class="kw">Given</span> 系统画中画权限被关闭
+ <span class="kw">When</span> 用户打开沉浸播放页右上角 ··· 菜单
+ <span class="kw">Then</span> 画中画切换开关应显示 OFF 并置灰
 
 <span class="scenario">Scenario:</span> 系统权限关时点切换开关弹引导弹窗
-  <span class="kw">Given</span> 系统画中画权限被关闭
-  <span class="kw">When</span> 用户点击切换开关
-  <span class="kw">Then</span> 应弹标准居中权限引导弹窗
-  <span class="kw">And</span> 弹窗标题为 画中画权限未开启
-  <span class="kw">And</span> 含 取消 与 去设置 两个按钮
-  <span class="kw">And</span> 切换开关状态不应变化
+ <span class="kw">Given</span> 系统画中画权限被关闭
+ <span class="kw">When</span> 用户点击切换开关
+ <span class="kw">Then</span> 应弹标准居中权限引导弹窗
+ <span class="kw">And</span> 弹窗标题为 画中画权限未开启
+ <span class="kw">And</span> 含 取消 与 去设置 两个按钮
+ <span class="kw">And</span> 切换开关状态不应变化
 
 <span class="scenario">Scenario:</span> 权限引导弹窗点去设置跳系统设置
-  <span class="kw">Given</span> 权限引导弹窗已弹出
-  <span class="kw">When</span> 用户点击 去设置
-  <span class="kw">Then</span> 应 deeplink 跳系统设置 PiP 权限页 或 App 详情页
+ <span class="kw">Given</span> 权限引导弹窗已弹出
+ <span class="kw">When</span> 用户点击 去设置
+ <span class="kw">Then</span> 应 deeplink 跳系统设置 PiP 权限页 或 App 详情页
 
 <span class="scenario">Scenario:</span> 切换开关 ON 时用户点击翻为 OFF 并持久化
-  <span class="kw">Given</span> 系统 PiP 权限开 且 用户切换开关显示 ON
-  <span class="kw">When</span> 用户点击切换开关
-  <span class="kw">Then</span> 切换开关应翻为 OFF
-  <span class="kw">And</span> 用户偏好应被持久化为 OFF
-  <span class="kw">And</span> 不应立即进入 PiP
+ <span class="kw">Given</span> 系统 PiP 权限开 且 用户切换开关显示 ON
+ <span class="kw">When</span> 用户点击切换开关
+ <span class="kw">Then</span> 切换开关应翻为 OFF
+ <span class="kw">And</span> 用户偏好应被持久化为 OFF
+ <span class="kw">And</span> 不应立即进入 PiP
 
 <span class="scenario">Scenario:</span> 用户主动关切换开关后按 Home 不进 PiP
-  <span class="kw">Given</span> 用户在沉浸播放页正在播放
-  <span class="kw">And</span> 系统 PiP 权限开 但 用户切换开关偏好为 OFF
-  <span class="kw">When</span> 用户按 Home 键
-  <span class="kw">Then</span> 不应进入 PiP
-  <span class="kw">And</span> 应沿用现网 App 退后台逻辑
+ <span class="kw">Given</span> 用户在沉浸播放页正在播放
+ <span class="kw">And</span> 系统 PiP 权限开 但 用户切换开关偏好为 OFF
+ <span class="kw">When</span> 用户按 Home 键
+ <span class="kw">Then</span> 不应进入 PiP
+ <span class="kw">And</span> 应沿用现网 App 退后台逻辑
 
 <span class="scenario">Scenario:</span> 用户首次使用默认偏好 ON 按 Home 自动进 PiP
-  <span class="kw">Given</span> 用户从未触碰过切换开关 偏好为默认 ON
-  <span class="kw">And</span> 系统 PiP 权限开 且 正在播放免费集
-  <span class="kw">When</span> 用户按 Home 键
-  <span class="kw">Then</span> 应进入 PiP 浮窗
+ <span class="kw">Given</span> 用户从未触碰过切换开关 偏好为默认 ON
+ <span class="kw">And</span> 系统 PiP 权限开 且 正在播放免费集
+ <span class="kw">When</span> 用户按 Home 键
+ <span class="kw">Then</span> 应进入 PiP 浮窗
 
 <span class="scenario">Scenario:</span> 弱网下一集失败保持已播完态
-  <span class="kw">Given</span> 用户的 PiP 正在播放且网络弱
-  <span class="kw">When</span> 自动连播触发下一集请求 3 次重试均失败
-  <span class="kw">Then</span> PiP 应保持当前集 已播完 暂停态
-  <span class="kw">And</span> 不应自动退出 PiP
+ <span class="kw">Given</span> 用户的 PiP 正在播放且网络弱
+ <span class="kw">When</span> 自动连播触发下一集请求 3 次重试均失败
+ <span class="kw">Then</span> PiP 应保持当前集 已播完 暂停态
+ <span class="kw">And</span> 不应自动退出 PiP
 
 <span class="scenario">Scenario:</span> 正在播全屏广告时按 Home 不进 PiP
-  <span class="kw">Given</span> 用户的 开屏 / 待解锁页 / 激励 等全屏广告正在播
-  <span class="kw">When</span> 用户按 Home 键
-  <span class="kw">Then</span> 不应进入 PiP
+ <span class="kw">Given</span> 用户的 开屏 / 待解锁页 / 激励 等全屏广告正在播
+ <span class="kw">When</span> 用户按 Home 键
+ <span class="kw">Then</span> 不应进入 PiP
 
 <span class="scenario">Scenario:</span> 用户点关闭 X 退出 PiP
-  <span class="kw">Given</span> 用户的 PiP 正在播放
-  <span class="kw">When</span> 用户点击 PiP 右上角关闭 X
-  <span class="kw">Then</span> 视频应停止播放
-  <span class="kw">And</span> 前台服务应退出
-  <span class="kw">And</span> App 不应主动切到前台
+ <span class="kw">Given</span> 用户的 PiP 正在播放
+ <span class="kw">When</span> 用户点击 PiP 右上角关闭 X
+ <span class="kw">Then</span> 视频应停止播放
+ <span class="kw">And</span> 前台服务应退出
+ <span class="kw">And</span> App 不应主动切到前台
 
 <span class="scenario">Scenario:</span> PiP 期间强制不显示弹幕
-  <span class="kw">Given</span> 用户在沉浸播放页正在播放免费集
-  <span class="kw">And</span> 用户全屏页弹幕开关为 ON
-  <span class="kw">When</span> 用户进入 PiP
-  <span class="kw">Then</span> PiP 窗内不应渲染任何弹幕
-  <span class="kw">When</span> 用户点 PiP 回 App 全屏
-  <span class="kw">Then</span> 全屏播放应恢复显示弹幕
-  <span class="kw">And</span> 用户弹幕开关设置应保持为 ON 未被改写
+ <span class="kw">Given</span> 用户在沉浸播放页正在播放免费集
+ <span class="kw">And</span> 用户全屏页弹幕开关为 ON
+ <span class="kw">When</span> 用户进入 PiP
+ <span class="kw">Then</span> PiP 窗内不应渲染任何弹幕
+ <span class="kw">When</span> 用户点 PiP 回 App 全屏
+ <span class="kw">Then</span> 全屏播放应恢复显示弹幕
+ <span class="kw">And</span> 用户弹幕开关设置应保持为 ON 未被改写
 
 <span class="scenario">Scenario:</span> 用户双击 PiP 放大缩小不影响业务逻辑
-  <span class="kw">Given</span> 用户的 PiP 正在播放
-  <span class="kw">When</span> 用户双击 PiP 浮窗使其放大或缩小
-  <span class="kw">Then</span> 视频应继续不中断播放
-  <span class="kw">And</span> 连播 / 锁定集策略 / watchdog 等业务逻辑应不受影响
+ <span class="kw">Given</span> 用户的 PiP 正在播放
+ <span class="kw">When</span> 用户双击 PiP 浮窗使其放大或缩小
+ <span class="kw">Then</span> 视频应继续不中断播放
+ <span class="kw">And</span> 连播 / 锁定集策略 / watchdog 等业务逻辑应不受影响
 
 <span class="scenario">Scenario:</span> 用户拖动 PiP 改变位置不影响播放
-  <span class="kw">Given</span> 用户的 PiP 正在播放
-  <span class="kw">When</span> 用户拖动 PiP 浮窗到屏幕另一位置
-  <span class="kw">Then</span> 视频应继续播放
-  <span class="kw">And</span> 切集与连播逻辑应不受影响
+ <span class="kw">Given</span> 用户的 PiP 正在播放
+ <span class="kw">When</span> 用户拖动 PiP 浮窗到屏幕另一位置
+ <span class="kw">Then</span> 视频应继续播放
+ <span class="kw">And</span> 切集与连播逻辑应不受影响
 
 <span class="scenario">Scenario:</span> PiP 期间 VIP 过期后下一集判定为锁定
-  <span class="kw">Given</span> 用户为 VIP 在 PiP 内观看第 N 集
-  <span class="kw">And</span> VIP 订阅在播放期间过期
-  <span class="kw">When</span> 自动连播触发第 N+1 集判定
-  <span class="kw">And</span> 第 N+1 集为 VIP 专属
-  <span class="kw">Then</span> PiP 应暂停在第 N+1 集封面
-  <span class="kw">And</span> 应显示 Tap to unlock overlay
+ <span class="kw">Given</span> 用户为 VIP 在 PiP 内观看第 N 集
+ <span class="kw">And</span> VIP 订阅在播放期间过期
+ <span class="kw">When</span> 自动连播触发第 N+1 集判定
+ <span class="kw">And</span> 第 N+1 集为 VIP 专属
+ <span class="kw">Then</span> PiP 应暂停在第 N+1 集封面
+ <span class="kw">And</span> 应显示 Tap to unlock overlay
 
 <span class="scenario">Scenario:</span> 推送 Deep link 触发立即关闭当前 PiP 跳目标
-  <span class="kw">Given</span> 用户的 PiP 正在播放剧 A 第 N 集
-  <span class="kw">When</span> 用户点击 FCM 推送 跳到剧 B 第 M 集 Deep link
-  <span class="kw">Then</span> 当前 PiP 应立即关闭 视频停止
-  <span class="kw">And</span> App 应切到前台
-  <span class="kw">And</span> 应进入剧 B 第 M 集 不是恢复剧 A 沉浸页
+ <span class="kw">Given</span> 用户的 PiP 正在播放剧 A 第 N 集
+ <span class="kw">When</span> 用户点击 FCM 推送 跳到剧 B 第 M 集 Deep link
+ <span class="kw">Then</span> 当前 PiP 应立即关闭 视频停止
+ <span class="kw">And</span> App 应切到前台
+ <span class="kw">And</span> 应进入剧 B 第 M 集 不是恢复剧 A 沉浸页
 
 <span class="scenario">Scenario:</span> PiP 期间播放计入看剧任务时长
-  <span class="kw">Given</span> 用户在 PiP 内观看免费集
-  <span class="kw">And</span> 现网看剧任务条件为累计观看 30 分钟
-  <span class="kw">When</span> 用户在 PiP 内观看 20 分钟 然后回 App 全屏观看 10 分钟
-  <span class="kw">Then</span> 任务进度应累计为 30 分钟
-  <span class="kw">And</span> 应满足任务完成条件
+ <span class="kw">Given</span> 用户在 PiP 内观看免费集
+ <span class="kw">And</span> 现网看剧任务条件为累计观看 30 分钟
+ <span class="kw">When</span> 用户在 PiP 内观看 20 分钟 然后回 App 全屏观看 10 分钟
+ <span class="kw">Then</span> 任务进度应累计为 30 分钟
+ <span class="kw">And</span> 应满足任务完成条件
 
 <span class="scenario">Scenario:</span> 其它 App 抢音频时 PiP 自动暂停且不自动恢复
-  <span class="kw">Given</span> 用户的 PiP 正在播放有声音的视频
-  <span class="kw">When</span> 用户切到另一 App 打开音乐播放
-  <span class="kw">Then</span> PiP 视频应自动暂停且音频静音
-  <span class="kw">When</span> 用户回到 FlareFlow
-  <span class="kw">Then</span> PiP 不应自动恢复播放
-  <span class="kw">And</span> 用户需点 PiP 内播放按钮才恢复</pre>
+ <span class="kw">Given</span> 用户的 PiP 正在播放有声音的视频
+ <span class="kw">When</span> 用户切到另一 App 打开音乐播放
+ <span class="kw">Then</span> PiP 视频应自动暂停且音频静音
+ <span class="kw">When</span> 用户回到 FlareFlow
+ <span class="kw">Then</span> PiP 不应自动恢复播放
+ <span class="kw">And</span> 用户需点 PiP 内播放按钮才恢复</pre>
 
 <h3 id="sec-5-10">5.10 OS 标准交互（App 不干预）</h3>
 <p>PiP 浮窗的<strong>尺寸、位置、缩放、显隐</strong>由 iOS / Android 系统自带的 PiP API 管控；App <strong>不接管</strong>任何 OS 原生手势。下表罗列<strong>已知</strong> OS 行为以便研发 / QA 对齐预期，<strong>App 业务逻辑（连播、锁定集策略、watchdog 等）不受这些尺寸/位置变化影响</strong>。</p>
 <table>
-  <thead><tr><th>OS 手势 / 事件</th><th>OS 行为</th><th>App 是否干预</th></tr></thead>
-  <tbody>
-    <tr><td><strong>双击 PiP 浮窗</strong></td><td>OS 切换 PiP 尺寸（放大 ↔ 缩小，档位由系统决定）</td><td><strong>否</strong>——继续正常播放</td></tr>
-    <tr><td><strong>拖动 PiP 浮窗</strong></td><td>OS 改变 PiP 位置（吸附屏幕角落或拖到的位置）</td><td><strong>否</strong></td></tr>
-    <tr><td><strong>单击 PiP 浮窗 · 控件区</strong></td><td>OS 显示 / 隐藏上一集 / 暂停 / 下一集三个控件</td><td><strong>否</strong></td></tr>
-    <tr><td><strong>单击 PiP 浮窗 · 非控件区</strong></td><td>App 处理：关 PiP + 切前台 + 路由（详见 §5.6）</td><td><strong>是</strong></td></tr>
-    <tr><td><strong>swipe PiP 离屏</strong>（Android）</td><td>关 PiP（详见 §5.6）</td><td>App 视为正常退出</td></tr>
-    <tr><td><strong>OS 自动收起 PiP</strong>（来电、低内存、系统强杀等）</td><td>系统强制关 PiP</td><td>App 视同正常退出，下次回 App 按现网恢复进度</td></tr>
-  </tbody>
+ <thead><tr><th>OS 手势 / 事件</th><th>OS 行为</th><th>App 是否干预</th></tr></thead>
+ <tbody>
+ <tr><td><strong>双击 PiP 浮窗</strong></td><td>OS 切换 PiP 尺寸（放大 ↔ 缩小，档位由系统决定）</td><td><strong>否</strong>——继续正常播放</td></tr>
+ <tr><td><strong>拖动 PiP 浮窗</strong></td><td>OS 改变 PiP 位置（吸附屏幕角落或拖到的位置）</td><td><strong>否</strong></td></tr>
+ <tr><td><strong>单击 PiP 浮窗 · 控件区</strong></td><td>OS 显示 / 隐藏上一集 / 暂停 / 下一集三个控件</td><td><strong>否</strong></td></tr>
+ <tr><td><strong>单击 PiP 浮窗 · 非控件区</strong></td><td>App 处理：关 PiP + 切前台 + 路由（详见 §5.6）</td><td><strong>是</strong></td></tr>
+ <tr><td><strong>swipe PiP 离屏</strong>（Android）</td><td>关 PiP（详见 §5.6）</td><td>App 视为正常退出</td></tr>
+ <tr><td><strong>OS 自动收起 PiP</strong>（来电、低内存、系统强杀等）</td><td>系统强制关 PiP</td><td>App 视同正常退出，下次回 App 按现网恢复进度</td></tr>
+ </tbody>
 </table>
 
 <!-- §6 -->
 <h2 id="sec-6">6. 影响范围</h2>
 <table>
-  <thead><tr><th>模块</th><th>影响</th></tr></thead>
-  <tbody>
-    <tr><td>系统支持范围</td><td><strong>Android 8.0 (API 26)+ / iOS 14.0+</strong>；低于此版本设备降级到现网退后台</td></tr>
-    <tr><td>沉浸播放页</td><td>右上角 <code>···</code> 菜单加「画中画」<strong>切换开关项</strong>；切换开关偏好持久化（本地存储）；进/退出 PiP 状态管理；锁定集封面渲染；<strong>PiP 期间弹幕渲染关闭 / 回全屏恢复</strong></td></tr>
-    <tr><td>沉浸播放器（核心）</td><td>接入 iOS <code>AVPictureInPictureController</code> + Android <code>PIP Mode API</code>；横竖屏 aspect ratio 动态切换；3 个系统位控件</td></tr>
-    <tr><td>前台服务（Android FGS）</td><td>与 PiP 生命周期绑定；PiP 关闭时 FGS 退出；<strong>关闭瞬间是否需要短暂续命由研发深化</strong></td></tr>
-    <tr><td>iOS 配置</td><td>Info.plist 声明 PiP 相关 Background Modes + <code>AVAudioSession.Category.playback</code> 配置由研发深化</td></tr>
-    <tr><td>待解锁页</td><td>PiP "Tap to unlock" deeplink（沿用现网）</td></tr>
-    <tr><td><strong>新增 UI 组件</strong></td><td><strong>权限引导弹窗</strong>（按 baseline v1.1 §6.8.1 标准居中弹窗实现）—— 详见 §5.1.3</td></tr>
-    <tr><td>系统设置 deeplink</td><td>Android 跳 PiP 权限设置页 / iOS 跳 Settings.app FlareFlow 项 —— 研发对齐</td></tr>
-    <tr><td><a href="../../../20260520/PRD/开屏与免费集插页AB/">0520 AB 插页实验</a></td><td>§5.2.5 已豁免 PiP，<strong>无新增改动</strong></td></tr>
-    <tr><td><a href="../../../20260514/PRD/Android-FCM高优先级透传唤醒与常驻通知/">0514 Android-FCM + 常驻通知</a></td><td>PiP 为其 FGS 提供合规依赖；<strong>0514 PRD 文字无需改</strong></td></tr>
-    <tr><td><a href="../../../20260513/PRD/访客模式与游客身份/">0513 访客 PRD</a></td><td><strong>§6.2 需补一句</strong>「PiP 不在访客黑名单」——<strong>留作独立 follow-up commit</strong></td></tr>
-  </tbody>
+ <thead><tr><th>模块</th><th>影响</th></tr></thead>
+ <tbody>
+ <tr><td>系统支持范围</td><td><strong>Android 8.0 (API 26)+ / iOS 14.0+</strong>；低于此版本设备降级到现网退后台</td></tr>
+ <tr><td>沉浸播放页</td><td>右上角 <code>···</code> 菜单加「画中画」<strong>切换开关项</strong>；切换开关偏好持久化（本地存储）；进/退出 PiP 状态管理；锁定集封面渲染；<strong>PiP 期间弹幕渲染关闭 / 回全屏恢复</strong></td></tr>
+ <tr><td>沉浸播放器（核心）</td><td>接入 iOS <code>AVPictureInPictureController</code> + Android <code>PIP Mode API</code>；横竖屏 aspect ratio 动态切换；3 个系统位控件</td></tr>
+ <tr><td>前台服务</td><td>与 PiP 生命周期绑定；PiP 关闭时前台服务退出；<strong>关闭瞬间是否需要短暂续命由研发深化</strong></td></tr>
+ <tr><td>iOS 配置</td><td>Info.plist 声明 PiP 相关 Background Modes + <code>AVAudioSession.Category.playback</code> 配置由研发深化</td></tr>
+ <tr><td>待解锁页</td><td>PiP "Tap to unlock" deeplink（沿用现网）</td></tr>
+ <tr><td><strong>新增 UI 组件</strong></td><td><strong>权限引导弹窗</strong>（按 baseline v1.1 §6.8.1 标准居中弹窗实现）—— 详见 §5.1.3</td></tr>
+ <tr><td>系统设置 deeplink</td><td>Android 跳 PiP 权限设置页 / iOS 跳 Settings.app FlareFlow 项 —— 研发对齐</td></tr>
+ <tr><td><a href="../../../20260520/PRD/开屏与免费集插页AB/">0520 AB 插页实验</a></td><td>§5.2.5 已豁免 PiP，<strong>无新增改动</strong></td></tr>
+ <tr><td><a href="../../../20260514/PRD/Android-FCM高优先级透传唤醒与常驻通知/">0514 Android-FCM + 常驻通知</a></td><td>PiP 为其前台服务提供合规依赖；<strong>0514 PRD 文字无需改</strong></td></tr>
+ <tr><td><a href="../../../20260513/PRD/访客模式与游客身份/">0513 访客 PRD</a></td><td><strong>§6.2 需补一句</strong>「PiP 不在访客黑名单」——<strong>留作独立 follow-up commit</strong></td></tr>
+ </tbody>
 </table>
 
 <!-- §7 -->
 <h2 id="sec-7">7. 待确认问题</h2>
 <p>大部分 PM 拍板项已在正文落定。本节仅列<strong>仍待研发对齐</strong>的真实开放项：</p>
 <table>
-  <thead><tr><th style="width: 6%;">#</th><th>项</th><th>状态</th></tr></thead>
-  <tbody>
-    <tr><td>1</td><td>Android 跳系统 PiP 权限设置页的 deeplink 可靠性（不同厂商 ROM 可能差异）</td><td>⚠️ 研发对齐；fallback 至 App 详情页</td></tr>
-    <tr><td>2</td><td>Android 目标用户 OS 分布与 8.0+ 覆盖率</td><td>⚠️ 数据团队复核</td></tr>
-    <tr><td>3</td><td>弱网下一集请求超时与重试阈值（PM：与现网一致）</td><td>⚠️ 研发实现时对齐现网常量</td></tr>
-  </tbody>
+ <thead><tr><th style="width: 6%;">#</th><th>项</th><th>状态</th></tr></thead>
+ <tbody>
+ <tr><td>1</td><td>Android 跳系统 PiP 权限设置页的 deeplink 可靠性（不同厂商 ROM 可能差异）</td><td>⚠️ 研发对齐；fallback 至 App 详情页</td></tr>
+ <tr><td>2</td><td>Android 目标用户 OS 分布与 8.0+ 覆盖率</td><td>⚠️ 数据团队复核</td></tr>
+ <tr><td>3</td><td>弱网下一集请求超时与重试阈值（PM：与现网一致）</td><td>⚠️ 研发实现时对齐现网常量</td></tr>
+ </tbody>
 </table>
 <p style="color: var(--ff-text-secondary); font-size: 13px;">以下 PM 已拍板，正文落定，仅记录决策出处：</p>
 <ul style="color: var(--ff-text-secondary); font-size: 13px;">
-  <li><strong>系统最低</strong>：Android 8.0 / iOS 14.0（§2 / §6）</li>
-  <li><strong>iOS entitlement / Audio Session 配置</strong>：研发深化，PM 边界外（§6）</li>
-  <li><strong>Watchdog 30 分钟</strong>：写死客户端常量（§5.4）</li>
-  <li><strong>横屏比例</strong>：按视频实际比例交 OS，超范围 clamp 由研发自决（§5.7）</li>
-  <li><strong>PiP 关闭瞬间 FGS 续命</strong>：研发深化，PM 边界外（§6）</li>
-  <li><strong>文案 Key</strong>：见 §5.1.4，共 5 个</li>
+ <li><strong>系统最低</strong>：Android 8.0 / iOS 14.0（§2 / §6）</li>
+ <li><strong>iOS entitlement / Audio Session 配置</strong>：研发深化，PM 边界外（§6）</li>
+ <li><strong>Watchdog 30 分钟</strong>：写死客户端常量（§5.4）</li>
+ <li><strong>横屏比例</strong>：按视频实际比例交 OS，超范围 clamp 由研发自决（§5.7）</li>
+ <li><strong>PiP 关闭瞬间前台服务续命</strong>：研发深化，PM 边界外（§6）</li>
+ <li><strong>文案 Key</strong>：见 §5.1.4，共 5 个</li>
 </ul>
 
 <!-- §8 -->
 <h2 id="sec-8">8. 版本规划</h2>
 <table>
-  <thead><tr><th>阶段</th><th>内容</th></tr></thead>
-  <tbody>
-    <tr><td><strong>本期</strong></td><td>iOS + Android PiP 上线；含<strong>自动连播</strong> + <strong>上下集系统位</strong> + <strong>锁定集 "Tap to unlock"</strong> + <strong>watchdog 30min</strong> + <strong>横屏剧支持</strong> + <strong>全广告豁免</strong> + <strong>用户可控切换开关</strong> + <strong>权限引导弹窗</strong>；伴随 0513 访客 PRD §6.2 小补丁（独立 commit）</td></tr>
-    <tr><td><strong>Phase 2</strong></td><td>watchdog 时长远程配置化；PiP 内增强控件</td></tr>
-    <tr><td><strong>不在版本规划</strong></td><td>跨剧 PiP 连播、PiP 内倍速/清晰度调节、弹幕 PiP</td></tr>
-  </tbody>
+ <thead><tr><th>阶段</th><th>内容</th></tr></thead>
+ <tbody>
+ <tr><td><strong>本期</strong></td><td>iOS + Android PiP 上线；含<strong>自动连播</strong> + <strong>上下集系统位</strong> + <strong>锁定集 "Tap to unlock"</strong> + <strong>watchdog 30min</strong> + <strong>横屏剧支持</strong> + <strong>全广告豁免</strong> + <strong>用户可控切换开关</strong> + <strong>权限引导弹窗</strong>；伴随 0513 访客 PRD §6.2 小补丁（独立 commit）</td></tr>
+ <tr><td><strong>Phase 2</strong></td><td>watchdog 时长远程配置化；PiP 内增强控件</td></tr>
+ <tr><td><strong>不在版本规划</strong></td><td>跨剧 PiP 连播、PiP 内倍速/清晰度调节、弹幕 PiP</td></tr>
+ </tbody>
 </table>
 
 <!-- Footer -->
 <footer class="footer">
-  <p><strong>设计基线</strong>：<a href="https://github.com/king460357/ff-app-prd-skill/blob/main/design-system/flareflow-visual-baseline.md">flareflow-visual-baseline.md v1.1</a>（2026-05-29）</p>
-  <p>真理源 markdown：<code>20260529_画中画_PRD.md</code></p>
-  <p>本 HTML 由 prd-writer-master skill 按 baseline v1.1 自动生成。Mermaid 流程图需联网渲染。</p>
+ <p><strong>设计基线</strong>：<a href="https://github.com/king460357/ff-app-prd-skill/blob/main/design-system/flareflow-visual-baseline.md">flareflow-visual-baseline.md v1.1</a>（2026-05-29）</p>
+ <p>真理源 markdown：<code>20260529_画中画_PRD.md</code></p>
+ <p>本 HTML 由 prd-writer-master skill 按 baseline v1.1 自动生成。Mermaid 流程图需联网渲染。</p>
 </footer>
 
 </div>
 
 <script>
-  if (window.mermaid) {
-    mermaid.initialize({
-      startOnLoad: true,
-      theme: 'dark',
-      themeVariables: {
-        primaryColor: '#1F1F22',
-        primaryTextColor: '#FFFFFF',
-        primaryBorderColor: '#FFD24A',
-        lineColor: '#8A8A8E',
-        secondaryColor: '#FF6B3D',
-        tertiaryColor: '#2A2A2E',
-        background: '#000000',
-        mainBkg: '#1F1F22',
-        secondBkg: '#2A2A2E',
-      }
-    });
-  }
-  document.querySelectorAll('[data-jump]').forEach(el => {
-    el.addEventListener('click', e => {
-      e.stopPropagation();
-      const sel = el.getAttribute('data-jump');
-      if (!sel) return;
-      const target = document.querySelector(sel);
-      if (!target) return;
-      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      target.classList.add('flash');
-      setTimeout(() => target.classList.remove('flash'), 1400);
-    });
-  });
+ if (window.mermaid) {
+ mermaid.initialize({
+ startOnLoad: true,
+ theme: 'dark',
+ themeVariables: {
+ primaryColor: '#1F1F22',
+ primaryTextColor: '#FFFFFF',
+ primaryBorderColor: '#FFD24A',
+ lineColor: '#8A8A8E',
+ secondaryColor: '#FF6B3D',
+ tertiaryColor: '#2A2A2E',
+ background: '#000000',
+ mainBkg: '#1F1F22',
+ secondBkg: '#2A2A2E',
+ }
+ });
+ }
+ document.querySelectorAll('[data-jump]').forEach(el => {
+ el.addEventListener('click', e => {
+ e.stopPropagation();
+ const sel = el.getAttribute('data-jump');
+ if (!sel) return;
+ const target = document.querySelector(sel);
+ if (!target) return;
+ target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+ target.classList.add('flash');
+ setTimeout(() => target.classList.remove('flash'), 1400);
+ });
+ });
 </script>
 
 </body>
