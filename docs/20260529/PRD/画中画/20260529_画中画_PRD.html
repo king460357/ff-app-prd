@@ -389,7 +389,7 @@
  padding: 4px;
  position: relative;
  }
- .pip-tap-overlay {
+ .pip-tap-Toast {
  position: absolute;
  top: 50%;
  left: 50%;
@@ -575,11 +575,11 @@
  <tr><td>适用身份</td><td><span class="id-tag visitor">VISITOR</span> / <span class="id-tag guest">GUEST</span> / <span class="id-tag loggedin">LOGGED_IN</span> <strong>三档全部可用</strong>（限可免费观看的集；锁定集策略见 §5.4）</td></tr>
  <tr><td>触发方式</td><td><strong>A. 系统手势</strong>（Android 按 Home / iOS App 切后台自动） + <strong>B. 沉浸播放页右上角 <code>···</code> 菜单内切换开关</strong>（用户可控偏好；不一键立即进 PiP）</td></tr>
  <tr><td>切集</td><td><strong>自动连播下一集</strong> + PiP 窗系统位上/下一集按钮</td></tr>
- <tr><td>锁定集</td><td>PiP <strong>暂停在锁定集封面 + "Tap to unlock" overlay</strong>；用户点 PiP 回 App 待解锁页</td></tr>
+ <tr><td>锁定集</td><td>PiP <strong>暂停在锁定集封面 + "Tap to unlock" Toast</strong>；用户点 PiP 回 App 待解锁页</td></tr>
  <tr><td>横屏剧支持</td><td><strong>是</strong>——进入 PiP 时按视频实际 aspect ratio 交 OS 处理</td></tr>
  <tr><td>VIP 差异</td><td><strong>无差异</strong>（VIP 自然受益于"无锁定集"）</td></tr>
  <tr><td>PiP 期间广告</td><td><strong>全部豁免</strong>（切集插页 / 开屏 / 激励均不触发）</td></tr>
- <tr><td>Watchdog</td><td>PiP <strong>实际未播放视频满 30 分钟</strong>（停留在锁定封面）自动关闭 PiP</td></tr>
+ <tr><td>超时关闭机制</td><td>PiP <strong>实际未播放视频满 30 分钟</strong>（停留在锁定封面）自动关闭 PiP</td></tr>
  <tr><td>本期不做</td><td>跨剧 PiP 连播 / PiP 内点赞收藏倍速清晰度 / 弹幕 PiP</td></tr>
  </tbody>
 </table>
@@ -634,7 +634,7 @@ flowchart TD
  B4 -->|锁定集| B6[PiP 暂停 显示封面 + Tap to unlock]
  B6 --> B7{用户行为?}
  B7 -->|点 PiP 窗体| B8[关 PiP 回 App 待解锁页]
- B7 -->|30min 内未恢复| B9[watchdog 自动关 PiP 前台服务退出]
+ B7 -->|30min 内未恢复| B9[超时关闭机制 自动关 PiP 前台服务退出]
  B7 -->|关闭 X / swipe| B9
 </pre>
 </div>
@@ -819,7 +819,7 @@ flowchart TD
  <thead><tr><th>位</th><th>控件</th><th>行为</th></tr></thead>
  <tbody>
  <tr><td>1</td><td><strong>上一集</strong>（系统 skip prev icon）</td><td>切换到上一集；规则同 §5.3</td></tr>
- <tr><td>2</td><td><strong>播放 / 暂停</strong>（系统 play/pause icon）</td><td>切换播放状态；暂停时前台服务仍可维持，<strong>不触发</strong> watchdog</td></tr>
+ <tr><td>2</td><td><strong>播放 / 暂停</strong>（系统 play/pause icon）</td><td>切换播放状态；暂停时前台服务仍可维持，<strong>不触发</strong> 超时关闭机制</td></tr>
  <tr><td>3</td><td><strong>下一集</strong>（系统 skip next icon）</td><td>切换到下一集；规则同 §5.3</td></tr>
  <tr><td>—</td><td>关闭 X（系统默认提供）</td><td>关 PiP；按 §5.6 退出流程</td></tr>
  </tbody>
@@ -863,12 +863,12 @@ flowchart TD
  </div>
  <div class="home-tabbar"><span>App 在后台</span></div>
  </div>
- <!-- PiP floating overlay -->
+ <!-- PiP floating Toast -->
  <div class="pip-floating jump-target" data-jump="#sec-5-4-rules">
  <div class="pip-cover">
  <div class="pip-close-x">×</div>
  <span style="opacity: 0.85;">EP. 4<br/>锁定集</span>
- <div class="pip-tap-overlay">Tap to unlock</div>
+ <div class="pip-tap-Toast">Tap to unlock</div>
  <div class="pip-controls">
  <span>⏮</span><span>⏸</span><span>⏭</span>
  </div>
@@ -877,17 +877,17 @@ flowchart TD
  </div>
  </div>
 </div>
-<p class="caption">PiP 浮窗叠在 OS 主屏上；视频停止，封面图 + "Tap to unlock" overlay；点 PiP → 回 App 待解锁页（点封面跳 §5.4 详细规则）</p>
+<p class="caption">PiP 浮窗叠在 OS 主屏上；视频停止，封面图 + "Tap to unlock" Toast；点 PiP → 回 App 待解锁页（点封面跳 §5.4 详细规则）</p>
 </div>
 
 <table id="sec-5-4-rules">
  <thead><tr><th style="width: 24%;">项</th><th>规则</th></tr></thead>
  <tbody>
  <tr><td><strong>触发条件</strong></td><td>PiP 内自动连播或用户点下一集，命中当前身份下不可免费观看的集</td></tr>
- <tr><td><strong>PiP 行为</strong></td><td>PiP 窗<strong>不退出</strong>；停止视频播放；窗内显示<strong>锁定集封面图</strong>（与现网待解锁页封面一致）+ overlay 文字 <strong>"Tap to unlock"</strong></td></tr>
+ <tr><td><strong>PiP 行为</strong></td><td>PiP 窗<strong>不退出</strong>；停止视频播放；窗内显示<strong>锁定集封面图</strong>（与现网待解锁页封面一致）+ Toast 文字 <strong>"Tap to unlock"</strong></td></tr>
  <tr><td><strong>用户点 PiP 窗体</strong></td><td>关闭 PiP → App 切到前台 → 路由到该剧该锁定集的待解锁页</td></tr>
- <tr><td><strong>Watchdog</strong></td><td>PiP 状态 = "暂停在锁定集封面" 持续 <strong>30 分钟</strong>未恢复播放 → 自动关闭 PiP →前台服务干净退出</td></tr>
- <tr><td><strong>Watchdog reset 条件</strong></td><td>用户在 PiP 内点击播放 / 切到下一集 / 点 PiP 回 App，timer 立即清零</td></tr>
+ <tr><td><strong>超时关闭机制</strong></td><td>PiP 状态 = "暂停在锁定集封面" 持续 <strong>30 分钟</strong>未恢复播放 → 自动关闭 PiP →前台服务干净退出</td></tr>
+ <tr><td><strong>超时关闭机制 reset 条件</strong></td><td>用户在 PiP 内点击播放 / 切到下一集 / 点 PiP 回 App，timer 立即清零</td></tr>
  <tr><td><strong>访客触发锁定集</strong></td><td>点 PiP 回 App → <strong>先弹隐私弹窗</strong>（沿用 <a href="../../../20260513/PRD/访客模式与游客身份/">访客 PRD §7</a>）；同意后才进待解锁页</td></tr>
  </tbody>
 </table>
@@ -918,7 +918,7 @@ flowchart TD
  <tr><td>用户点关闭 X</td><td>视频停止 → PiP 收起 → App 仍在后台（不主动前台）→前台服务退出</td></tr>
  <tr><td>用户点 PiP 窗体（非控件区）</td><td>关闭 PiP → App 切到前台并恢复沉浸播放页全屏；若是锁定集封面则进待解锁页</td></tr>
  <tr><td>用户 swipe PiP 离屏（Android）</td><td>等同关闭 X</td></tr>
- <tr><td>Watchdog 30min 触发</td><td>等同关闭 X</td></tr>
+ <tr><td>超时关闭机制 30min 触发</td><td>等同关闭 X</td></tr>
  <tr><td>系统压力 / 强制关闭</td><td>视为正常退出；不弹提示</td></tr>
  <tr><td><strong>推送 / Deep link 触发 App 切前台</strong></td><td><strong>立即关闭当前 PiP</strong>（视频停止）→ App 切前台 → 按推送 deeplink 进<strong>目标剧/集</strong>（不是恢复原 PiP 沉浸页）；与"用户点 PiP 窗体"路径等价但目标位置由 deeplink 决定</td></tr>
  </tbody>
@@ -931,7 +931,7 @@ flowchart TD
  <tr><td><strong>识别方式</strong></td><td>沿用现网每集元信息中的 orientation 字段</td></tr>
  <tr><td><strong>进入 PiP 时</strong></td><td>客户端按<strong>当前集实际 aspect ratio</strong> 调用 OS API；<strong>具体比例完全交 OS 处理</strong></td></tr>
  <tr><td><strong>连播切横↔竖时</strong></td><td>OS API <code>setPictureInPictureParams</code> 实时更新；PiP 窗轻微动画切换</td></tr>
- <tr><td><strong>锁定集封面适配</strong></td><td>按集 orientation 选对应封面 + overlay 适配</td></tr>
+ <tr><td><strong>锁定集封面适配</strong></td><td>按集 orientation 选对应封面 + Toast 适配</td></tr>
  <tr><td><strong>手机自动旋转 vs PiP</strong></td><td>PiP 窗形状由<strong>内容 orientation</strong> 决定，<strong>不</strong>受手机旋转影响</td></tr>
  <tr><td><strong>超出 OS 比例限制</strong></td><td>客户端 clamp 到 OS 支持范围（iOS 17+ 限制 0.418-2.39；Android 12+ 类似），策略由研发自决</td></tr>
  </tbody>
@@ -943,8 +943,8 @@ flowchart TD
  <tbody>
  <tr><td>进入中</td><td>OS 系统过渡动画（约 300ms）；不渲染自定义 loading</td></tr>
  <tr><td>正常播放</td><td>PiP 窗视频播放中；3 个系统位控件可用</td></tr>
- <tr><td>手动暂停</td><td>用户点暂停 → 视频暂停；前台服务 仍可维持；<strong>不</strong>触发 watchdog</td></tr>
- <tr><td>锁定集封面态</td><td>显示封面 + "Tap to unlock"；watchdog timer 开始</td></tr>
+ <tr><td>手动暂停</td><td>用户点暂停 → 视频暂停；前台服务 仍可维持；<strong>不</strong>触发 超时关闭机制</td></tr>
+ <tr><td>锁定集封面态</td><td>显示封面 + "Tap to unlock"；超时关闭机制 timer 开始</td></tr>
  <tr><td>切集中</td><td>短暂 spinner；新集加载完毕继续播放</td></tr>
  <tr><td>已播完末集</td><td>暂停态显示"已播完"</td></tr>
  <tr><td>退出中</td><td>OS 系统过渡动画；前台服务 退出</td></tr>
@@ -982,7 +982,7 @@ flowchart TD
  <span class="kw">When</span> 第 N 集播完触发自动连播
  <span class="kw">Then</span> PiP 窗应停止视频播放
  <span class="kw">And</span> 应显示第 N+1 集的封面图
- <span class="kw">And</span> 应叠加 "Tap to unlock" overlay
+ <span class="kw">And</span> 应叠加 "Tap to unlock" Toast
  <span class="kw">And</span> PiP 窗不应自动退出
 
 <span class="scenario">Scenario:</span> 锁定集场景下用户点 PiP 回 App
@@ -992,9 +992,9 @@ flowchart TD
  <span class="kw">And</span> App 应切到前台
  <span class="kw">And</span> 应路由到该剧该锁定集的待解锁页
 
-<span class="scenario">Scenario:</span> Watchdog 30 分钟自动关闭 PiP
+<span class="scenario">Scenario:</span> 超时关闭机制 30 分钟自动关闭 PiP
  <span class="kw">Given</span> 用户的 PiP 暂停在锁定集封面已达 30 分钟
- <span class="kw">When</span> 30 分钟 watchdog 触发
+ <span class="kw">When</span> 30 分钟 超时关闭机制 触发
  <span class="kw">Then</span> PiP 应自动关闭
  <span class="kw">And</span> 前台服务应退出
 
@@ -1086,7 +1086,7 @@ flowchart TD
  <span class="kw">Given</span> 用户的 PiP 正在播放
  <span class="kw">When</span> 用户双击 PiP 浮窗使其放大或缩小
  <span class="kw">Then</span> 视频应继续不中断播放
- <span class="kw">And</span> 连播 / 锁定集策略 / watchdog 等业务逻辑应不受影响
+ <span class="kw">And</span> 连播 / 锁定集策略 / 超时关闭机制 等业务逻辑应不受影响
 
 <span class="scenario">Scenario:</span> 用户拖动 PiP 改变位置不影响播放
  <span class="kw">Given</span> 用户的 PiP 正在播放
@@ -1100,7 +1100,7 @@ flowchart TD
  <span class="kw">When</span> 自动连播触发第 N+1 集判定
  <span class="kw">And</span> 第 N+1 集为 VIP 专属
  <span class="kw">Then</span> PiP 应暂停在第 N+1 集封面
- <span class="kw">And</span> 应显示 Tap to unlock overlay
+ <span class="kw">And</span> 应显示 Tap to unlock Toast
 
 <span class="scenario">Scenario:</span> 推送 Deep link 触发立即关闭当前 PiP 跳目标
  <span class="kw">Given</span> 用户的 PiP 正在播放剧 A 第 N 集
@@ -1125,7 +1125,7 @@ flowchart TD
  <span class="kw">And</span> 用户需点 PiP 内播放按钮才恢复</pre>
 
 <h3 id="sec-5-10">5.10 OS 标准交互（App 不干预）</h3>
-<p>PiP 浮窗的<strong>尺寸、位置、缩放、显隐</strong>由 iOS / Android 系统自带的 PiP API 管控；App <strong>不接管</strong>任何 OS 原生手势。下表罗列<strong>已知</strong> OS 行为以便研发 / QA 对齐预期，<strong>App 业务逻辑（连播、锁定集策略、watchdog 等）不受这些尺寸/位置变化影响</strong>。</p>
+<p>PiP 浮窗的<strong>尺寸、位置、缩放、显隐</strong>由 iOS / Android 系统自带的 PiP API 管控；App <strong>不接管</strong>任何 OS 原生手势。下表罗列<strong>已知</strong> OS 行为以便研发 / QA 对齐预期，<strong>App 业务逻辑（连播、锁定集策略、超时关闭机制 等）不受这些尺寸/位置变化影响</strong>。</p>
 <table>
  <thead><tr><th>OS 手势 / 事件</th><th>OS 行为</th><th>App 是否干预</th></tr></thead>
  <tbody>
@@ -1172,7 +1172,7 @@ flowchart TD
 <ul style="color: var(--ff-text-secondary); font-size: 13px;">
  <li><strong>系统最低</strong>：Android 8.0 / iOS 14.0（§2 / §6）</li>
  <li><strong>iOS entitlement / Audio Session 配置</strong>：研发深化，PM 边界外（§6）</li>
- <li><strong>Watchdog 30 分钟</strong>：写死客户端常量（§5.4）</li>
+ <li><strong>超时关闭机制 30 分钟</strong>：写死客户端常量（§5.4）</li>
  <li><strong>横屏比例</strong>：按视频实际比例交 OS，超范围 clamp 由研发自决（§5.7）</li>
  <li><strong>PiP 关闭瞬间前台服务续命</strong>：研发深化，PM 边界外（§6）</li>
  <li><strong>文案 Key</strong>：见 §5.1.4，共 5 个</li>
@@ -1183,8 +1183,8 @@ flowchart TD
 <table>
  <thead><tr><th>阶段</th><th>内容</th></tr></thead>
  <tbody>
- <tr><td><strong>本期</strong></td><td>iOS + Android PiP 上线；含<strong>自动连播</strong> + <strong>上下集系统位</strong> + <strong>锁定集 "Tap to unlock"</strong> + <strong>watchdog 30min</strong> + <strong>横屏剧支持</strong> + <strong>全广告豁免</strong> + <strong>用户可控切换开关</strong> + <strong>权限引导弹窗</strong>；伴随 0513 访客 PRD §6.2 小补丁（独立 commit）</td></tr>
- <tr><td><strong>Phase 2</strong></td><td>watchdog 时长远程配置化；PiP 内增强控件</td></tr>
+ <tr><td><strong>本期</strong></td><td>iOS + Android PiP 上线；含<strong>自动连播</strong> + <strong>上下集系统位</strong> + <strong>锁定集 "Tap to unlock"</strong> + <strong>超时关闭机制 30min</strong> + <strong>横屏剧支持</strong> + <strong>全广告豁免</strong> + <strong>用户可控切换开关</strong> + <strong>权限引导弹窗</strong>；伴随 0513 访客 PRD §6.2 小补丁（独立 commit）</td></tr>
+ <tr><td><strong>Phase 2</strong></td><td>超时关闭机制 时长远程配置化；PiP 内增强控件</td></tr>
  <tr><td><strong>不在版本规划</strong></td><td>跨剧 PiP 连播、PiP 内倍速/清晰度调节、弹幕 PiP</td></tr>
  </tbody>
 </table>
