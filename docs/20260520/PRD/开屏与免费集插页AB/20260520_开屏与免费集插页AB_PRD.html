@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<!-- Generated against design-system/flareflow-visual-baseline.md v1.1 (2026-05-29).
+     如视觉与现网不符，先核查 baseline.md 是否过期，再改 HTML。 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FlareFlow · 开屏广告顺序与免费集插页 AB · PRD（baseline v1.1）</title>
+<style>
+  :root {
+    --ff-bg: #000000;
+    --ff-surface-1: #1F1F22;
+    --ff-surface-2: #2A2A2E;
+    --ff-divider: #262629;
+    --ff-text-primary: #FFFFFF;
+    --ff-text-secondary: #8A8A8E;
+    --ff-text-placeholder: #5E5E62;
+    --ff-text-disabled: #3A3A3D;
+
+    --ff-gold: #FFD24A;
+    --ff-gold-bright: #FFCB47;
+    --ff-gold-deep: #E5A82B;
+    --ff-gold-gradient: linear-gradient(135deg, #FFCB47, #E5A82B);
+
+    --ff-orange: #FF6B3D;
+    --ff-orange-gradient: linear-gradient(135deg, #FF8050, #FF5028);
+
+    --ff-red: #FF3B30;
+    --ff-success: #3CC76A;
+
+    --ff-radius-card: 12px;
+    --ff-radius-product: 16px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--ff-bg);
+    color: var(--ff-text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 32px 24px 96px; }
+
+  h1 { font-size: 32px; font-weight: 700; line-height: 1.25; margin: 0 0 8px; }
+  h2 {
+    font-size: 22px; font-weight: 700; margin: 48px 0 16px;
+    padding-bottom: 10px; border-bottom: 1px solid var(--ff-divider);
+  }
+  h3 { font-size: 18px; font-weight: 600; margin: 32px 0 14px; }
+  h4 { font-size: 16px; font-weight: 600; margin: 22px 0 10px; color: #DCDCE0; }
+  h5 { font-size: 14px; font-weight: 600; margin: 18px 0 8px; color: var(--ff-text-secondary); text-transform: uppercase; letter-spacing: 0.04em; }
+
+  p { margin: 0 0 14px; }
+  ul, ol { margin: 0 0 14px; padding-left: 22px; }
+  li { margin-bottom: 6px; }
+  strong { color: var(--ff-text-primary); font-weight: 700; }
+  a { color: var(--ff-gold); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    background: var(--ff-surface-1);
+    color: var(--ff-gold);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+  }
+
+  blockquote {
+    margin: 14px 0;
+    padding: 12px 18px;
+    background: var(--ff-surface-1);
+    border-left: 3px solid var(--ff-gold);
+    border-radius: 0 var(--ff-radius-card) var(--ff-radius-card) 0;
+    color: #D0D0D2;
+    font-size: 13.5px;
+  }
+  blockquote.plain-talk {
+    border-left-color: var(--ff-orange);
+    background: rgba(255, 107, 61, 0.08);
+  }
+  blockquote.plain-talk::before {
+    content: "白话 · ";
+    color: var(--ff-orange);
+    font-weight: 700;
+  }
+
+  /* —— Meta header —— */
+  .meta {
+    color: var(--ff-text-secondary);
+    font-size: 13px;
+    margin: 0 0 28px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--ff-divider);
+  }
+  .meta-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    background: var(--ff-surface-1);
+    color: var(--ff-text-primary);
+    border-radius: 4px;
+    font-size: 12px;
+    margin-right: 6px;
+  }
+  .meta-tag.gold { background: var(--ff-gold-gradient); color: #1A1500; font-weight: 700; }
+  .meta-tag.platform-ios { background: rgba(0, 122, 255, 0.16); color: #5BA8FF; border: 1px solid rgba(91, 168, 255, 0.3); }
+  .meta-tag.platform-and { background: rgba(60, 199, 106, 0.16); color: var(--ff-success); border: 1px solid rgba(60, 199, 106, 0.3); }
+
+  /* —— Open instructions —— */
+  .howto {
+    background: var(--ff-surface-1);
+    border-radius: var(--ff-radius-card);
+    padding: 18px 22px;
+    margin: 0 0 32px;
+    font-size: 13px;
+    color: #C8C8CC;
+  }
+  .howto h4 { margin-top: 0; color: var(--ff-text-primary); font-size: 14px; }
+  .howto ul { padding-left: 18px; margin: 8px 0 0; }
+
+  /* —— TOC —— */
+  .toc {
+    background: var(--ff-surface-1);
+    border-radius: var(--ff-radius-card);
+    padding: 16px 22px;
+    margin: 0 0 36px;
+    font-size: 13px;
+  }
+  .toc-title { font-weight: 700; margin-bottom: 8px; color: var(--ff-text-primary); }
+  .toc a { display: inline-block; margin: 4px 14px 4px 0; color: var(--ff-text-secondary); }
+  .toc a:hover { color: var(--ff-gold); text-decoration: none; }
+
+  /* —— Tables —— */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0 24px;
+    font-size: 13px;
+    background: var(--ff-surface-1);
+    border-radius: var(--ff-radius-card);
+    overflow: hidden;
+  }
+  th, td {
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--ff-divider);
+    vertical-align: top;
+  }
+  th {
+    color: var(--ff-text-secondary);
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.02);
+    font-size: 12px;
+  }
+  tr:last-child td { border-bottom: none; }
+
+  /* —— 实验参数表 强调 —— */
+  table.param-table th { background: rgba(255, 107, 61, 0.06); color: var(--ff-orange); }
+  table.subswitch-table th { background: rgba(255, 210, 74, 0.06); color: var(--ff-gold); }
+  table.gherkin-feature th { background: rgba(60, 199, 106, 0.06); color: var(--ff-success); }
+
+  /* —— Param value chip —— */
+  .param-chip {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: "SF Mono", Menlo, monospace;
+    margin: 0 2px;
+  }
+  .param-chip.p0 { background: rgba(138, 138, 142, 0.18); color: var(--ff-text-secondary); border: 1px solid #3A3A3D; }
+  .param-chip.p1 { background: var(--ff-orange-gradient); color: #1A0500; }
+
+  /* —— Code / Gherkin / ASCII —— */
+  pre {
+    background: #0F0F12;
+    border: 1px solid var(--ff-divider);
+    border-radius: var(--ff-radius-card);
+    padding: 16px 20px;
+    overflow-x: auto;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: #D8D8DC;
+    margin: 14px 0;
+  }
+  pre.gherkin { border-left: 3px solid var(--ff-success); }
+  pre.gherkin .kw { color: var(--ff-orange); font-weight: 700; }
+  pre.gherkin .scenario { color: var(--ff-gold); font-weight: 700; }
+  pre.ascii { border-left: 3px solid var(--ff-gold); white-space: pre; }
+
+  /* —— Mermaid container —— */
+  .mermaid-wrap {
+    background: var(--ff-surface-1);
+    border-radius: var(--ff-radius-card);
+    padding: 18px;
+    margin: 14px 0 24px;
+    overflow-x: auto;
+    border: 1px solid var(--ff-divider);
+  }
+  .mermaid { color: var(--ff-text-primary); font-family: inherit; }
+
+  /* —— Mockup row —— */
+  .mockup-section {
+    background: rgba(255, 255, 255, 0.015);
+    border-radius: var(--ff-radius-card);
+    padding: 20px 18px;
+    margin: 18px 0 28px;
+    border: 1px solid var(--ff-divider);
+  }
+  .mockup-section h4 { margin-top: 0; }
+  .mockup-section .caption {
+    text-align: center;
+    font-size: 12px;
+    color: var(--ff-text-placeholder);
+    margin: 8px 0 0;
+  }
+  .mockup-row {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 12px 0 8px;
+  }
+  .mockup-arrow {
+    font-size: 28px;
+    color: var(--ff-text-placeholder);
+    font-weight: 200;
+  }
+
+  /* —— Mini phone for ad flow —— */
+  .mini-phone {
+    width: 180px;
+    height: 380px;
+    background: var(--ff-bg);
+    border: 1px solid #2A2A2E;
+    border-radius: 22px;
+    padding: 4px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+  }
+  .mini-phone-screen {
+    width: 100%;
+    height: 100%;
+    background: var(--ff-bg);
+    border-radius: 18px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .mini-status {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 14px 4px;
+    font-size: 10px;
+    color: var(--ff-text-primary);
+    font-weight: 600;
+  }
+  .mini-phone-screen .label {
+    position: absolute;
+    bottom: 8px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 10px;
+    color: var(--ff-text-placeholder);
+  }
+
+  /* —— Logo phase —— */
+  .logo-phase {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ff-bg);
+  }
+  .logo-mark {
+    width: 56px;
+    height: 56px;
+    background: var(--ff-orange-gradient);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 22px;
+    box-shadow: 0 4px 16px rgba(255, 107, 61, 0.3);
+  }
+
+  /* —— Ad phase（开屏） —— */
+  .ad-phase {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(180deg, #2a1810 0%, #1a0e08 100%);
+    position: relative;
+  }
+  .ad-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+  }
+  .ad-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+  }
+  .ad-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+  }
+  .ad-title { font-size: 14px; font-weight: 700; color: white; margin-bottom: 8px; }
+  .ad-sub { font-size: 10px; color: rgba(255,255,255,0.7); margin-bottom: 16px; line-height: 1.4; }
+  .ad-cta {
+    background: var(--ff-orange-gradient);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 8px 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(255, 107, 61, 0.3);
+  }
+
+  /* —— Home phase（首页） —— */
+  .home-phase {
+    flex: 1;
+    background: var(--ff-bg);
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .home-search {
+    background: var(--ff-surface-1);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 10px;
+    color: var(--ff-text-placeholder);
+  }
+  .home-tabs {
+    display: flex;
+    gap: 8px;
+    font-size: 10px;
+    color: var(--ff-text-secondary);
+    padding: 0 4px;
+  }
+  .home-tabs .selected { color: var(--ff-text-primary); font-weight: 700; border-bottom: 2px solid var(--ff-text-primary); padding-bottom: 2px; }
+  .home-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px;
+    flex: 1;
+  }
+  .home-cell {
+    background: var(--ff-surface-1);
+    border-radius: 6px;
+    aspect-ratio: 3/4;
+  }
+  .home-tabbar {
+    display: flex;
+    gap: 4px;
+    padding-top: 4px;
+    border-top: 1px solid var(--ff-divider);
+    font-size: 8px;
+    color: var(--ff-text-secondary);
+    justify-content: space-around;
+  }
+  .home-tabbar .selected { color: var(--ff-text-primary); font-weight: 700; }
+
+  /* —— Player + Interstitial mockup —— */
+  .player-phase {
+    flex: 1;
+    background: linear-gradient(180deg, #1a1410 0%, #0a0805 100%);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .player-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ff-text-placeholder);
+    font-size: 10px;
+  }
+  .player-ep-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .player-controls {
+    padding: 4px 8px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .player-progress {
+    height: 2px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 1px;
+    position: relative;
+  }
+  .player-progress::after {
+    content: ""; position: absolute; left: 0; top: 0;
+    width: 35%; height: 100%; background: white; border-radius: 1px;
+  }
+  .player-time {
+    font-size: 8px;
+    color: var(--ff-text-secondary);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* —— Switch / chip —— */
+  .switch-key-chip {
+    display: inline-block;
+    background: var(--ff-surface-1);
+    color: var(--ff-gold);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: "SF Mono", Menlo, monospace;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  /* —— data-jump flash —— */
+  .jump-target { transition: outline 0.3s, outline-offset 0.3s; }
+  .jump-target.flash { outline: 2px solid var(--ff-orange); outline-offset: 4px; border-radius: 8px; }
+  [data-jump] { cursor: pointer; }
+
+  /* —— Footer —— */
+  .footer {
+    margin-top: 64px;
+    padding-top: 22px;
+    border-top: 1px solid var(--ff-divider);
+    font-size: 12px;
+    color: var(--ff-text-placeholder);
+  }
+</style>
+<!-- Mermaid for flowcharts -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>FlareFlow · 开屏广告顺序与免费集插页 AB</h1>
+  <div class="meta">
+    <span class="meta-tag">P1</span>
+    <span class="meta-tag">v1.0</span>
+    <span class="meta-tag platform-ios">iOS</span>
+    <span class="meta-tag platform-and">Android</span>
+    <span class="meta-tag gold">baseline v1.1 校准</span>
+    <span style="margin-left: 10px;">2026-05-20 创建 · 2026-05-21 最近修订</span>
+  </div>
+</header>
+
+<section class="howto">
+  <h4>怎么打开本 HTML</h4>
+  <ul>
+    <li><strong>方式 A · 终端</strong>：<code>git clone …/ff-app-prd.git &amp;&amp; open docs/20260520/PRD/开屏与免费集插页AB/20260520_开屏与免费集插页AB_PRD.html</code></li>
+    <li><strong>方式 B · Finder 双击</strong>：下载后双击 <code>*_PRD.html</code></li>
+    <li><strong>方式 C · 拖到浏览器</strong>：下载后拖入任意浏览器</li>
+  </ul>
+  <p style="margin-top: 10px; color: var(--ff-text-placeholder); font-size: 12px;">⚠️ GitHub 网页直接看 HTML 是源码，需下载到本地浏览器才能看到渲染效果（含 Mermaid 流程图）。</p>
+</section>
+
+<nav class="toc">
+  <div class="toc-title">目录</div>
+  <a href="#sec-1">1. 需求背景</a>
+  <a href="#sec-2">2. 需求概述</a>
+  <a href="#sec-3">3. 目标用户与分群</a>
+  <a href="#sec-4">4. 核心用户动线</a>
+  <a href="#sec-5">5. 功能详细描述</a>
+  <a href="#sec-5-1">5.1 开屏实验</a>
+  <a href="#sec-5-2">5.2 插页实验</a>
+  <a href="#sec-6">6. 埋点与指标</a>
+  <a href="#sec-7">7. 影响范围</a>
+  <a href="#sec-8">8. 待确认问题</a>
+  <a href="#sec-9">9. 版本规划</a>
+</nav>
+
+<!-- §1 -->
+<h2 id="sec-1">1. 需求背景</h2>
+
+<p>FlareFlow 需在<strong>不改动待解锁页广告解锁形态</strong>（另见 <code>docs/20260513/PRD/待解锁页广告解锁改插页/</code>）的前提下，验证两类变现策略：<strong>启动时展示运营开屏还是开屏广告</strong>，以及<strong>播放免费剧集时切集是否插入无奖励插页</strong>。现网默认<strong>优先展示运营配置的开屏营销页</strong>；竞品（ReelShort 等）普遍在运营素材之后还会追加<strong>开屏广告</strong>，且对免费剧采用「看几集弹一次全屏插页、没广告就不挡播放」策略。</p>
+
+<p>本期要通过 <strong>两个彼此独立</strong> 的 AB 实验回答：① 用 <strong>开屏广告</strong> 替代运营开屏（单次启动二者<strong>只能展示一个</strong>），是否提升广告收入且留存可接受；② <strong>播放免费剧集时</strong>按 <strong>看2集弹</strong>（默认）插入无奖励插页，是否提升 ARPU 且完播/留存可接受。</p>
+
+<h3 id="sec-1-1">1.1 决策上下文（研发/QA 易犯偏差）</h3>
+
+<table>
+  <thead><tr><th style="width: 18%;">类型</th><th>内容</th></tr></thead>
+  <tbody>
+    <tr><td>考虑过但放弃</td><td><strong>合并为一个 AB key</strong>：开屏与插页对用户心智与指标不同，须独立 key 与参数（<code>ios_open_ads-test</code> 与 <code>ios_free_interstitial-test</code> 分开）。</td></tr>
+    <tr><td>考虑过但放弃</td><td><strong>实验组 A 先广告再运营</strong>：单次启动<strong>只能二选一</strong>；A 组<strong>只展示开屏广告、不展示运营开屏</strong>。</td></tr>
+    <tr><td>考虑过但放弃</td><td><strong>无缓存时等待加载开屏/插页</strong>：竞品与现网一致——没广告可播则<strong>跳过</strong>，不黑屏阻塞。</td></tr>
+    <tr><td>考虑过但放弃</td><td><strong>插页看完发币/解锁</strong>：本期为<strong>普通全屏插页广告</strong>，无奖励；与待解锁页「看广告解锁」不是同一路径。</td></tr>
+    <tr><td>FAQ</td><td>待解锁页会插页吗？——<strong>本需求不改</strong>待解锁页；仅改启动开屏顺序 + 沉浸播放页免费集切集插页。</td></tr>
+    <tr><td>五类角色偏差</td><td><strong>前端</strong>：勿把两个实验绑在同一远程开关。<strong>广告/SDK</strong>：开屏广告与播放页插页用不同广告位。<strong>数据</strong>：分实验报表，勿混参数/实验。</td></tr>
+  </tbody>
+</table>
+
+<!-- §2 -->
+<h2 id="sec-2">2. 需求概述</h2>
+
+<table>
+  <thead><tr><th style="width: 18%;">维度</th><th>规则</th></tr></thead>
+  <tbody>
+    <tr><td>实验数量</td><td><strong>2 个独立 AB</strong>，参数互不影响；完整逻辑分别在 <strong>5.1 开屏实验</strong>、<strong>5.2 插页实验</strong></td></tr>
+    <tr><td><strong>开屏实验</strong></td><td><strong>对照组（<span class="param-chip p0">参数 0</span>）</strong>：单次启动只可能看<strong>运营开屏</strong>（命中时），不看开屏广告。<strong>实验组 A（<span class="param-chip p1">参数 1</span>）</strong>：单次启动只可能看<strong>开屏广告</strong>，<strong>绝不</strong>再接运营开屏；无货最多等 7 秒进首页。详见 §5.1</td></tr>
+    <tr><td><strong>插页实验</strong></td><td><strong>对照组</strong>：<strong>播放免费剧集时</strong>切集不弹本需求插页。<strong>实验组 A</strong>：按 <strong>看几集弹</strong> 规则（默认 <strong>看2集弹</strong> → 第 <strong>2、4、6…</strong> 集看完时弹）可能弹<strong>无奖励</strong>全屏插页，无缓存不挡播放。详见 §5.2</td></tr>
+    <tr><td>默认</td><td><strong>实验参数</strong>（0/1 分组）默认值 = <strong>0</strong>；<strong>子开关</strong>默认值见 §5.1.4 / §5.2.4（跟现网，<strong>不是</strong>一律 0）</td></tr>
+    <tr><td>本期不做</td><td>待解锁页广告形态、退出播放页插页、列表原生广告、片内中插（IMA）、DRM、改订阅全局规则</td></tr>
+  </tbody>
+</table>
+
+<blockquote class="plain-talk">一次打开 App，<strong>要么</strong>看运营活动图、<strong>要么</strong>看一条变现全屏广告，<strong>不会两个连着看</strong>。对照组还是运营图；实验组 A 只看变现广告，<strong>不会再弹运营活动图</strong>。VIP 不看开屏广告；运营活动图是否还给 VIP 看，<strong>对照组跟现网</strong>。</blockquote>
+
+<blockquote class="plain-talk">对照组看免费剧切集不弹插页；实验组 A 默认 <strong>看2集弹</strong>——第 <strong>2、4、6…</strong> 集<strong>看完</strong>时可能弹一次全屏广告，<strong>不给币</strong>，关掉接着播。锁定集、访客不弹。</blockquote>
+
+<!-- §3 -->
+<h2 id="sec-3">3. 目标用户与分群</h2>
+
+<h3 id="sec-3-0">3.0 两个实验的关系</h3>
+<ul>
+  <li><strong>开屏实验</strong> 与 <strong>插页实验</strong> 各读各的 <strong>参数</strong>（0=对照组、1=实验组 A），互不影响。</li>
+  <li>同一用户可同时为「开屏参数=1 + 插页参数=0」等任意组合。</li>
+</ul>
+
+<h3 id="sec-3-1">3.1 开屏实验 · 分群</h3>
+<table>
+  <thead><tr><th>分群</th><th>判定摘要</th><th>行为</th></tr></thead>
+  <tbody>
+    <tr><td><span class="param-chip p0">参数 0</span> 对照组</td><td><code>ios/android_open_ads-test</code> 下发 <strong>0</strong></td><td><strong>仅</strong>运营开屏（命中时），<strong>不展示</strong>开屏广告</td></tr>
+    <tr><td><span class="param-chip p1">参数 1</span> 实验组 A</td><td>同上 key 下发 <strong>1</strong></td><td><strong>仅</strong>开屏广告，<strong>禁止</strong>运营开屏；频控见 §5.1.4 子开关默认值</td></tr>
+    <tr><td><strong>有效订阅 / VIP</strong></td><td>现网判定有效订阅</td><td><strong>不展示</strong>开屏变现广告（与参数无关）。<strong>运营开屏</strong>：参数 <strong>0</strong> 时跟<strong>现网 VIP 对运营开屏</strong>的规则；参数 <strong>1</strong> 时仍<strong>禁止</strong>运营开屏</td></tr>
+    <tr><td><strong>访客</strong>（未同意隐私）</td><td>无 UID，未 init 广告 SDK</td><td><strong>不展示</strong>开屏变现广告与运营开屏（本需求广告链路）</td></tr>
+  </tbody>
+</table>
+
+<h3 id="sec-3-2">3.2 插页实验 · 分群</h3>
+<table>
+  <thead><tr><th>分群</th><th>判定摘要</th><th>行为</th></tr></thead>
+  <tbody>
+    <tr><td><span class="param-chip p0">参数 0</span> 对照组</td><td><code>ios/android_free_interstitial-test</code> 下发 <strong>0</strong></td><td><strong>播放免费剧集时</strong>切集<strong>不弹</strong>本需求插页</td></tr>
+    <tr><td><span class="param-chip p1">参数 1</span> 实验组 A</td><td>同上 key 下发 <strong>1</strong></td><td><strong>播放免费剧集时</strong>按 §5.2.4 <strong>看几集弹</strong>（默认 <strong>看2集弹</strong> → 第 2、4、6… 集看完时弹）</td></tr>
+    <tr><td><strong>有效订阅 / VIP</strong></td><td>现网判定有效订阅</td><td><strong>不展示</strong>插页</td></tr>
+    <tr><td><strong>访客</strong></td><td>未 init 广告 SDK</td><td><strong>不展示</strong></td></tr>
+    <tr><td>待解锁·锁定集</td><td>当前集需付费解锁</td><td><strong>不插页</strong>，走待解锁门闸</td></tr>
+  </tbody>
+</table>
+
+<!-- §4 -->
+<h2 id="sec-4">4. 核心用户动线</h2>
+
+<h3 id="sec-4-1">4.1 开屏实验</h3>
+<div class="mermaid-wrap">
+<pre class="mermaid">
+flowchart TD
+  A0{冷启动 或 回前台?}
+  A0 -->|回前台| A0b{hot_start_enable=1?}
+  A0b -->|否 默认| A0c[不尝试本实验开屏广告 走现网]
+  A0b -->|是| A1
+  A0 -->|冷启动| A1{豁免? 访客等}
+  A1 -->|访客| A9v[不 init 广告 直进首页或现网启动链]
+  A1 -->|VIP| A9vip[不展示开屏广告 运营开屏见 3.1]
+  A1 -->|其它非豁免| A3{实验参数}
+  A3 -->|参数=0| A4[仅运营开屏或直进首页]
+  A3 -->|参数=1| A5{满足子开关与频控?}
+  A5 -->|否| A7[直进首页]
+  A5 -->|是| A6{有开屏广告缓存?}
+  A6 -->|是| A8[仅开屏广告 → 首页]
+  A6 -->|否| A7b[按 5.1.6 拉货最多 7 秒 → 首页 无运营开屏]
+</pre>
+</div>
+
+<h3 id="sec-4-2">4.2 插页实验</h3>
+<div class="mermaid-wrap">
+<pre class="mermaid">
+flowchart TD
+  B1[沉浸页切到可免费观看的集] --> B2{豁免或锁定?}
+  B2 -->|是| B9[不插页/待解锁]
+  B2 -->|否| B3{实验参数}
+  B3 -->|参数=0| B8[直接播放]
+  B3 -->|参数=1| B4{命中看几集弹?}
+  B4 -->|否| B8
+  B4 -->|是| B5{有插页缓存?}
+  B5 -->|是| B6[全屏插页无奖励]
+  B5 -->|否| B8
+  B6 --> B8
+</pre>
+</div>
+
+<!-- §5 -->
+<h2 id="sec-5">5. 功能详细描述</h2>
+
+<!-- §5.1 -->
+<h3 id="sec-5-1">5.1 开屏实验</h3>
+<p style="color: var(--ff-text-secondary); font-size: 13px;"><strong>目标读者</strong>：前端、广告/SDK、QA、配置后台。</p>
+
+<h4 id="sec-5-1-1">5.1.1 实验 Key</h4>
+<table>
+  <thead><tr><th>说明</th><th>iOS key</th><th>Android key</th></tr></thead>
+  <tbody>
+    <tr><td>运营开屏 vs 开屏广告（单次启动二选一）</td><td><code>ios_open_ads-test</code></td><td><code>android_open_ads-test</code></td></tr>
+  </tbody>
+</table>
+<p style="font-size: 12px; color: var(--ff-text-placeholder);">Key 命名规范见 <code>.claude/skills/prd-writer-master/ab_experiment_key_standard.md</code></p>
+
+<h4 id="sec-5-1-2">5.1.2 参数（实验分组 · int）</h4>
+<blockquote>本实验通过上述 key 下发的 <strong>参数</strong> 决定用户走对照还是实验组 A。<strong>参数默认值 = 0</strong>。</blockquote>
+<table class="param-table">
+  <thead><tr><th>参数值</th><th>含义</th><th>本实验行为</th></tr></thead>
+  <tbody>
+    <tr><td><span class="param-chip p0">0</span></td><td>对照组</td><td>单次启动：<strong>仅</strong>可走运营开屏（命中时），<strong>不展示</strong>开屏广告</td></tr>
+    <tr><td><span class="param-chip p1">1</span></td><td>实验组 A</td><td>单次启动：<strong>仅</strong>可走<strong>开屏广告</strong>（有缓存且通过校验时），<strong>禁止</strong>运营开屏</td></tr>
+  </tbody>
+</table>
+<blockquote class="plain-talk">参数 <strong>0</strong> = 还是运营活动图；参数 <strong>1</strong> = 一次打开 App 只看开屏广告、<strong>不再</strong>看运营活动图。</blockquote>
+
+<h4 id="sec-5-1-3">5.1.3 单次启动互斥（产品铁律）</h4>
+<table>
+  <thead><tr><th>规则</th><th>说明</th></tr></thead>
+  <tbody>
+    <tr><td>二选一</td><td>同一次启动（含冷启/热启触发的当次开屏链路），<strong>运营开屏</strong>与 <strong>开屏广告</strong> <strong>最多展示 1 个</strong></td></tr>
+    <tr><td><span class="param-chip p0">参数 0</span></td><td>走现网运营开屏逻辑；<strong>不</strong>展示开屏广告</td></tr>
+    <tr><td><span class="param-chip p1">参数 1</span></td><td>优先尝试开屏广告；<strong>即使</strong>运营开屏配置命中、素材已下载，<strong>也不展示</strong>运营开屏</td></tr>
+    <tr><td><span class="param-chip p1">参数 1</span> 且无填充</td><td>按 §5.1.6 拉货超时后 <strong>直进首页</strong>，<strong>仍不</strong>降级展示运营开屏</td></tr>
+  </tbody>
+</table>
+
+<h4 id="sec-5-1-4">5.1.4 子开关（实验 key 下 · int）</h4>
+<blockquote>下列 <strong>子开关</strong> 挂在 <code>ios_open_ads-test</code> / <code>android_open_ads-test</code> 下，与 §5.1.2 参数（0/1 分组）不同。<strong>仅当 §5.1.2 参数 = 1</strong> 时参与逻辑。<br><strong>默认值来源</strong>：本期实验设计 + FlareFlow 现网 <code>app_open</code>（⚠️ 上线前与研发真值表核对）。</blockquote>
+<table class="subswitch-table">
+  <thead><tr><th>子开关的 key</th><th>类型</th><th>默认值</th><th>需求逻辑（未改配置时）</th><th>远程改配</th></tr></thead>
+  <tbody>
+    <tr><td><code>hot_start_enable</code></td><td>int</td><td><strong>0</strong></td><td>仅<strong>冷启动</strong>尝试开屏广告；从后台回到前台<strong>不</strong>走本实验开屏</td><td>设为 <strong>1</strong>：回前台也允许尝试（仍须互斥、频控、有缓存）</td></tr>
+    <tr><td><code>inter_time_sec</code></td><td>int</td><td><strong>60</strong></td><td>距上次开屏广告<strong>成功关闭</strong>至少 <strong>60 秒</strong>后才可再试</td><td>设为 <strong>N</strong>：至少 <strong>N</strong> 秒</td></tr>
+    <tr><td><code>max_per_session</code></td><td>int</td><td><strong>10</strong></td><td><strong>当天展示上限</strong>：同一<strong>自然日</strong>内开屏广告<strong>成功展示</strong>累计 <strong>≤ 10 次</strong>（跨日清零；日历日口径 ⚠️ 与现网对齐）</td><td>设为 <strong>N</strong>：当天 <strong>≤ N</strong> 次</td></tr>
+  </tbody>
+</table>
+<blockquote class="plain-talk">每次冷启或回前台（开了热启动时），<strong>一轮最多 1 条</strong>开屏广告；<strong>同一天里</strong>累计成功展示不超过 <strong>10 次</strong>（<code>max_per_session</code>，跨天重新计）。</blockquote>
+
+<h4 id="sec-5-1-5">5.1.5 线框 · 启动顺序</h4>
+
+<div class="mockup-section">
+<h4 style="margin-top: 0;">实验组 A（参数 = 1）：Logo → 开屏广告 → 首页</h4>
+<div class="mockup-row">
+  <div class="mini-phone">
+    <div class="mini-phone-screen">
+      <div class="mini-status"><span>9:41</span><span>●●● ▮▮</span></div>
+      <div class="logo-phase">
+        <div class="logo-mark">FF</div>
+      </div>
+      <div class="label">Logo · 2 秒</div>
+    </div>
+  </div>
+  <div class="mockup-arrow">→</div>
+  <div class="mini-phone jump-target" data-jump="#sec-5-1-3">
+    <div class="mini-phone-screen">
+      <div class="mini-status"><span>9:41</span><span>●●● ▮▮</span></div>
+      <div class="ad-phase">
+        <span class="ad-badge">广告</span>
+        <span class="ad-close">×</span>
+        <div class="ad-content">
+          <div class="ad-title">Brand X · Mobile Game</div>
+          <div class="ad-sub">Tap to install · 4.8★</div>
+          <div class="ad-cta">INSTALL</div>
+        </div>
+      </div>
+      <div class="label">开屏广告全屏（CTA-A 风格示意）</div>
+    </div>
+  </div>
+  <div class="mockup-arrow">→</div>
+  <div class="mini-phone">
+    <div class="mini-phone-screen">
+      <div class="mini-status"><span>9:41</span><span>●●● ▮▮</span></div>
+      <div class="home-phase">
+        <div class="home-search">Hello, I'm At Your Service</div>
+        <div class="home-tabs"><span class="selected">Categories</span><span>Revenge</span><span>Marriage</span></div>
+        <div class="home-grid">
+          <div class="home-cell"></div><div class="home-cell"></div><div class="home-cell"></div>
+          <div class="home-cell"></div><div class="home-cell"></div><div class="home-cell"></div>
+        </div>
+        <div class="home-tabbar"><span class="selected">Discover</span><span>Reels</span><span>List</span><span>Profile</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<p class="caption"><strong>不展示运营开屏</strong>。点中间 Ad mockup 跳 §5.1.3 互斥铁律。</p>
+</div>
+
+<pre class="ascii">参数 = 0（对照组）
+[ Logo 2 秒 ] → [ 运营开屏全屏（可选） ] → [ 首页 ]
+
+参数 = 1（实验组 A）
+[ Logo 2 秒 ] → [ 开屏广告全屏（可选；无缓存时最多再等 5 秒拉货） ] → [ 首页 ]
+</pre>
+
+<h4 id="sec-5-1-6">5.1.6 补充规则</h4>
+<blockquote>分组、互斥、子开关、预加载与频控见 §5.1.2～§5.1.4、§5.1.7；本节<strong>只写上文未覆盖</strong>项。</blockquote>
+<blockquote class="plain-talk">先播 <strong>2 秒 Logo</strong>。有广告缓存时，Logo 播完就弹开屏广告。没缓存时：先给 <strong>2 秒</strong>要广告，还拿不到就<strong>再多等 5 秒</strong>；<strong>一共 7 秒</strong>仍没有就进首页，绝不改弹运营开屏。</blockquote>
+<table>
+  <thead><tr><th style="width: 22%;">项</th><th>规则</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Logo 与开屏广告时机（参数 = 1）</strong></td><td>冷/热启进入开屏链路，且已满足 §5.1.2～§5.1.4、§5.1.3 时：<strong>① Logo</strong> 固定展示 <strong>2 秒</strong>（Lottie/静态兜底，与现网 <strong>FF 1.2.6</strong> 一致）。<strong>② 有未过期缓存</strong>：Logo <strong>满 2 秒</strong>后展示开屏广告全屏（展示前仍须 SDK 校验通过）。<strong>③ 无缓存</strong>（无货、失效、SDK 无填充）：自启动链路起 <strong>0～2 秒</strong>内发起或继续 <code>app_open</code> 拉取；<strong>2 秒内有填充</strong> → <strong>第 2 秒后</strong>展示开屏广告；<strong>2 秒内无填充</strong> → 拉取<strong>再延长 5 秒</strong>，<strong>5 秒内任意时刻有填充则立即展示</strong>；<strong>满 2+5 秒（共 7 秒）仍无填充</strong> → <strong>跳过</strong>开屏广告、<strong>直进首页</strong>（<strong>不</strong>展示运营开屏、<strong>不</strong>为等待单独全屏 Loading）</td></tr>
+    <tr><td>与其它全屏广告</td><td>激励、插页、待解锁页广告等<strong>正在播</strong>时，<strong>不</strong>再弹开屏广告</td></tr>
+    <tr><td>外部拉起</td><td>推送/深链进主页且会话标记为外部拉起时，<strong>不</strong>弹开屏广告</td></tr>
+    <tr><td>无填充上报</td><td>跳过开屏广告时，失败原因可上报（⚠️ 事件名研发深化）</td></tr>
+    <tr><td>用户豁免</td><td><strong>访客</strong>：不 init 广告 SDK，不进入本实验开屏广告。<strong>VIP</strong>：不展示开屏变现广告；运营开屏见 §3.1（参数 <strong>0</strong> 跟现网 VIP，参数 <strong>1</strong> 禁止运营开屏）</td></tr>
+  </tbody>
+</table>
+
+<h4 id="sec-5-1-7">5.1.7 预加载与展示上限（开屏广告）</h4>
+<blockquote><strong>预加载</strong>：<code>app_open</code> <strong>始终按现网执行预加载</strong>（本需求<strong>不提供</strong>关闭或调节预加载的子开关）。<strong>参数 = 1</strong> 时在满足条件时<strong>消费</strong>缓存尝试展示；<strong>参数 = 0</strong> 不展示开屏广告，预加载与缓存策略仍跟现网。</blockquote>
+<blockquote class="plain-talk">广告总要先下好；该弹时有货就弹，没货别卡用户；别在短时间内连弹很多次。</blockquote>
+<p><strong>广告位</strong>：<code>app_open</code>（开屏广告）；兜底顺序 ⚠️ 与现网配置一致（常见为插页 / 全屏原生，本 PRD 不展开）。</p>
+
+<h5>预加载：何时拉取、何时作废</h5>
+<table>
+  <thead><tr><th>时机 / 条件</th><th>客户端行为</th></tr></thead>
+  <tbody>
+    <tr><td><strong>App 冷启动</strong>（进程起来后）</td><td>后台发起 <code>app_open</code> 预加载；<strong>不</strong>为预加载单独挡 Logo / 首页</td></tr>
+    <tr><td><strong>开屏广告展示并关闭</strong>（缓存被消耗）</td><td>立即触发<strong>下一次</strong>预加载（为后续冷启 / 热启备库）</td></tr>
+    <tr><td><strong>预加载请求失败</strong></td><td><strong>60 秒</strong>后可重试；Android 保活场景与现网一致（历史需求：保活仅预加载开屏格式，失败间隔 60s）</td></tr>
+    <tr><td><strong>缓存仍有效</strong></td><td>展示前可直接用缓存拉起全屏；有效期跟<strong>现网 / SDK 默认</strong>（历史索引建议 <strong>4 小时</strong>，⚠️ 研发对齐）</td></tr>
+    <tr><td><strong>缓存超过有效期</strong></td><td>视为无缓存：客户端<strong>自动重新预加载</strong>；展示前拉货与等待按 §5.1.6（2 秒 + 可延长 5 秒）</td></tr>
+    <tr><td><span class="param-chip p0">参数 0</span></td><td><strong>不展示</strong>本实验开屏广告；<code>app_open</code> 预加载<strong>仍执行</strong>（与现网一致，不在此实验消费）</td></tr>
+  </tbody>
+</table>
+
+<h5>展示：何时尝试、何时跳过</h5>
+<blockquote>参数 <strong>1</strong>、冷/热启动、间隔秒数与<strong>当天展示上限</strong>见 §5.1.2、§5.1.4；互斥与豁免见 §5.1.3、§5.1.6。</blockquote>
+<table>
+  <thead><tr><th>条件</th><th>是否尝试展示</th></tr></thead>
+  <tbody>
+    <tr><td>有未过期预加载缓存且 SDK 校验通过</td><td><strong>是</strong></td></tr>
+    <tr><td>无缓存 / 已过期 / SDK 无填充</td><td>按 §5.1.6：<strong>2 秒</strong>内无货可<strong>再延长 5 秒</strong>拉取；<strong>满 7 秒</strong>仍无货 → <strong>否</strong>，直进首页；<strong>不</strong>降级运营开屏</td></tr>
+    <tr><td>当天已成功展示次数已达 <code>max_per_session</code></td><td><strong>否</strong></td></tr>
+    <tr><td>未满足上文参数/子开关/互斥/豁免</td><td><strong>否</strong></td></tr>
+  </tbody>
+</table>
+
+<h5>展示上限（频控）</h5>
+<blockquote>间隔秒数、当天展示次数见 §5.1.4 子开关（默认 60s、当天 <strong>10</strong> 次）。本节只补<strong>铁律</strong>：</blockquote>
+<table>
+  <thead><tr><th>维度</th><th>规则</th></tr></thead>
+  <tbody>
+    <tr><td><strong>单次开屏链路</strong></td><td>同一次冷/热启开屏链路内成功展示 <strong>≤ 1 次</strong>（与 §5.1.3 二选一一致；子开关<strong>不可</strong>放宽为连弹两次）</td></tr>
+  </tbody>
+</table>
+
+<h5>展示后</h5>
+<table>
+  <thead><tr><th>事件</th><th>行为</th></tr></thead>
+  <tbody>
+    <tr><td>用户关闭开屏广告（成功）</td><td>计一次「成功展示」；消耗当前缓存；触发<strong>预加载下一发</strong>；<strong>直接进首页</strong>（不接运营开屏）</td></tr>
+    <tr><td>展示失败 / 无填充</td><td>不计入成功展示次数；上报失败原因；不阻塞进首页</td></tr>
+  </tbody>
+</table>
+
+<h4 id="sec-5-1-8">5.1.8 状态</h4>
+<table>
+  <thead><tr><th>状态</th><th>表现</th></tr></thead>
+  <tbody>
+    <tr><td>加载中</td><td><strong>Logo 固定播满 2 秒</strong>；期间可后台拉 <code>app_open</code>；<strong>不</strong>为拉广告单独全屏 Loading</td></tr>
+    <tr><td>成功展示并关闭</td><td><strong>直接进首页</strong>（不接运营开屏，见 §5.1.3）</td></tr>
+    <tr><td>无填充/失败</td><td><strong>直进首页</strong>，不降级运营开屏；无缓存时自启动起最多 <strong>2+5 秒</strong>（见 §5.1.6）</td></tr>
+  </tbody>
+</table>
+
+<h4 id="sec-5-1-9">5.1.9 验收标准</h4>
+<pre class="gherkin"><span class="kw">Feature:</span> 开屏广告顺序实验
+
+<span class="scenario">Scenario:</span> 参数0不播开屏广告
+  <span class="kw">Given</span> 用户 ios_open_ads-test 或 android_open_ads-test 参数为 0
+  <span class="kw">And</span> 用户非 VIP 且非访客
+  <span class="kw">When</span> 用户冷启动进入 App
+  <span class="kw">Then</span> 不应出现开屏广告全屏
+  <span class="kw">And</span> 若运营开屏命中则可展示运营开屏
+
+<span class="scenario">Scenario:</span> 参数1有缓存仅开屏广告且无运营开屏
+  <span class="kw">Given</span> 用户开屏实验参数为 1
+  <span class="kw">And</span> 开屏广告已预加载成功
+  <span class="kw">And</span> 运营开屏配置命中
+  <span class="kw">When</span> 用户冷启动
+  <span class="kw">Then</span> Logo 应展示满 2 秒
+  <span class="kw">And</span> 满 2 秒后应展示开屏广告全屏
+  <span class="kw">And</span> 用户关闭广告后应直接进入首页
+  <span class="kw">And</span> 不应展示运营开屏
+
+<span class="scenario">Scenario:</span> 参数1无缓存直进首页且无运营开屏
+  <span class="kw">Given</span> 用户开屏实验参数为 1
+  <span class="kw">And</span> 开屏广告无缓存
+  <span class="kw">And</span> 运营开屏配置命中
+  <span class="kw">And</span> 启动后 7 秒内始终无开屏广告填充
+  <span class="kw">When</span> 用户冷启动
+  <span class="kw">Then</span> Logo 应展示满 2 秒
+  <span class="kw">And</span> 应在 7 秒内进入首页
+  <span class="kw">And</span> 不应展示开屏广告全屏
+  <span class="kw">And</span> 不应展示运营开屏
+  <span class="kw">And</span> 不应出现持续黑屏等待
+
+<span class="scenario">Scenario:</span> 参数1展示后预加载下一发
+  <span class="kw">Given</span> 用户开屏实验参数为 1
+  <span class="kw">And</span> 开屏广告已展示并成功关闭
+  <span class="kw">When</span> 客户端进入下一次可尝试开屏的时机
+  <span class="kw">Then</span> 应已触发 app_open 预加载请求
+  <span class="kw">And</span> 不应为预加载单独展示全屏 Loading
+
+<span class="scenario">Scenario:</span> 当天达到展示上限不再弹
+  <span class="kw">Given</span> 用户开屏实验参数为 1
+  <span class="kw">And</span> max_per_session 子开关为 2
+  <span class="kw">And</span> 当前自然日内已成功展示开屏广告 2 次
+  <span class="kw">When</span> 用户再次满足冷启动开屏条件
+  <span class="kw">Then</span> 不应再展示开屏广告
+
+<span class="scenario">Scenario:</span> 热启动开关开启且回前台有缓存
+  <span class="kw">Given</span> 用户开屏实验参数为 1
+  <span class="kw">And</span> hot_start_enable 子开关为 1
+  <span class="kw">And</span> 开屏广告已预加载成功
+  <span class="kw">When</span> 用户从后台回到前台
+  <span class="kw">Then</span> 应展示开屏广告全屏
+  <span class="kw">And</span> 不应展示运营开屏
+
+<span class="scenario">Scenario:</span> 距上次关闭不足间隔秒数不再弹
+  <span class="kw">Given</span> 用户开屏实验参数为 1
+  <span class="kw">And</span> inter_time_sec 子开关为 60
+  <span class="kw">And</span> 用户在 30 秒前已成功关闭开屏广告
+  <span class="kw">When</span> 用户再次冷启动且满足其它开屏条件
+  <span class="kw">Then</span> 不应展示开屏广告
+
+<span class="scenario">Scenario:</span> 访客冷启动不出现开屏广告
+  <span class="kw">Given</span> 用户为访客未 init 广告 SDK
+  <span class="kw">When</span> 用户冷启动进入 App
+  <span class="kw">Then</span> 不应出现开屏广告全屏
+
+<span class="scenario">Scenario:</span> VIP参数1不出现开屏广告与运营开屏
+  <span class="kw">Given</span> 用户为有效订阅 VIP
+  <span class="kw">And</span> 用户开屏实验参数为 1
+  <span class="kw">When</span> 用户冷启动
+  <span class="kw">Then</span> 不应出现开屏广告全屏
+  <span class="kw">And</span> 不应展示运营开屏
+
+<span class="scenario">Scenario:</span> VIP参数0不出现开屏广告
+  <span class="kw">Given</span> 用户为有效订阅 VIP
+  <span class="kw">And</span> 用户开屏实验参数为 0
+  <span class="kw">When</span> 用户冷启动
+  <span class="kw">Then</span> 不应出现开屏广告全屏
+  <span class="kw">And</span> 运营开屏是否展示应与现网 VIP 规则一致</pre>
+
+<!-- §5.2 -->
+<h3 id="sec-5-2">5.2 插页实验</h3>
+<p style="color: var(--ff-text-secondary); font-size: 13px;"><strong>目标读者</strong>：前端、广告/SDK、QA、配置后台。</p>
+
+<h4 id="sec-5-2-1">5.2.1 实验 Key</h4>
+<table>
+  <thead><tr><th>说明</th><th>iOS key</th><th>Android key</th></tr></thead>
+  <tbody>
+    <tr><td>播放免费剧集时切集插页</td><td><code>ios_free_interstitial-test</code></td><td><code>android_free_interstitial-test</code></td></tr>
+  </tbody>
+</table>
+
+<h4 id="sec-5-2-2">5.2.2 参数（实验分组 · int）</h4>
+<blockquote>本实验通过上述 key 下发的 <strong>参数</strong> 决定对照 / 实验组 A。<strong>参数默认值 = 0</strong>。</blockquote>
+<table class="param-table">
+  <thead><tr><th>参数值</th><th>含义</th><th>本实验行为</th></tr></thead>
+  <tbody>
+    <tr><td><span class="param-chip p0">0</span></td><td>对照组</td><td><strong>播放免费剧集时</strong>切集<strong>不弹</strong>本需求插页</td></tr>
+    <tr><td><span class="param-chip p1">1</span></td><td>实验组 A</td><td><strong>播放免费剧集时</strong>按 §5.2.4 <strong>看几集弹</strong> 尝试插页（默认 <strong>看2集弹</strong>）</td></tr>
+  </tbody>
+</table>
+<blockquote class="plain-talk">参数 <strong>0</strong> = 看免费剧切集不打断；参数 <strong>1</strong> = 按 <strong>看几集弹</strong> 在指定集<strong>看完</strong>时可能弹全屏广告，<strong>不给币</strong>（默认 <strong>看2集弹</strong> = 第 2、4、6… 集看完时弹）。</blockquote>
+
+<h4 id="sec-5-2-3">5.2.3 线框 · 切集插页</h4>
+
+<div class="mockup-section">
+<h4 style="margin-top: 0;">参数 = 1 · 默认看2集弹：第 N 集（N=2,4,6…）看完时弹</h4>
+<div class="mockup-row">
+  <div class="mini-phone">
+    <div class="mini-phone-screen">
+      <div class="mini-status"><span>9:41</span><span>●●● ▮▮</span></div>
+      <div class="player-phase">
+        <span class="player-ep-tag">EP. N</span>
+        <div class="player-content">正片画面</div>
+        <div class="player-controls">
+          <div class="player-progress"></div>
+          <div class="player-time"><span>00:00 / 03:10</span><span>1.0X</span></div>
+        </div>
+      </div>
+      <div class="label">第 N 集 加载成功</div>
+    </div>
+  </div>
+  <div class="mockup-arrow">→</div>
+  <div class="mini-phone jump-target" data-jump="#sec-5-2-4">
+    <div class="mini-phone-screen">
+      <div class="mini-status"><span>9:41</span><span>●●● ▮▮</span></div>
+      <div class="ad-phase">
+        <span class="ad-badge">广告</span>
+        <span class="ad-close">×</span>
+        <div class="ad-content">
+          <div class="ad-title">Sponsored Brand</div>
+          <div class="ad-sub">Full-screen interstitial · no reward</div>
+          <div class="ad-cta">LEARN MORE</div>
+        </div>
+      </div>
+      <div class="label">全屏插页 · 无奖励 · 关闭即继续</div>
+    </div>
+  </div>
+  <div class="mockup-arrow">→</div>
+  <div class="mini-phone">
+    <div class="mini-phone-screen">
+      <div class="mini-status"><span>9:41</span><span>●●● ▮▮</span></div>
+      <div class="player-phase">
+        <span class="player-ep-tag">EP. N</span>
+        <div class="player-content">继续播放正片</div>
+        <div class="player-controls">
+          <div class="player-progress"></div>
+          <div class="player-time"><span>00:00 / 03:10</span><span>1.0X</span></div>
+        </div>
+      </div>
+      <div class="label">关闭后接着播 第 N 集</div>
+    </div>
+  </div>
+</div>
+<p class="caption"><strong>参数 = 0 时</strong>中间这张插页整段不出现，直接是左 → 右连续播放。点中间 mockup 跳 §5.2.4「看几集弹」逻辑。</p>
+</div>
+
+<pre class="ascii">┌─────────────────────────────────────────┐
+│  沉浸播放页 · 第 N 集加载成功            │
+│         ↓（本集属于看几集弹且有缓存）   │
+│  ┌───────────────────────────────────┐  │
+│  │  全屏插页广告（无奖励）            │  │
+│  │  [关闭]                           │  │
+│  └───────────────────────────────────┘  │
+│         ↓ 关闭后                         │
+│  继续播放第 N 集正片                     │
+└─────────────────────────────────────────┘
+</pre>
+
+<h4 id="sec-5-2-4">5.2.4 子开关（实验 key 下 · int）</h4>
+<blockquote>下列 <strong>子开关</strong> 挂在 <code>ios_free_interstitial-test</code> / <code>android_free_interstitial-test</code> 下。<strong>仅当 §5.2.2 参数 = 1</strong> 时参与判定。<br><strong>默认值来源</strong>：本期实验设计（默认 <strong>看2集弹</strong>）；<code>inter_time_sec</code> / <code>max_per_play_session</code> 默认 <strong>0</strong> 表示不额外加秒级/会话 cap（⚠️ 与现网核对）。</blockquote>
+<table class="subswitch-table">
+  <thead><tr><th>子开关的 key</th><th>产品叫法</th><th>类型</th><th>默认值</th><th>需求逻辑（未改配置时）</th><th>远程改配</th></tr></thead>
+  <tbody>
+    <tr><td><code>interval_episodes</code></td><td><strong>看几集弹</strong></td><td>int</td><td><strong>2</strong>（<strong>看2集弹</strong>）</td><td><strong>看1集弹</strong>：每看完 1 集都可能弹。<strong>看2集弹</strong>（默认）：第 2、4、6… 集看完弹，第 1 集不弹。<strong>看3集弹</strong>：第 3、6、9… 集看完弹。须能免费看；切集完成时判定；有缓存就弹，没有则 0.5 秒内开播</td><td>设为 <strong>1</strong> / <strong>2</strong> / <strong>3</strong> … = <strong>看1集弹</strong> / <strong>看2集弹</strong> / <strong>看3集弹</strong></td></tr>
+    <tr><td><code>inter_time_sec</code></td><td>（秒级冷却）</td><td>int</td><td><strong>0</strong></td><td><strong>不</strong>额外按「多少秒才能再弹」（只受 <strong>看几集弹</strong> 约束）</td><td>设为 <strong>N</strong>：距上次成功关闭至少 <strong>N</strong> 秒</td></tr>
+    <tr><td><code>max_per_play_session</code></td><td>（单次播放页上限）</td><td>int</td><td><strong>0</strong></td><td><strong>不</strong>另设单次进播放页总次数上限</td><td>设为 <strong>N</strong>：单次进入播放页会话内成功展示 <strong>≤ N</strong> 次</td></tr>
+  </tbody>
+</table>
+
+<h4 id="sec-5-2-5">5.2.5 补充规则</h4>
+<blockquote>参数、子开关、预加载、展示判定与频控见 §5.2.2、§5.2.4、§5.2.6；本节<strong>只写上文未覆盖</strong>项。</blockquote>
+<table>
+  <thead><tr><th style="width: 22%;">项</th><th>规则</th></tr></thead>
+  <tbody>
+    <tr><td><strong>触发时机</strong></td><td>在<strong>新一集加载成功 / 切集完成</strong>时进入是否弹插页的判定（弹不弹见 §5.2.6）</td></tr>
+    <tr><td><strong>奖励</strong></td><td><strong>无</strong>；关闭后继续当前集正片</td></tr>
+    <tr><td><strong>画中画</strong></td><td><strong>跳过</strong>，不弹</td></tr>
+    <tr><td><strong>与其它全屏广告</strong></td><td>其它全屏广告正在播时，<strong>不叠</strong>第二个</td></tr>
+    <tr><td><strong>数据场景</strong></td><td>建议对齐现网 <code>immersion_free_int</code>（⚠️ 与数据确认编号）</td></tr>
+  </tbody>
+</table>
+
+<h4 id="sec-5-2-6">5.2.6 预加载与展示上限（插页广告）</h4>
+<blockquote><strong>预加载</strong>：<code>immersion_free_int</code> <strong>始终按现网执行预加载</strong>（本需求<strong>不提供</strong>关闭或调节预加载的子开关）。<strong>参数 = 1</strong> 且命中触发条件时<strong>消费</strong>缓存尝试展示；<strong>参数 = 0</strong> 不展示本需求插页，预加载仍跟现网。</blockquote>
+<blockquote class="plain-talk">进播放页就会攒广告；该弹的那一集有货就弹，没货立刻播剧；同一集最多弹一次。</blockquote>
+<p><strong>广告位</strong>：<code>immersion_free_int</code>（免费剧集插页）；双单元 fallback ⚠️ 与现网一致。</p>
+
+<h5>预加载：何时拉取、何时作废</h5>
+<table>
+  <thead><tr><th>时机 / 条件</th><th>客户端行为</th></tr></thead>
+  <tbody>
+    <tr><td><strong>进入沉浸播放页</strong>（打开某剧播放页）</td><td><strong>必须</strong>预加载 1 发插页（与现网一致）</td></tr>
+    <tr><td><strong>插页展示并关闭</strong>（缓存消耗）</td><td><strong>必须</strong>立即预加载下一发</td></tr>
+    <tr><td><strong>用户切到「下一个可能触发插页」的集之前</strong></td><td>若当前无有效缓存，<strong>后台</strong>续拉（⚠️ 与现网对齐，<strong>不</strong>挡正片起播）</td></tr>
+    <tr><td><strong>上一个广告消耗完</strong>（现网通用事件）</td><td>触发预加载（与历史「缓存时机」一致）</td></tr>
+    <tr><td><strong>预加载失败</strong></td><td><strong>不挡播放</strong>；按现网策略间隔重试（⚠️ 秒数与现网对齐，见 §8.2 待确认）</td></tr>
+    <tr><td><strong>缓存超时</strong></td><td>跟<strong>现网 / SDK 默认</strong>（历史索引：<strong>60 分钟</strong>未用失效等；与 SDK 硬过期并存时取<strong>更严</strong>）；超时后客户端<strong>自动重新预加载</strong></td></tr>
+    <tr><td><span class="param-chip p0">参数 0</span></td><td><strong>不展示</strong>本需求插页；<code>immersion_free_int</code> 预加载<strong>仍执行</strong>（与现网一致）</td></tr>
+  </tbody>
+</table>
+
+<h5>展示：何时尝试、何时跳过</h5>
+<blockquote>参数 <strong>1</strong>、免费/锁定、<strong>看几集弹</strong>见 §5.2.2、§5.2.4；秒级冷却与会话总 cap 见 §5.2.4；画中画 / 叠播见 §5.2.5。</blockquote>
+<table>
+  <thead><tr><th>条件</th><th>是否尝试展示</th></tr></thead>
+  <tbody>
+    <tr><td>参数 <strong>1</strong> 且满足 §5.2.4 <strong>看几集弹</strong>，且有有效缓存、SDK 有填充</td><td><strong>是</strong></td></tr>
+    <tr><td>当前集为待解锁<strong>锁定集</strong> / 不可免费观看</td><td><strong>否</strong>（走待解锁门闸，不消耗本实验插页机会）</td></tr>
+    <tr><td>无缓存 / 过期 / 无填充</td><td><strong>否</strong> → <strong>500ms 内</strong>起播，不全屏等待</td></tr>
+    <tr><td>该集本次停留已展示过本需求插页</td><td><strong>否</strong>（<strong>同一集 ≤1 次</strong>，见下表）</td></tr>
+    <tr><td>VIP / 访客 / 未命中 §5.2.4 算法</td><td><strong>否</strong></td></tr>
+  </tbody>
+</table>
+
+<h5>展示上限（频控）</h5>
+<table>
+  <thead><tr><th>维度</th><th>规则</th></tr></thead>
+  <tbody>
+    <tr><td><strong>单集</strong></td><td>同一 <code>episode_index</code> 本次停留中，成功展示 <strong>≤ 1 次</strong></td></tr>
+    <tr><td><strong>自然日</strong></td><td>⚠️ 若现网对 <code>immersion_free_int</code> 有日上限则保持一致；无则本期不新增</td></tr>
+  </tbody>
+</table>
+
+<h5>展示后</h5>
+<table>
+  <thead><tr><th>事件</th><th>行为</th></tr></thead>
+  <tbody>
+    <tr><td>用户关闭插页（成功）</td><td>计一次成功展示；消耗缓存；预加载下一发；<strong>继续播放当前集正片</strong>，无奖励</td></tr>
+    <tr><td>无缓存 / 失败</td><td>不计成功次数；立即播正片；后台可继续预加载</td></tr>
+  </tbody>
+</table>
+
+<h4 id="sec-5-2-7">5.2.7 状态</h4>
+<table>
+  <thead><tr><th>状态</th><th>表现</th></tr></thead>
+  <tbody>
+    <tr><td>不应触发</td><td>见 §5.2.6「展示：何时尝试」<strong>否</strong>分支 → 直接播放</td></tr>
+    <tr><td>应触发无缓存</td><td>直接播放；后台可继续预加载</td></tr>
+    <tr><td>展示成功</td><td>全屏插页 → 关闭后继续当前集</td></tr>
+    <tr><td>展示失败</td><td>同无缓存</td></tr>
+  </tbody>
+</table>
+
+<h4 id="sec-5-2-8">5.2.8 验收标准</h4>
+<pre class="gherkin"><span class="kw">Feature:</span> 免费集切集插页实验
+
+<span class="scenario">Scenario:</span> 参数0播放免费剧集时不插页
+  <span class="kw">Given</span> 用户 ios_free_interstitial-test 或 android_free_interstitial-test 参数为 0
+  <span class="kw">And</span> 用户在沉浸播放页观看免费剧
+  <span class="kw">When</span> 用户连续进入第 2、4、6 集
+  <span class="kw">Then</span> 不应出现本需求定义的全屏插页
+
+<span class="scenario">Scenario:</span> 参数1在第2集有缓存时插页
+  <span class="kw">Given</span> 用户插页实验参数为 1
+  <span class="kw">And</span> 插页已预加载
+  <span class="kw">When</span> 用户进入第 2 集且该集为免费非锁定
+  <span class="kw">Then</span> 应展示全屏插页
+  <span class="kw">And</span> 关闭后应继续播放第 2 集正片
+  <span class="kw">And</span> 不应发放金币或解锁权益
+
+<span class="scenario">Scenario:</span> 参数1在第4集有缓存时插页
+  <span class="kw">Given</span> 用户插页实验参数为 1
+  <span class="kw">And</span> 插页已预加载
+  <span class="kw">When</span> 用户进入第 4 集且该集为免费非锁定
+  <span class="kw">Then</span> 应展示全屏插页
+  <span class="kw">And</span> 关闭后应继续播放第 4 集正片
+  <span class="kw">And</span> 不应发放金币或解锁权益
+
+<span class="scenario">Scenario:</span> 参数1第3集不插页
+  <span class="kw">Given</span> 用户插页实验参数为 1
+  <span class="kw">When</span> 用户进入第 3 集
+  <span class="kw">Then</span> 不应因本需求弹插页
+
+<span class="scenario">Scenario:</span> 无缓存不挡播放
+  <span class="kw">Given</span> 用户插页实验参数为 1
+  <span class="kw">And</span> 进入第 2 集时应插页但无缓存
+  <span class="kw">When</span> 集加载成功
+  <span class="kw">Then</span> 应在 500ms 内开始正片播放
+  <span class="kw">And</span> 不应出现全屏 Loading 等待广告
+
+<span class="scenario">Scenario:</span> 进入播放页必须预加载插页
+  <span class="kw">Given</span> 用户插页实验参数为 1
+  <span class="kw">When</span> 用户进入某剧沉浸播放页
+  <span class="kw">Then</span> 应触发 immersion_free_int 预加载
+  <span class="kw">And</span> 不应阻塞首集正片起播
+
+<span class="scenario">Scenario:</span> 同一集不重复插页
+  <span class="kw">Given</span> 用户插页实验参数为 1
+  <span class="kw">And</span> 用户已在第 4 集成功关闭本需求插页一次
+  <span class="kw">When</span> 用户离开第 4 集后再次进入第 4 集
+  <span class="kw">Then</span> 不应因本需求再次弹插页
+
+<span class="scenario">Scenario:</span> 锁定集不插页
+  <span class="kw">Given</span> 用户插页实验参数为 1
+  <span class="kw">And</span> 插页已预加载
+  <span class="kw">And</span> 第 4 集为待解锁锁定集不可免费观看
+  <span class="kw">When</span> 用户进入第 4 集
+  <span class="kw">Then</span> 不应因本需求弹插页
+  <span class="kw">And</span> 应走待解锁门闸
+
+<span class="scenario">Scenario:</span> 访客播放免费剧不插页
+  <span class="kw">Given</span> 用户为访客未 init 广告 SDK
+  <span class="kw">And</span> 用户在沉浸播放页观看免费剧
+  <span class="kw">When</span> 用户进入第 2 集
+  <span class="kw">Then</span> 不应出现本需求定义的全屏插页</pre>
+
+<h3 id="sec-5-3">5.3 与相关 PRD / 广告位关系</h3>
+<table>
+  <thead><tr><th>文档/资产</th><th>关系</th></tr></thead>
+  <tbody>
+    <tr><td><code>docs/20260513/PRD/待解锁页广告解锁改插页/</code></td><td><strong>独立</strong>；不改待解锁「看广告解锁」</td></tr>
+    <tr><td><code>docs/20260513/PRD/访客模式与游客身份/</code></td><td>访客豁免；不 init 广告</td></tr>
+    <tr><td>历史索引 <code>app_open</code></td><td>开屏实验埋点/广告位对齐</td></tr>
+    <tr><td>历史索引 <code>immersion_free_int</code></td><td>插页实验埋点/广告位对齐</td></tr>
+  </tbody>
+</table>
+
+<!-- §6 -->
+<h2 id="sec-6">6. 埋点与实验指标</h2>
+
+<h3>6.1 开屏实验指标</h3>
+<table>
+  <thead><tr><th>类型</th><th>指标</th></tr></thead>
+  <tbody>
+    <tr><td>核心</td><td>开屏广告展示率、eCPM、启动至首页耗时</td></tr>
+    <tr><td>护栏</td><td>次日留存、启动流失</td></tr>
+    <tr><td>分析维度</td><td><strong>开屏实验参数</strong>（0/1）× 平台 × 国家 × 新老用户</td></tr>
+  </tbody>
+</table>
+
+<h3>6.2 插页实验指标</h3>
+<table>
+  <thead><tr><th>类型</th><th>指标</th></tr></thead>
+  <tbody>
+    <tr><td>核心</td><td>插页展示率、广告 ARPU</td></tr>
+    <tr><td>护栏</td><td>免费集完播率、次留、投诉</td></tr>
+    <tr><td>分析维度</td><td><strong>插页实验参数</strong>（0/1）× 平台 × 国家 × 新老用户</td></tr>
+  </tbody>
+</table>
+
+<h3>6.3 开屏实验埋点</h3>
+<table>
+  <thead><tr><th>事件意图</th><th>触发时机</th><th>建议字段</th></tr></thead>
+  <tbody>
+    <tr><td>开屏广告尝试</td><td>调用展示开屏广告前</td><td><code>open_ads_param</code>（0/1）、<code>fail_reason</code>、<code>session_type</code>（cold/hot）</td></tr>
+    <tr><td>开屏广告展示/关闭</td><td>SDK 回调</td><td><code>duration_ms</code>、<code>ad_network</code></td></tr>
+  </tbody>
+</table>
+
+<h3>6.4 插页实验埋点</h3>
+<table>
+  <thead><tr><th>事件意图</th><th>触发时机</th><th>建议字段</th></tr></thead>
+  <tbody>
+    <tr><td>免费集插页尝试</td><td>切集判定为应插页时</td><td><code>free_int_param</code>（0/1）、<code>drama_id</code>、<code>episode_index</code></td></tr>
+    <tr><td>免费集插页展示/关闭</td><td>SDK 回调</td><td><code>duration_ms</code>、是否继续播放</td></tr>
+  </tbody>
+</table>
+
+<!-- §7 -->
+<h2 id="sec-7">7. 影响范围</h2>
+<table>
+  <thead><tr><th>模块</th><th>影响</th></tr></thead>
+  <tbody>
+    <tr><td>启动页 / 首页</td><td>开屏实验顺序与频控</td></tr>
+    <tr><td>沉浸播放页</td><td>插页实验切集判定与插页</td></tr>
+    <tr><td>广告 SDK</td><td>开屏广告 + 播放页插页广告的预加载与互斥</td></tr>
+    <tr><td>远程配置 / 实验平台</td><td>双 key，各 key 独立 <strong>参数（0/1）</strong> + <strong>子开关（int）</strong>；<strong>回滚</strong>：将参数改回 <strong>0</strong> 或关闭实验 key 即恢复对照行为</td></tr>
+    <tr><td>数据报表</td><td>分实验看板</td></tr>
+  </tbody>
+</table>
+<p><strong>不改</strong>：待解锁页、退出播放页插页、任务中心激励、订阅计费逻辑。</p>
+
+<!-- §8 -->
+<h2 id="sec-8">8. 待确认问题</h2>
+
+<h3>8.1 开屏实验</h3>
+<table>
+  <thead><tr><th style="width: 6%;">#</th><th>项</th><th>状态</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>热启动是否默认展示开屏广告</td><td>子开关默认 <strong>0</strong>（仅冷启动）；远程设为 <strong>1</strong> 开启</td></tr>
+  </tbody>
+</table>
+
+<h3>8.2 插页实验</h3>
+<table>
+  <thead><tr><th style="width: 6%;">#</th><th>项</th><th>状态</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td><code>immersion_free_int</code> 场景编号是否与数据现网一致</td><td>⚠️ 上线前与数据对齐</td></tr>
+    <tr><td>2</td><td>插页预加载失败重试间隔、缓存失效与现网真值（无预加载子开关）</td><td>⚠️ 研发对齐后关闭</td></tr>
+  </tbody>
+</table>
+
+<h3>8.3 开屏实验 · 现网频控真值</h3>
+<table>
+  <thead><tr><th style="width: 6%;">#</th><th>项</th><th>状态</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td><code>app_open</code> 默认间隔秒数、当天展示上限（<code>max_per_session</code>=10）是否与线上一致</td><td>⚠️ 研发对齐后关闭</td></tr>
+  </tbody>
+</table>
+
+<!-- §9 -->
+<h2 id="sec-9">9. 版本规划</h2>
+<table>
+  <thead><tr><th>阶段</th><th>内容</th></tr></thead>
+  <tbody>
+    <tr><td><strong>本期</strong></td><td>开屏 + 插页双实验上线；实验参数默认 <strong>0</strong>；子开关默认值见 §5.1.4 / §5.2.4</td></tr>
+    <tr><td><strong>Phase 2</strong></td><td>按数据调 <strong>看几集弹</strong>（<code>interval_episodes</code>）等；退出播放页插页另立项</td></tr>
+  </tbody>
+</table>
+
+<!-- Footer -->
+<footer class="footer">
+  <p><strong>设计基线</strong>：<a href="https://github.com/king460357/ff-app-prd-skill/blob/main/design-system/flareflow-visual-baseline.md">flareflow-visual-baseline.md v1.1</a>（2026-05-29）</p>
+  <p>真理源 markdown：<code>20260520_开屏与免费集插页AB_PRD.md</code></p>
+  <p>本 HTML 由 prd-writer-master skill 按 baseline v1.1 自动生成。Mermaid 流程图需联网渲染；离线状态下显示原文 code。</p>
+</footer>
+
+</div>
+
+<script>
+  // Mermaid init
+  if (window.mermaid) {
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'dark',
+      themeVariables: {
+        primaryColor: '#1F1F22',
+        primaryTextColor: '#FFFFFF',
+        primaryBorderColor: '#FFD24A',
+        lineColor: '#8A8A8E',
+        secondaryColor: '#FF6B3D',
+        tertiaryColor: '#2A2A2E',
+        background: '#000000',
+        mainBkg: '#1F1F22',
+        secondBkg: '#2A2A2E',
+      }
+    });
+  }
+
+  // data-jump 跳转三件套
+  document.querySelectorAll('[data-jump]').forEach(el => {
+    el.addEventListener('click', e => {
+      e.stopPropagation();
+      const sel = el.getAttribute('data-jump');
+      if (!sel) return;
+      const target = document.querySelector(sel);
+      if (!target) return;
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      target.classList.add('flash');
+      setTimeout(() => target.classList.remove('flash'), 1400);
+    });
+  });
+</script>
+
+</body>
+</html>
