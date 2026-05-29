@@ -534,7 +534,7 @@
  <li><strong>方式 B · Finder 双击</strong>：下载后双击 <code>*_PRD.html</code></li>
  <li><strong>方式 C · 拖到浏览器</strong>：下载后拖入任意浏览器</li>
  </ul>
- <p style="margin-top: 10px; color: var(--ff-text-placeholder); font-size: 12px;">⚠️ Mermaid 流程图需联网首次渲染；离线状态显示源码。</p>
+ <p style="margin-top: 10px; color: var(--ff-text-placeholder); font-size: 12px;">⚠️ Mermaid 流程图需联网首次显示；离线状态显示源码。</p>
 </section>
 
 <nav class="toc">
@@ -575,8 +575,8 @@
  <tr><td>适用身份</td><td><span class="id-tag visitor">VISITOR</span> / <span class="id-tag guest">GUEST</span> / <span class="id-tag loggedin">LOGGED_IN</span> <strong>三档全部可用</strong>（限可免费观看的集；锁定集策略见 §5.4）</td></tr>
  <tr><td>触发方式</td><td><strong>A. 系统手势</strong>（Android 按 Home / iOS App 切后台自动） + <strong>B. 沉浸播放页右上角 <code>···</code> 菜单内切换开关</strong>（用户可控偏好；不一键立即进 PiP）</td></tr>
  <tr><td>切集</td><td><strong>自动连播下一集</strong> + PiP 窗系统位上/下一集按钮</td></tr>
- <tr><td>锁定集</td><td>PiP <strong>暂停在锁定集封面 + "Tap to unlock" Toast</strong>；用户点 PiP 回 App 待解锁页</td></tr>
- <tr><td>横屏剧支持</td><td><strong>是</strong>——进入 PiP 时按视频实际 aspect ratio 交 OS 处理</td></tr>
+ <tr><td>锁定集</td><td>PiP <strong>暂停在锁定集封面 + 显示「Tap to unlock」（中文：点击解锁）的 Toast 浮层</strong>；用户点 PiP 回 App 待解锁页</td></tr>
+ <tr><td>横屏剧支持</td><td><strong>是</strong>——进入 PiP 时按视频实际 画面比例 交 OS 处理</td></tr>
  <tr><td>VIP 差异</td><td><strong>无差异</strong>（VIP 自然受益于"无锁定集"）</td></tr>
  <tr><td>PiP 期间广告</td><td><strong>全部豁免</strong>（切集插页 / 开屏 / 激励均不触发）</td></tr>
  <tr><td>超时关闭机制</td><td>PiP <strong>实际未播放视频满 30 分钟</strong>（停留在锁定封面）自动关闭 PiP</td></tr>
@@ -610,7 +610,7 @@ flowchart TD
  A0[沉浸播放页正在播放正片] --> A1{触发方式?}
  A1 -->|按 Home / iOS 切后台| A2{切换开关偏好 ON 且 系统权限 ON?}
  A1 -->|点 ··· 菜单内切换开关| A3{系统 PiP 权限状态?}
- A2 -->|是| A4[设 aspect ratio 进 PiP]
+ A2 -->|是| A4[设 画面比例 进 PiP]
  A2 -->|否| A5[沿用现网 App 退后台]
  A3 -->|系统权限 ON| A6[翻转切换开关偏好并保存到本地]
  A3 -->|系统权限 OFF 置灰| A7[弹标准居中权限引导弹窗]
@@ -629,7 +629,7 @@ flowchart TD
  B1 -->|是| B2{下一集存在?}
  B2 -->|否 最后一集| B3[PiP 显示已播完 暂停]
  B2 -->|是| B4{下一集可免费观看?}
- B4 -->|免费集| B5[继续播 aspect ratio 按需更新]
+ B4 -->|免费集| B5[继续播 画面比例 按需更新]
  B5 --> B0
  B4 -->|锁定集| B6[PiP 暂停 显示封面 + Tap to unlock]
  B6 --> B7{用户行为?}
@@ -658,7 +658,7 @@ flowchart TD
 
 <h4 id="sec-5-1-2">5.1.2 菜单切换开关（核心 UX · 用户可控）</h4>
 
-<p>沉浸播放页 <code>···</code> 菜单内的「画中画」项是 <strong>iOS-style 切换开关 UI</strong>（与系统 Settings 视觉风格一致）。</p>
+<p>沉浸播放页 <code>···</code> 菜单内的「画中画」项是 <strong>iOS 系统设置风格 切换开关 UI</strong>（与系统 Settings 视觉风格一致）。</p>
 <p><strong>用户可控</strong>：即使系统 PiP 权限 ON，用户也可在 App 内独立把 FlareFlow 的 PiP 关掉。点击切换开关 = <strong>切换状态并保存到本地</strong>（<strong>不立即触发进入 PiP</strong>）。</p>
 
 <div class="mockup-section">
@@ -818,15 +818,15 @@ flowchart TD
 <table>
  <thead><tr><th>位</th><th>控件</th><th>行为</th></tr></thead>
  <tbody>
- <tr><td>1</td><td><strong>上一集</strong>（系统 skip prev icon）</td><td>切换到上一集；规则同 §5.3</td></tr>
- <tr><td>2</td><td><strong>播放 / 暂停</strong>（系统 play/pause icon）</td><td>切换播放状态；暂停时前台服务仍可维持，<strong>不触发</strong> 超时关闭机制</td></tr>
- <tr><td>3</td><td><strong>下一集</strong>（系统 skip next icon）</td><td>切换到下一集；规则同 §5.3</td></tr>
+ <tr><td>1</td><td><strong>上一集</strong>（系统"上一集"按钮）</td><td>切换到上一集；规则同 §5.3</td></tr>
+ <tr><td>2</td><td><strong>播放 / 暂停</strong>（系统"播放/暂停"按钮）</td><td>切换播放状态；暂停时前台服务仍可维持，<strong>不触发</strong> 超时关闭机制</td></tr>
+ <tr><td>3</td><td><strong>下一集</strong>（系统"下一集"按钮）</td><td>切换到下一集；规则同 §5.3</td></tr>
  <tr><td>—</td><td>关闭 X（系统默认提供）</td><td>关 PiP；按 §5.6 退出流程</td></tr>
  </tbody>
 </table>
 <blockquote class="plain-talk">PiP 浮窗里就 3 个按钮——上一集 / 暂停 / 下一集，加上右上角系统默认的关闭 X。其它任何控件（点赞、收藏、倍速、清晰度、<strong>弹幕开关</strong>等）都不放，用户回 App 全屏再操作。</blockquote>
 
-<p><strong>弹幕渲染策略</strong>：PiP 期间<strong>强制不渲染弹幕</strong>——即使用户在全屏页打开了弹幕开关，PiP 窗内也<strong>不显示</strong>任何弹幕。理由：PiP 窗约 100×178 pt，弹幕字号小不易看清；强制关闭节省 CPU 与电量。用户<strong>点 PiP 回 App 全屏</strong>后，恢复用户原本的弹幕开关设置（PiP 期间不会修改用户的弹幕设置）。</p>
+<p><strong>弹幕显示策略</strong>：PiP 期间<strong>强制不显示弹幕</strong>——即使用户在全屏页打开了弹幕开关，PiP 窗内也<strong>不显示</strong>任何弹幕。理由：PiP 窗约 100×178 pt，弹幕字号小不易看清；强制关闭节省 CPU 与电量。用户<strong>点 PiP 回 App 全屏</strong>后，恢复用户原本的弹幕开关设置（PiP 期间不会修改用户的弹幕设置）。</p>
 
 <p><strong>音频会话策略</strong>：PiP 期间走 OS 标准音频会话（iOS <code>AVAudioSession.Category.playback</code> / Android 媒体音频流）；与其它 App 共存规则：</p>
 <ul>
@@ -839,11 +839,11 @@ flowchart TD
 <table>
  <thead><tr><th>项</th><th>规则</th></tr></thead>
  <tbody>
- <tr><td><strong>自动连播</strong></td><td>当前集播完 → 自动切下一集（Reels-style）；下一集请求按现网播放器走</td></tr>
+ <tr><td><strong>自动连播</strong></td><td>当前集播完 → 自动切下一集（类 Reels Tab 自动连播体验）；下一集请求按现网播放器走</td></tr>
  <tr><td><strong>手动切集</strong></td><td>系统位上一集 / 下一集按钮直接切；<strong>首集</strong>上一集置灰；<strong>末集</strong>下一集置灰</td></tr>
- <tr><td><strong>横竖屏切换</strong></td><td>切下一集后若 aspect ratio 与上一集不同（横↔竖），调用 OS API <code>setAspectRatio()</code> 实时更新；PiP 窗轻微动画切换尺寸</td></tr>
+ <tr><td><strong>横竖屏切换</strong></td><td>切下一集后若 画面比例 与上一集不同（横↔竖），调用 OS API <code>setAspectRatio()</code> 实时更新；PiP 窗轻微动画切换尺寸</td></tr>
  <tr><td><strong>弱网下一集失败</strong></td><td>超时阈值与现网播放器对齐；3 次重试失败 → "已播完"暂停态（不自动退 PiP）</td></tr>
- <tr><td><strong>播放归属（任务时长 / 观看进度 / 解锁次数 / 数据上报）</strong></td><td><strong>完全沿用现网</strong>——PiP 期间播放与 App 内沉浸页播放等价（同一播放器，仅渲染容器不同）；看剧任务时长、播放进度同步、广告解锁次数等按现网逻辑累加</td></tr>
+ <tr><td><strong>播放归属（任务时长 / 观看进度 / 解锁次数 / 数据上报）</strong></td><td><strong>完全沿用现网</strong>——PiP 期间播放与 App 内沉浸页播放等价（同一播放器，仅显示容器不同）；看剧任务时长、播放进度同步、广告解锁次数等按现网逻辑累加</td></tr>
  </tbody>
 </table>
 
@@ -885,9 +885,9 @@ flowchart TD
  <tbody>
  <tr><td><strong>触发条件</strong></td><td>PiP 内自动连播或用户点下一集，命中当前身份下不可免费观看的集</td></tr>
  <tr><td><strong>PiP 行为</strong></td><td>PiP 窗<strong>不退出</strong>；停止视频播放；窗内显示<strong>锁定集封面图</strong>（与现网待解锁页封面一致）+ Toast 文字 <strong>"Tap to unlock"</strong></td></tr>
- <tr><td><strong>用户点 PiP 窗体</strong></td><td>关闭 PiP → App 切到前台 → 路由到该剧该锁定集的待解锁页</td></tr>
+ <tr><td><strong>用户点 PiP 窗体</strong></td><td>关闭 PiP → App 切到前台 → 跳转到该剧该锁定集的待解锁页</td></tr>
  <tr><td><strong>超时关闭机制</strong></td><td>PiP 状态 = "暂停在锁定集封面" 持续 <strong>30 分钟</strong>未恢复播放 → 自动关闭 PiP →前台服务干净退出</td></tr>
- <tr><td><strong>超时关闭机制 reset 条件</strong></td><td>用户在 PiP 内点击播放 / 切到下一集 / 点 PiP 回 App，timer 立即清零</td></tr>
+ <tr><td><strong>超时关闭机制 reset 条件</strong></td><td>用户在 PiP 内点击播放 / 切到下一集 / 点 PiP 回 App，计时器 立即清零</td></tr>
  <tr><td><strong>访客触发锁定集</strong></td><td>点 PiP 回 App → <strong>先弹隐私弹窗</strong>（沿用 <a href="../../../20260513/PRD/访客模式与游客身份/">访客 PRD §7</a>）；同意后才进待解锁页</td></tr>
  </tbody>
 </table>
@@ -929,7 +929,7 @@ flowchart TD
  <thead><tr><th style="width: 28%;">项</th><th>规则</th></tr></thead>
  <tbody>
  <tr><td><strong>识别方式</strong></td><td>沿用现网每集元信息中的 orientation 字段</td></tr>
- <tr><td><strong>进入 PiP 时</strong></td><td>客户端按<strong>当前集实际 aspect ratio</strong> 调用 OS API；<strong>具体比例完全交 OS 处理</strong></td></tr>
+ <tr><td><strong>进入 PiP 时</strong></td><td>客户端按<strong>当前集实际 画面比例</strong> 调用 OS API；<strong>具体比例完全交 OS 处理</strong></td></tr>
  <tr><td><strong>连播切横↔竖时</strong></td><td>OS API <code>setPictureInPictureParams</code> 实时更新；PiP 窗轻微动画切换</td></tr>
  <tr><td><strong>锁定集封面适配</strong></td><td>按集 orientation 选对应封面 + Toast 适配</td></tr>
  <tr><td><strong>手机自动旋转 vs PiP</strong></td><td>PiP 窗形状由<strong>内容 orientation</strong> 决定，<strong>不</strong>受手机旋转影响</td></tr>
@@ -937,15 +937,15 @@ flowchart TD
  </tbody>
 </table>
 
-<h3 id="sec-5-8">5.8 状态机</h3>
+<h3 id="sec-5-8">5.8 状态总览</h3>
 <table>
  <thead><tr><th>状态</th><th>表现</th></tr></thead>
  <tbody>
- <tr><td>进入中</td><td>OS 系统过渡动画（约 300ms）；不渲染自定义 loading</td></tr>
+ <tr><td>进入中</td><td>OS 系统过渡动画（约 300ms）；不显示自定义 loading</td></tr>
  <tr><td>正常播放</td><td>PiP 窗视频播放中；3 个系统位控件可用</td></tr>
  <tr><td>手动暂停</td><td>用户点暂停 → 视频暂停；前台服务 仍可维持；<strong>不</strong>触发 超时关闭机制</td></tr>
- <tr><td>锁定集封面态</td><td>显示封面 + "Tap to unlock"；超时关闭机制 timer 开始</td></tr>
- <tr><td>切集中</td><td>短暂 spinner；新集加载完毕继续播放</td></tr>
+ <tr><td>锁定集封面态</td><td>显示封面 + "Tap to unlock"；超时关闭机制 计时器 开始</td></tr>
+ <tr><td>切集中</td><td>短暂 加载圈；新集加载完毕继续播放</td></tr>
  <tr><td>已播完末集</td><td>暂停态显示"已播完"</td></tr>
  <tr><td>退出中</td><td>OS 系统过渡动画；前台服务 退出</td></tr>
  </tbody>
@@ -990,7 +990,7 @@ flowchart TD
  <span class="kw">When</span> 用户点击 PiP 窗体
  <span class="kw">Then</span> PiP 应关闭
  <span class="kw">And</span> App 应切到前台
- <span class="kw">And</span> 应路由到该剧该锁定集的待解锁页
+ <span class="kw">And</span> 应跳转到该剧该锁定集的待解锁页
 
 <span class="scenario">Scenario:</span> 超时关闭机制 30 分钟自动关闭 PiP
  <span class="kw">Given</span> 用户的 PiP 暂停在锁定集封面已达 30 分钟
@@ -1013,9 +1013,9 @@ flowchart TD
 <span class="scenario">Scenario:</span> 横屏剧进入 PiP 与切横竖
  <span class="kw">Given</span> 用户在沉浸播放页观看一部横屏剧
  <span class="kw">When</span> 用户触发 PiP
- <span class="kw">Then</span> PiP 窗应按横屏剧实际 aspect ratio 显示
+ <span class="kw">Then</span> PiP 窗应按横屏剧实际 画面比例 显示
  <span class="kw">When</span> 切到一集竖屏剧
- <span class="kw">Then</span> PiP 窗 aspect ratio 应平滑切换为竖屏比
+ <span class="kw">Then</span> PiP 窗 画面比例 应平滑切换为竖屏比
 
 <span class="scenario">Scenario:</span> 系统权限关时菜单切换开关显示 OFF 置灰
  <span class="kw">Given</span> 系统画中画权限被关闭
@@ -1077,7 +1077,7 @@ flowchart TD
  <span class="kw">Given</span> 用户在沉浸播放页正在播放免费集
  <span class="kw">And</span> 用户全屏页弹幕开关为 ON
  <span class="kw">When</span> 用户进入 PiP
- <span class="kw">Then</span> PiP 窗内不应渲染任何弹幕
+ <span class="kw">Then</span> PiP 窗内不应显示任何弹幕
  <span class="kw">When</span> 用户点 PiP 回 App 全屏
  <span class="kw">Then</span> 全屏播放应恢复显示弹幕
  <span class="kw">And</span> 用户弹幕开关设置应保持为 ON 未被改写
@@ -1132,7 +1132,7 @@ flowchart TD
  <tr><td><strong>双击 PiP 浮窗</strong></td><td>OS 切换 PiP 尺寸（放大 ↔ 缩小，档位由系统决定）</td><td><strong>否</strong>——继续正常播放</td></tr>
  <tr><td><strong>拖动 PiP 浮窗</strong></td><td>OS 改变 PiP 位置（吸附屏幕角落或拖到的位置）</td><td><strong>否</strong></td></tr>
  <tr><td><strong>单击 PiP 浮窗内的按钮位置</strong>（上一集 / 暂停 / 下一集）</td><td>OS 显示 / 隐藏这三个按钮</td><td><strong>否</strong></td></tr>
- <tr><td><strong>单击 PiP 浮窗内的按钮位置以外</strong>（画面区域）</td><td>App 处理：关 PiP + 切前台 + 路由（详见 §5.6）</td><td><strong>是</strong></td></tr>
+ <tr><td><strong>单击 PiP 浮窗内的按钮位置以外</strong>（画面区域）</td><td>App 处理：关 PiP + 切前台 + 跳转到对应页面（详见 §5.6）</td><td><strong>是</strong></td></tr>
  <tr><td><strong>把 PiP 滑出屏幕边缘</strong>（Android）</td><td>关 PiP（详见 §5.6）</td><td>App 视为正常退出</td></tr>
  <tr><td><strong>OS 自动收起 PiP</strong>（来电、低内存、系统强杀等）</td><td>系统强制关 PiP</td><td>App 视同正常退出，下次回 App 按现网恢复进度</td></tr>
  </tbody>
@@ -1144,8 +1144,8 @@ flowchart TD
  <thead><tr><th>模块</th><th>影响</th></tr></thead>
  <tbody>
  <tr><td>系统支持范围</td><td><strong>Android 8.0 (API 26)+ / iOS 14.0+</strong>；低于此版本设备降级到现网退后台</td></tr>
- <tr><td>沉浸播放页</td><td>右上角 <code>···</code> 菜单加「画中画」<strong>切换开关项</strong>；切换开关用户选择保存在手机本地；进/退出 PiP 状态管理；锁定集封面渲染；<strong>PiP 期间弹幕渲染关闭 / 回全屏恢复</strong></td></tr>
- <tr><td>沉浸播放器（核心）</td><td>接入 iOS <code>AVPictureInPictureController</code> + Android <code>PIP Mode API</code>；横竖屏 aspect ratio 动态切换；3 个系统位控件</td></tr>
+ <tr><td>沉浸播放页</td><td>右上角 <code>···</code> 菜单加「画中画」<strong>切换开关项</strong>；切换开关用户选择保存在手机本地；进/退出 PiP 状态管理；锁定集封面显示；<strong>PiP 期间弹幕显示关闭 / 回全屏恢复</strong></td></tr>
+ <tr><td>沉浸播放器（核心）</td><td>接入 iOS <code>AVPictureInPictureController</code> + Android <code>PIP Mode API</code>；横竖屏 画面比例 动态切换；3 个系统位控件</td></tr>
  <tr><td>前台服务</td><td>与 PiP 生命周期绑定；PiP 关闭时前台服务退出；<strong>关闭瞬间是否需要短暂续命由研发深化</strong></td></tr>
  <tr><td>iOS 配置</td><td>Info.plist 声明 PiP 相关 Background Modes + <code>AVAudioSession.Category.playback</code> 配置由研发深化</td></tr>
  <tr><td>待解锁页</td><td>PiP "Tap to unlock" deeplink（沿用现网）</td></tr>
@@ -1193,7 +1193,7 @@ flowchart TD
 <footer class="footer">
  <p><strong>设计基线</strong>：<a href="https://github.com/king460357/ff-app-prd-skill/blob/main/design-system/flareflow-visual-baseline.md">flareflow-visual-baseline.md v1.1</a>（2026-05-29）</p>
  <p>真理源 markdown：<code>20260529_画中画_PRD.md</code></p>
- <p>本 HTML 由 prd-writer-master skill 按 baseline v1.1 自动生成。Mermaid 流程图需联网渲染。</p>
+ <p>本 HTML 由 prd-writer-master skill 按 baseline v1.1 自动生成。Mermaid 流程图需联网显示。</p>
 </footer>
 
 </div>
