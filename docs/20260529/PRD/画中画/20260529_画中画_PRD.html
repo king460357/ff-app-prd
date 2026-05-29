@@ -555,13 +555,13 @@
 <!-- §1 -->
 <h2 id="sec-1">1. 需求背景</h2>
 
-<p>FlareFlow Android 端使用 <code>mediaPlayback</code> 类型的前台服务（关联 <a href="../../../20260514/PRD/Android-FCM高优先级透传唤醒与常驻通知/">0514 Android-FCM 高优先级透传与常驻通知</a>）维持 FCM 透传保活、常驻通知等链路。Android 12+ 起对前台服务的合规判定收紧——<code>mediaPlayback</code> 类前台服务须有"用户可见 media 真在播"的证据，否则会被系统回收，进而拖垮 FCM / 保活链路。<strong>画中画（PiP）是合规的核心证据之一</strong>：用户切走 App 时 PiP 浮窗仍可见、视频仍在播，前台服务 维持成立。</p>
+<p>FlareFlow Android 端使用 <code>mediaPlayback</code> 类型的前台服务（关联 <a href="../../../20260514/PRD/Android-FCM高优先级透传唤醒与常驻通知/">0514 Android-FCM 高优先级透传与常驻通知</a>）维持 FCM 即时推送链路保活、常驻通知等链路。Android 12+ 起对前台服务的合规判定收紧——<code>mediaPlayback</code> 类前台服务须有"用户可见 media 真在播"的证据，否则会被系统回收，进而拖垮 FCM / 保活链路。<strong>画中画（PiP）是合规的核心证据之一</strong>：用户切走 App 时 PiP 浮窗仍可见、视频仍在播，前台服务 维持成立。</p>
 
 <p>iOS 没有等价的前台服务概念，但 PiP 同样能延长用户观看时长——用户切换 App、聊天、复制粘贴时不必关掉 FlareFlow。</p>
 
 <p>因此本期把 PiP 正式做成一个独立功能，统一规则：</p>
 <ul>
- <li><strong>合规边界（Android 主因）</strong>：PiP 是前台服务续命的核心证据；无 PiP 链路则 FCM 透传/保活/常驻通知受影响。</li>
+ <li><strong>合规边界（Android 主因）</strong>：PiP 是前台服务续命的核心证据；无 PiP 链路则 FCM 即时推送/保活/常驻通知受影响。</li>
  <li><strong>体验边界（两平台共同）</strong>：用户在多任务切换时仍能继续看剧；锁定集场景下 PiP 不打扰但给出明确的解锁回流入口。</li>
 </ul>
 
@@ -596,7 +596,7 @@
  <tr><td><span class="id-tag visitor">VISITOR</span> 访客</td><td>✓</td><td>用户点 PiP 回 App → <strong>先弹隐私弹窗</strong>（沿用 <a href="../../../20260513/PRD/访客模式与游客身份/">访客 PRD §7</a>）；同意后才进待解锁页</td></tr>
  <tr><td><span class="id-tag guest">GUEST</span> 游客</td><td>✓</td><td>用户点 PiP 回 App → 直接进待解锁页</td></tr>
  <tr><td><span class="id-tag loggedin">LOGGED_IN</span> 非 VIP</td><td>✓</td><td>同 GUEST；待解锁页按现网权益</td></tr>
- <tr><td><span class="id-tag loggedin">LOGGED_IN</span> VIP</td><td>✓</td><td>全集可播；<strong>无锁定集触发</strong>；连播到底</td></tr>
+ <tr><td><span class="id-tag loggedin">LOGGED_IN</span> VIP</td><td>✓</td><td>全集可播；<strong>不会遇到锁定集</strong>，因此画中画不会暂停在封面、也不会被超时关闭机制自动关掉；连播到底</td></tr>
  </tbody>
 </table>
 
@@ -612,7 +612,7 @@ flowchart TD
  A1 -->|点 ··· 菜单内切换开关| A3{系统 PiP 权限状态?}
  A2 -->|是| A4[设 aspect ratio 进 PiP]
  A2 -->|否| A5[沿用现网 App 退后台]
- A3 -->|系统权限 ON| A6[翻转切换开关偏好并持久化]
+ A3 -->|系统权限 ON| A6[翻转切换开关偏好并保存到本地]
  A3 -->|系统权限 OFF 置灰| A7[弹标准居中权限引导弹窗]
  A7 -->|点 去设置| A8[deeplink 跳系统设置]
  A7 -->|点 取消| A9[关弹窗留在菜单]
@@ -649,7 +649,7 @@ flowchart TD
  <thead><tr><th style="width: 22%;">项</th><th>规则</th></tr></thead>
  <tbody>
  <tr><td><strong>Android 自动触发</strong></td><td>用户在沉浸播放页正在播放正片时按 Home / 任务键 / 上滑手势 → 若<strong>用户切换开关偏好 = ON</strong> + 系统 PiP 权限 ON → 自动调用 <code>enterPictureInPictureMode()</code>；按当前集 orientation 配置 <code>setPictureInPictureParams</code>。<strong>正片正在播是前提</strong>；暂停态时按 Home 沿用现网</td></tr>
- <tr><td><strong>iOS 自动触发</strong></td><td>App lifecycle 进入后台时，若沉浸播放器正在播放正片 + 用户切换开关偏好 = ON + 系统 PiP 权限 ON → 调用 <code>AVPictureInPictureController.startPictureInPicture()</code></td></tr>
+ <tr><td><strong>iOS 自动触发</strong></td><td>App 从前台被切到后台时，若沉浸播放器正在播放正片 + 用户切换开关偏好 = ON + 系统 PiP 权限 ON → 调用 <code>AVPictureInPictureController.startPictureInPicture()</code></td></tr>
  <tr><td><strong>菜单切换开关</strong></td><td>沉浸播放页右上角 <code>···</code> 菜单内的「画中画」切换开关项（下方 §5.1.2 详细）</td></tr>
  <tr><td><strong>正在播广告时按 Home</strong></td><td>进入 PiP 链路被阻断；沿用现网，不强制进 PiP</td></tr>
  <tr><td><strong>正在弹合规弹窗时按 Home</strong></td><td>沿用现网（与访客 PRD 不冲突）</td></tr>
@@ -659,7 +659,7 @@ flowchart TD
 <h4 id="sec-5-1-2">5.1.2 菜单切换开关（核心 UX · 用户可控）</h4>
 
 <p>沉浸播放页 <code>···</code> 菜单内的「画中画」项是 <strong>iOS-style 切换开关 UI</strong>（与系统 Settings 视觉风格一致）。</p>
-<p><strong>用户可控</strong>：即使系统 PiP 权限 ON，用户也可在 App 内独立把 FlareFlow 的 PiP 关掉。点击切换开关 = <strong>切换状态并持久化</strong>（<strong>不立即触发进入 PiP</strong>）。</p>
+<p><strong>用户可控</strong>：即使系统 PiP 权限 ON，用户也可在 App 内独立把 FlareFlow 的 PiP 关掉。点击切换开关 = <strong>切换状态并保存到本地</strong>（<strong>不立即触发进入 PiP</strong>）。</p>
 
 <div class="mockup-section">
 <h4 style="margin-top: 0;">实物 UI · ··· 菜单内的切换开关（3 状态）</h4>
@@ -739,20 +739,20 @@ flowchart TD
 
 <h5>状态决定矩阵</h5>
 <table>
- <thead><tr><th>系统 PiP 权限</th><th>用户持久化偏好</th><th>切换开关显示</th><th>用户点击切换开关行为</th></tr></thead>
+ <thead><tr><th>系统 PiP 权限</th><th>用户保存的用户选择</th><th>切换开关显示</th><th>用户点击切换开关行为</th></tr></thead>
  <tbody>
- <tr><td><strong>ON</strong></td><td>未设置（首次）</td><td><strong>ON</strong>（默认）</td><td>切换为 OFF 并持久化；FlareFlow PiP 关闭</td></tr>
- <tr><td><strong>ON</strong></td><td><strong>ON</strong></td><td><strong>ON</strong></td><td>切换为 OFF 并持久化</td></tr>
- <tr><td><strong>ON</strong></td><td><strong>OFF</strong>（用户曾主动关） </td><td><strong>OFF</strong></td><td>切换为 ON 并持久化；FlareFlow PiP 恢复</td></tr>
+ <tr><td><strong>ON</strong></td><td>未设置（首次）</td><td><strong>ON</strong>（默认）</td><td>切换为 OFF 并保存到本地；FlareFlow PiP 关闭</td></tr>
+ <tr><td><strong>ON</strong></td><td><strong>ON</strong></td><td><strong>ON</strong></td><td>切换为 OFF 并保存到本地</td></tr>
+ <tr><td><strong>ON</strong></td><td><strong>OFF</strong>（用户曾主动关） </td><td><strong>OFF</strong></td><td>切换为 ON 并保存到本地；FlareFlow PiP 恢复</td></tr>
  <tr><td><strong>OFF</strong></td><td>任意</td><td><strong>OFF + 置灰</strong></td><td>弹标准居中权限引导弹窗（见 §5.1.3）；切换开关状态不变</td></tr>
  </tbody>
 </table>
 
 <p><strong>状态联动</strong>：</p>
 <ul>
- <li>系统权限 OFF → 切换开关<strong>强制显示</strong> OFF + 置灰（不论用户持久化偏好）</li>
- <li>用户从系统设置开启权限后回到 App → 切换开关恢复显示<strong>用户持久化偏好</strong>（如未设置则 ON）</li>
- <li>持久化存储：客户端本地（iOS NSUserDefaults / Android SharedPreferences），<strong>不</strong>上服务端</li>
+ <li>系统权限 OFF → 切换开关<strong>强制显示</strong> OFF + 置灰（不论用户保存的用户选择）</li>
+ <li>用户从系统设置开启权限后回到 App → 切换开关恢复显示<strong>用户保存的用户选择</strong>（如未设置则 ON）</li>
+ <li>保存方式（本地存储）：客户端本地（iOS NSUserDefaults / Android SharedPreferences），<strong>不</strong>上服务端</li>
 </ul>
 
 <p><strong>关于「立即进 PiP」的入口</strong>：</p>
@@ -826,11 +826,11 @@ flowchart TD
 </table>
 <blockquote class="plain-talk">PiP 浮窗里就 3 个按钮——上一集 / 暂停 / 下一集，加上右上角系统默认的关闭 X。其它任何控件（点赞、收藏、倍速、清晰度、<strong>弹幕开关</strong>等）都不放，用户回 App 全屏再操作。</blockquote>
 
-<p><strong>弹幕渲染策略</strong>：PiP 期间<strong>强制不渲染弹幕</strong>——即使用户在全屏页打开了弹幕开关，PiP 窗内也<strong>不显示</strong>任何弹幕。理由：PiP 窗约 100×178 pt，弹幕字号小不易看清；强制关闭节省 CPU 与电量。用户<strong>点 PiP 回 App 全屏</strong>后，恢复用户原本的弹幕开关设置（PiP 期间不持久化改用户偏好）。</p>
+<p><strong>弹幕渲染策略</strong>：PiP 期间<strong>强制不渲染弹幕</strong>——即使用户在全屏页打开了弹幕开关，PiP 窗内也<strong>不显示</strong>任何弹幕。理由：PiP 窗约 100×178 pt，弹幕字号小不易看清；强制关闭节省 CPU 与电量。用户<strong>点 PiP 回 App 全屏</strong>后，恢复用户原本的弹幕开关设置（PiP 期间不会修改用户的弹幕设置）。</p>
 
 <p><strong>音频会话策略</strong>：PiP 期间走 OS 标准音频会话（iOS <code>AVAudioSession.Category.playback</code> / Android 媒体音频流）；与其它 App 共存规则：</p>
 <ul>
- <li><strong>PiP 进入瞬间</strong>：FlareFlow 视频音轨抢占音频焦点（与全屏播放一致），其它正在播放的音乐 App（Spotify / Apple Music 等）按系统标准被暂停或音量被压低</li>
+ <li><strong>PiP 进入瞬间</strong>：FlareFlow 视频的声音会<strong>盖过其它 App 的声音</strong>（与全屏播放一致），其它正在播放的音乐 App（Spotify / Apple Music 等）按系统标准被暂停或音量被压低</li>
  <li><strong>其它 App 主动抢音频</strong>（用户在 PiP 期间打开音乐 App 等）：FlareFlow PiP <strong>视频自动暂停 + 音频静音</strong>；用户回到 FlareFlow 后<strong>手动点 PiP 内播放按钮</strong>才恢复播放，<strong>不自动恢复</strong></li>
  <li><strong>来电 / 系统警告音</strong>：参 §5.10 OS 自动收起 PiP 流程</li>
 </ul>
@@ -1035,11 +1035,11 @@ flowchart TD
  <span class="kw">When</span> 用户点击 去设置
  <span class="kw">Then</span> 应 deeplink 跳系统设置 PiP 权限页 或 App 详情页
 
-<span class="scenario">Scenario:</span> 切换开关 ON 时用户点击翻为 OFF 并持久化
+<span class="scenario">Scenario:</span> 切换开关 ON 时用户点击翻为 OFF 并保存到本地
  <span class="kw">Given</span> 系统 PiP 权限开 且 用户切换开关显示 ON
  <span class="kw">When</span> 用户点击切换开关
  <span class="kw">Then</span> 切换开关应翻为 OFF
- <span class="kw">And</span> 用户偏好应被持久化为 OFF
+ <span class="kw">And</span> 用户选择应保存为 OFF
  <span class="kw">And</span> 不应立即进入 PiP
 
 <span class="scenario">Scenario:</span> 用户主动关切换开关后按 Home 不进 PiP
@@ -1131,8 +1131,8 @@ flowchart TD
  <tbody>
  <tr><td><strong>双击 PiP 浮窗</strong></td><td>OS 切换 PiP 尺寸（放大 ↔ 缩小，档位由系统决定）</td><td><strong>否</strong>——继续正常播放</td></tr>
  <tr><td><strong>拖动 PiP 浮窗</strong></td><td>OS 改变 PiP 位置（吸附屏幕角落或拖到的位置）</td><td><strong>否</strong></td></tr>
- <tr><td><strong>单击 PiP 浮窗 · 控件区</strong></td><td>OS 显示 / 隐藏上一集 / 暂停 / 下一集三个控件</td><td><strong>否</strong></td></tr>
- <tr><td><strong>单击 PiP 浮窗 · 非控件区</strong></td><td>App 处理：关 PiP + 切前台 + 路由（详见 §5.6）</td><td><strong>是</strong></td></tr>
+ <tr><td><strong>单击 PiP 浮窗内的按钮位置</strong>（上一集 / 暂停 / 下一集）</td><td>OS 显示 / 隐藏这三个按钮</td><td><strong>否</strong></td></tr>
+ <tr><td><strong>单击 PiP 浮窗内的按钮位置以外</strong>（画面区域）</td><td>App 处理：关 PiP + 切前台 + 路由（详见 §5.6）</td><td><strong>是</strong></td></tr>
  <tr><td><strong>swipe PiP 离屏</strong>（Android）</td><td>关 PiP（详见 §5.6）</td><td>App 视为正常退出</td></tr>
  <tr><td><strong>OS 自动收起 PiP</strong>（来电、低内存、系统强杀等）</td><td>系统强制关 PiP</td><td>App 视同正常退出，下次回 App 按现网恢复进度</td></tr>
  </tbody>
@@ -1144,7 +1144,7 @@ flowchart TD
  <thead><tr><th>模块</th><th>影响</th></tr></thead>
  <tbody>
  <tr><td>系统支持范围</td><td><strong>Android 8.0 (API 26)+ / iOS 14.0+</strong>；低于此版本设备降级到现网退后台</td></tr>
- <tr><td>沉浸播放页</td><td>右上角 <code>···</code> 菜单加「画中画」<strong>切换开关项</strong>；切换开关偏好持久化（本地存储）；进/退出 PiP 状态管理；锁定集封面渲染；<strong>PiP 期间弹幕渲染关闭 / 回全屏恢复</strong></td></tr>
+ <tr><td>沉浸播放页</td><td>右上角 <code>···</code> 菜单加「画中画」<strong>切换开关项</strong>；切换开关用户选择保存在手机本地；进/退出 PiP 状态管理；锁定集封面渲染；<strong>PiP 期间弹幕渲染关闭 / 回全屏恢复</strong></td></tr>
  <tr><td>沉浸播放器（核心）</td><td>接入 iOS <code>AVPictureInPictureController</code> + Android <code>PIP Mode API</code>；横竖屏 aspect ratio 动态切换；3 个系统位控件</td></tr>
  <tr><td>前台服务</td><td>与 PiP 生命周期绑定；PiP 关闭时前台服务退出；<strong>关闭瞬间是否需要短暂续命由研发深化</strong></td></tr>
  <tr><td>iOS 配置</td><td>Info.plist 声明 PiP 相关 Background Modes + <code>AVAudioSession.Category.playback</code> 配置由研发深化</td></tr>
